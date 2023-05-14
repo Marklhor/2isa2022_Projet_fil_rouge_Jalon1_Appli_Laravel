@@ -21,10 +21,11 @@ Route::get('/', function () {
     return view('connexion');
 });
 
-Route::get('/01', function () {
-    return view('layout', ['title_head' => 'Les tableaux']);
-});
+Route::get('/home_si', function () {
+    return view('layout', ['title_head' => 'Home Servive informatique AMIO - gestion des incidents']);
+})->name('home_si');
 
+// $url = route('home_si');
 
 Route::get('/test', function () {
     return 'ça marche';
