@@ -3,7 +3,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite --config vite.config.js"
+        "build": "vite build"
     },
     "devDependencies": {
         "axios": "^1.1.2",

@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ Vite::asset('resources/js/app.js') }}">
-    <link rel="stylesheet" href="{{ Vite::asset('resources/css/app.css') }}">
-    <!-- <link rel="stylesheet" href="{{URL::asset('css/style.css')}}"> -->
+    
+    <link rel="stylesheet" href="{{ Vite::asset('resources/css/style.css') }}">
     <title>Elements du site</title>
    
 </head>
@@ -44,7 +43,7 @@
         </main>
         <footer>
             <div>
-                <img class="icon_amio" src="./icon/2isa_white.webp" alt="AMIO">
+                <img class="icon_amio" src="/img/2isa_white.webp" alt="AMIO">
             </div>
             <address>
                 <p>01.65.61.42.42</p>
