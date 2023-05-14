@@ -1,0 +1,215 @@
+/* 
+.container th h1{
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+    color: #185875;
+}
+ */
+
+.container {
+    text-align: center;
+    width: 80%;
+    height: auto;
+    margin: 0;
+    display: table;
+    padding: 0 0 0 0;
+    background-color: #232F3F;
+
+    display: table-cell;
+    vertical-align: auto;
+    /* font-weight: bold; */
+    /* text-align: -internal-center; */
+}
+
+.container td {
+    font-weight: normal;
+    font-size: 1em;
+    box-shadow: 0 2px 2px -2px #0E1119;
+    /* -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+    -moz-box-shadow: 0 2px 2px -2px #0E1119; */
+    /* box-shadow: 0 2px 2px -2px #0E1119; */
+}
+
+h1,
+h2,
+p,
+span {
+    display: inline-block;
+}
+
+.container td,
+.container th {
+    padding-bottom: 1.5em;
+    padding-top: 1.5em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+
+}
+
+/* Background-color of the odd rows */
+.container tr:nth-child(odd) {
+    background-color: #323C50;
+}
+
+/* Background-color of the even rows */
+.container tr:nth-child(even) {
+    background-color: #2C3446;
+}
+
+.container th {
+    background-color: #1F2739;
+}
+
+
+
+.container td:first-child {
+    color: #FB667A;
+}
+
+tbody tr:hover {
+    background-color: #464A52;
+    box-shadow: 0 6px 6px -6px #0E1119;
+    /* -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+    -moz-box-shadow: 0 6px 6px -6px #0E1119; */
+    box-shadow: 0 6px 6px -6px #0E1119;
+
+    box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+    transform: translate3d(6px, -6px, 0);
+
+    transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+    transition-timing-function: line;
+
+    cursor: pointer;
+
+
+}
+
+
+.table_fix_head {
+    overflow: auto;
+    height: 700px;
+    margin: 0;
+    /* width: 1000px; */
+
+}
+
+caption {
+    font-size: 1.5em;
+    /* margin-bottom: 10px; */
+
+
+}
+
+caption.fixed {
+
+
+    position: sticky;
+    /* make the table heads sticky */
+    top: 0px;
+    /* table head will be placed from the top of the table and sticks to it */
+    background-color: #232F3F;
+    z-index: 2;
+}
+
+thead.fixed {
+    position: sticky;
+    /* make the table heads sticky */
+    top: 23px;
+    z-index: 2;
+    /* table head will be placed from the top of the table and sticks to it */
+}
+
+thead {
+    background-color: #232F3F;
+    z-index: 2;
+}
+
+.icon_advance {
+    height: 1em;
+    width: 1em;
+}
+
+table {
+    width: 100%;
+}
+
+.container td:nth-child(7),
+.container th:nth-child(7) {
+    display: none;
+}
+
+.container td:nth-child(6),
+.container th:nth-child(6) {
+    display: none;
+}
+
+.container td:nth-child(3),
+.container th:nth-child(3) {
+    display: none;
+}
+
+.container td:nth-child(2),
+.container th:nth-child(2) {
+    display: none;
+}
+
+.desk_text {
+    visibility: hidden;
+    display: none;
+}
+
+.mobil_text {
+    visibility: visible;
+    display: inline;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+    .container td:nth-child(2),
+    .container th:nth-child(2) {
+        display: table-cell;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .desk_text {
+        visibility: visible;
+        display: inline;
+    }
+
+    .mobil_text {
+        visibility: hidden;
+        display: none;
+    }
+
+    .container td:nth-child(3),
+    .container th:nth-child(3) {
+        display: table-cell;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+    /* .container td,
+    .container th {
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+    } */
+
+    .container td:nth-child(7),
+    .container th:nth-child(7) {
+        display: table-cell;
+    }
+
+    .container td:nth-child(6),
+    .container th:nth-child(6) {
+        display: table-cell;
+    }
+
+}

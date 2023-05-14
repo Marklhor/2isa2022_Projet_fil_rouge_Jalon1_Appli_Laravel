@@ -21,6 +21,9 @@ Route::get('/', function () {
     return view('connexion');
 });
 
+Route::get('/01', function () {
+    return view('layout', ['title_head' => 'Les tableaux']);
+});
 
 
 Route::get('/test', function () {

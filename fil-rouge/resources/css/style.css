@@ -197,6 +197,14 @@ footer {
     justify-content: space-around;
     text-align: center;
     margin-top: 80px;
+
+    font-size: 0.8em;
+
+}
+
+.icon_amio {
+    width: 8rem;
+    height: 8rem;
 }
 
 .input {
@@ -235,6 +243,7 @@ a {
     color: #A7A1AE;
     text-decoration: none;
 }
+
 /* 
 .clear {
     clear: both;
@@ -251,3 +260,4 @@ a {
     z-index: -10;
 }
 
+@media only screen and (min-width: 768px) {}
