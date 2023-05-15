@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\IncidentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +30,6 @@ Route::get('/home_si', function () {
 Route::get('/test', function () {
     return 'ça marche';
 });
+
+
+Route::resource('TICKETS', IncidentController::class);
