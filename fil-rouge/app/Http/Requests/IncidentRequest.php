@@ -11,7 +11,7 @@ class IncidentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class IncidentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'sujet' => ['required', 'string', 'max:100'],
+            'idStatus' => ['required', 'integer', 'numeric']
         ];
     }
 }
