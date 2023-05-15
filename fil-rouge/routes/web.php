@@ -22,7 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home_si', function () {
-    return view('layout', ['title_head' => 'Servive informatique AMIO - gestion des incidents']);
+    return view('home_si', ['title_head' => 'Servive informatique AMIO - gestion des incidents']);
 })->name('home_si');
 
 // $url = route('home_si');
