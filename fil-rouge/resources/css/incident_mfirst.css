@@ -94,13 +94,13 @@
     padding: 10px;
     /* margin: 10px 10px 10px 10px; */
     border-radius: 10px 10px 0 10px;
-    
+
     /* width chat + 20px */
-    width: 300px; 
+    width: 300px;
 }
 
 .border {
-    text-align: left;
+    /* text-align: left; */
     /* width: 80%; */
     height: auto;
     margin: 10px;
@@ -111,6 +111,11 @@
     /* border: 2px solid white;
     border-radius: 10px 10px 10px 10px;
     padding: 0.2em; */
+}
+
+#incident_detail {
+    display: flex;
+    flex-direction: column;
 }
 
 /* rapports: chat width = media/1.25; message width = chat width / 1.5 */
@@ -132,7 +137,7 @@
         width: 221px;
     }
 
-    .text_input{
+    .text_input {
         width: 332px;
     }
 }
@@ -146,7 +151,8 @@
     .message {
         width: 288px;
     }
-    .text_input{
+
+    .text_input {
         width: 432px;
     }
 }
@@ -170,7 +176,7 @@
         width: 400px;
     }
 
-    .text_input{
+    .text_input {
         width: 600px;
     }
 }
@@ -183,7 +189,7 @@
         left: 5px;
     }
 
-    .chat-container{
+    .chat-container {
         justify-content: flex-end;
     }
 
@@ -196,7 +202,7 @@
         width: 300px;
     }
 
-    .text_input{
+    .text_input {
         width: 400px;
     }
 
@@ -215,7 +221,7 @@
         width: 400px;
     }
 
-    .text_input{
+    .text_input {
         width: 600px;
     }
 

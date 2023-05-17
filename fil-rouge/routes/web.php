@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncidentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,17 +20,59 @@ use App\Http\Controllers\IncidentController;
 
 Route::get('/', function () {
     return view('connexion');
-});
+})->name('connexion');
 
-Route::get('/home_si', function () {
-    return view('home_si', ['title_head' => 'Servive informatique AMIO - gestion des incidents']);
-})->name('home_si');
-
-// $url = route('home_si');
-
-Route::get('/test', function () {
-    return 'ça marche';
-});
+// ------------------------------------------------------------
+Route::get('/techotline', function () {
+    return view('incidents',['hotline'=>true,'all'=>true]);
+})->name('tous_les_incidents');
 
 
-Route::resource('TICKETS', IncidentController::class);
+Route::controller(IncidentController::class)->group(function(){
+    session()->put('hotline',true);
+    session()->put('all',true);
+    Route::get('/techotline','All_Tickets');
+    });
+
+
+Route::get('/techotline', function () {
+    return view('incidents',['hotline'=>true,'all'=>true]);
+})->name('tous_les_incidents');
+// ------------------------------------------------------------
+
+
+// ------------------------------------------------------------
+Route::get('/techotline/{nb}', function ($nb) {
+    return view('incident',['hotline'=>true,'id_incident'=>$nb]);
+})->name('un_incident');
+// ------------------------------------------------------------
+
+
+// ------------------------------------------------------------
+
+Route::get('/user/{n}', function ($n) {
+    return view('incidents',['hotline'=>false,'all'=>false,'id_user' => $n]);
+})->name('mes_incidents');
+
+Route::get('/user/{n}/new', function ($n) {
+    return view('incident',['hotline'=>false,'id_user' => $n,'new'=>true]);
+})->name('creer_un_nouveau_incident');
+
+Route::get('/user/{n}/{nb}', function ($n,$nb) {
+    return view('incident',['hotline'=>false,'id_user' => $n,'id_incident'=>$nb]);
+})->name('mon_incidentt');
+
+Route::get('/logout', function ($n,$nb) {
+    return view('logout');
+})->name('me_deconnecter');
+// ------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
+
+
+
 
 use Illuminate\Http\Request;
 
@@ -12,6 +14,21 @@ class IncidentController extends Controller
     public function index()
     {
         //
+    }
+
+
+    public function All_Tickets()
+    {
+        $TecHotline = false;
+        $All_Tickets = false;
+
+        $TecHotline = session('hotline');
+        $All_Tickets = session('all');
+        if ($TecHotline) {
+            return DB::select();
+        }
+
+
     }
 
     /**

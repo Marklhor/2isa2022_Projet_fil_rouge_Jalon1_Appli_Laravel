@@ -5,7 +5,7 @@
     @include('templates.metas')
     @include('templates.links')
     @vite('resources/js/app.js')
-    <title>{{ $title_head }}</title>
+    <title>@yield('title')</title>
 </head>
 
 <body>
@@ -19,9 +19,9 @@
             @yield('contenu')
             <div>
                 <?php
-                    if(DB::connection()->getPdo()){
-                        echo"connexion avec BDD OK =>" . DB::connection()->getDatabaseName();
-                    }
+                if (DB::connection()->getPdo()) {
+                    echo 'connexion avec BDD OK =>' . DB::connection()->getDatabaseName();
+                }
                 ?>
             </div>
         </main>

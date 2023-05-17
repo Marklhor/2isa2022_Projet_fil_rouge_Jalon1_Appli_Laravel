@@ -5,10 +5,10 @@
 <nav class="menu">
     <div>
         <ul>
-            <li><a href='#'>Home</a></li>
-            <li><a href='#'>About</a></li>
-            <li><a href='#'>Services</a></li>
-            <li><a href='#'>Contact</a></li>
+            <li><a href="{{ route('tous_les_incidents') }}">Tous les incidents</a></li>
+            <li><a href='#'>Mes incidents</a></li>
+            <li><a href='#'>Signaler un incident</a></li>
+            <li><a href='{{ route('me_deconnecter') }}'>Se déconnecter</a></li>
         </ul>
     </div>
 </nav>

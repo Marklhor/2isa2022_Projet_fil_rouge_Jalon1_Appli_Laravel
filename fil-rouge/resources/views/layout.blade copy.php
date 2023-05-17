@@ -5,7 +5,7 @@
     @include('templates.metas')
     @include('templates.links')
     @vite('resources/js/app.js')
-    <title>{{ $title_head }}</title>
+    <title>@include('templates.head_title_site.blade')</title>
 </head>
 
 <body>
