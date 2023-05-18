@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncidentController;
@@ -23,11 +25,17 @@ Route::get('/', function () {
     return view('connexion');
 })->name('connexion');
 
-Route::get('/employees', [TicketController::class, 'listOfTickets'])->name('tickets.list');
-Route::get('/employee', [TicketController::class, 'selectTicket'])->name('select.ticket');
-Route::post('/employee', [TicketController::class, 'getTicketById'])->name('ticket.detail');
+// Route::get('/employees', [TicketController::class, 'listOfTickets'])->name('tickets.list');
+// Route::get('/employee', [TicketController::class, 'selectTicket'])->name('select.ticket');
+// Route::post('/employee', [TicketController::class, 'getTicketById'])->name('ticket.detail');
 
 Route::get('/incidents', [TicketController::class, 'getTicketsForVueIncidents'])->name('tickets');
+
+// Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', $nb])->name('ticket');
+
+Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', 'hotline' => true, 'id_incident' => $nb]) > name('ticket');
+
+
 
 // ------------------------------------------------------------
 // Route::get('/techotline', function () {
