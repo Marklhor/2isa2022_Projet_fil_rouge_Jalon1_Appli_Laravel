@@ -33,7 +33,7 @@ Route::get('/incidents', [TicketController::class, 'getTicketsForVueIncidents'])
 
 // Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', $nb])->name('ticket');
 
-Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', 'hotline' => true, 'id_incident' => $nb]) > name('ticket');
+Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', 'hotline' => true, 'id_incident' => $nb])->name('ticket');
 
 
 
