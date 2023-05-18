@@ -3,12 +3,11 @@ namespace App\Http\Controllers;
 
 
 
-
 use App\Models\Incident;
 use Illuminate\Http\Request;
 
 
- class IncidentController extends Controller
+class IncidentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,18 +26,18 @@ use Illuminate\Http\Request;
         $IsTecHotline = session('hotline');
         $getAllTickets = session('all');
 
-        $db = new Incident();
-        $Tickets = $db->getAllTickets();
+        // $db = new Incident($Tickets);
+        $Tickets[] = $db->getAllTickets();
         // dd($Tickets); // pour voir la variable dans le Dom
         // TODO supprimer les données employé de session ? Utile pour la sécurité ? si non passer que par session
 
         if ($IsTecHotline && $getAllTickets) {
             $tickets = Incident::getAllTickets();
-            return view('incidents', ['Tickets'=> $Tickets,'IsTecHotline'=> $TecHotline]);
+            return view('incidents', ['Tickets' => $Tickets, 'IsTecHotline' => $IsTecHotline]);
         } else {
             $MyId = 82001; // TODO $MyId = session('user_id');
             $tickets = Incident::getMyTiets($MyId);
-            return view('incidents', ['Tickets'=>$Tickets,'MyId'=>$MyId ]);
+            return view('incidents', ['Tickets' => $Tickets, 'MyId' => $MyId]);
         }
     }
     /**

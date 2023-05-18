@@ -63,7 +63,7 @@ span {
 
 
 
-.container td:first-child {
+.container td:first-child a {
     color: #FB667A;
 }
 

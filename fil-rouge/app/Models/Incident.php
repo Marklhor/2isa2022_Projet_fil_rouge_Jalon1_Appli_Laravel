@@ -32,19 +32,19 @@ class Incident extends Model
 
     // }
     // int id_ticket,string sujet, int id_status,string status_label, int id_type_de_panne, string type_de_panne, int id_user, string nom, int avancement, DateTime date_de_creation,DateTime date_de_maj, intnb_de_message
-    public function __construct($array) {
-        this->IdTicket = $array[];
-        this->Sujet = $array[];
-        this->IdStatus = $array[];
-        this->StatusLabel = $array[];
-        this->IdTypePanne = $array[];
-        this->TypePanneLabel = $array[];
-        this->IdUser = $array[];
-        this->UserName= $array[];
-        this->Avancement = $array[];
-        this->DateDeCreation = $array[];
-        this->DateDeMaj = $array[];
-        this->NbMessages = $array[];
+    public function __construct(array $array) {
+        $this->IdTicket = $array[0];
+        $this->Sujet = $array[1];
+        $this->IdStatus = $array[2];
+        $this->StatusLabel = $array[3];
+        $this->IdTypePanne = $array[4];
+        $this->TypePanneLabel = $array[5];
+        $this->IdUser = $array[6];
+        $this->UserName= $array[7];
+        $this->Avancement = $array[8];
+        $this->DateDeCreation = $array[9];
+        $this->DateDeMaj = $array[10];
+        $this->NbMessages = $array[11];
     }
     /*
     public function setIncident(){

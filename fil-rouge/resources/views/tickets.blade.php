@@ -33,31 +33,35 @@
                 </th>
             </thead>
             <tbody>
-                @if (!empty($Tickets))
-                    @foreach ($Tickets as $Ticket)
-                        <td>{{ $Ticket->id_ticket }}</td>
-                        <td>{{ $Ticket->sujet }}</td>
-                        <td>{{ $Ticket->type_de_panne }}</td>
-                        @if (!empty($IstecHotline) && $IsTecHotline)
-                            <td>{{ $Ticket->nom }}</td>
-                        @endif
-                        <td>
-                            {{ $Ticket->avancement }}j&#x20;
-                            @switch($Ticket->id_status)
-                                @case(11111)
-                                    <sub><img class="icon_advance" src="/img/red.svg" alt=""></sub>
+                @if (!empty($data))
+                    @foreach ($data as $RowData)
+                        <tr>
+                            <td><a href='{{ route('connexion') }}'>{{ $RowData->id_ticket }}</a> </td>
+                            <td>{{ $RowData->sujet }}</td>
+                            <td>{{ $RowData->type_de_panne }}</td>
+                            @if (!empty($IstecHotline) && $IsTecHotline)
+                                <td>{{ $RowData->nom }}</td>
+                            @endif
+                            <td>
+                                {{ $RowData->avancement }}j&#x20;
+                                @switch($RowData->id_status)
+                                    @case(11111)
+                                        <sub><img class="icon_advance" src="/img/red.svg" alt=""></sub>
                                     @break
-                                @case(22222)
-                                    <sub><img class="icon_advance" src="/img/yellow.svg" alt=""></sub>
+
+                                    @case(22222)
+                                        <sub><img class="icon_advance" src="/img/yellow.svg" alt=""></sub>
                                     @break
-                                @case(33333)
-                                    <sub><img class="icon_advance" src="/img/green.svg" alt=""></sub>
+
+                                    @case(33333)
+                                        <sub><img class="icon_advance" src="/img/green.svg" alt=""></sub>
                                     @break
-                            @endswitch
-                        </td>
-                        <td>{{ $Ticket->date_de_creation }}</td>
-                        <td>{{ $Ticket->date_de_maj }}</td>
-                        <td>{{ $Ticket->nb_de_message }}</td>
+                                @endswitch
+                            </td>
+                            <td>{{ $RowData->date_de_creation }}</td>
+                            <td>{{ $RowData->date_de_maj }}</td>
+                            <td>{{ $RowData->nb_de_message }}</td>
+                        </tr>
                     @endforeach
                 @endif
             </tbody>
