@@ -6,14 +6,7 @@ namespace App\Models\Incident;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Faker\Provider\DateTime
-
-
-class ClassName extends AnotherClass implements Interface
-{
-
-}
-
+use Faker\Provider\DateTime;
 
 class Incident extends Model
 {
