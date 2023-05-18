@@ -1,11 +1,10 @@
 @extends('template')
 
 @section('title')
-Service informatique AMIO - Gestion des incidents
+    Service informatique AMIO - Gestion des incidents
 @endsection
 
 @section('contenu')
-
     <article class="table_fix_head">
         <table class="container">
             <caption class="fixed">TOUS LES INCIDENTS</caption>
@@ -19,7 +18,9 @@ Service informatique AMIO - Gestion des incidents
                     <span class="mobil_text">Panne</span>
                     <span class="desk_text">Type de panne</span>
                 </th>
-                <th>Auteur</th>
+                @if (!empty($IstecHotline) && $IsTecHotline)
+                    <th>Auteur</th>
+                @endif
                 <th>
                     <span class="mobil_text">Avcmt</span>
                     <span class="desk_text">Avancement</span>
@@ -32,96 +33,33 @@ Service informatique AMIO - Gestion des incidents
                 </th>
             </thead>
             <tbody>
-                <tr>
-                    <td>07424</td>
-                    <td>Mon pc ne s'allume plus</td>
-                    <td>Matériel</td>
-                    <td>BERNARD LAVILLIERS</td>
-                    <td>27j <sub><img class="icon_advance" src="/img/orange.svg" alt="en cours"></sub></td>
-                    <td>13/04/2023</td>
-                    <td>10/05/2023</td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>93655</td>
-                    <td>Mon pc ne s'allume plus</td>
-                    <td>Matériel</td>
-                    <td>MICHEL BERGER</td>
-                    <td>24j <sub><img class="icon_advance" src="/img/yellow.svg" alt=""></sub></td>
-                    <td>18/04/2023</td>
-                    <td></td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>80063</td>
-                    <td>Mon pc ne s'allume plus</td>
-                    <td>Matériel</td>
-                    <td>ALAIN BASHUNG</td>
-                    <td>7j <sub><img class="icon_advance" src="/img/green.svg" alt=""></sub></td>
-                    <td>25/04/2023</td>
-                    <td>02/05/2023</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>07424</td>
-                    <td>Mon pc ne s'allume plus</td>
-                    <td>Matériel</td>
-                    <td>BERNARD LAVILLIERS</td>
-                    <td>27j <sub><img class="icon_advance" src="/img/orange.svg" alt=""></sub></td>
-                    <td>13/04/2023</td>
-                    <td>10/05/2023</td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>93655</td>
-                    <td>Mon pc ne s'allume plus</td>
-                    <td>Matériel</td>
-                    <td>MICHEL BERGER</td>
-                    <td>27j <sub><img class="icon_advance" src="/img/yellow.svg" alt=""></sub></td>
-                    <td>18/04/2023</td>
-                    <td></td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>80063</td>
-                    <td>Mon pc ne s'allume plus</td>
-                    <td>Matériel</td>
-                    <td>ALAIN BASHUNG</td>
-                    <td>27j <sub><img class="icon_advance" src="/img/green.svg" alt=""></sub></td>
-                    <td>25/04/2023</td>
-                    <td>02/05/2023</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>07424</td>
-                    <td>Mon pc ne s'allume plus</td>
-                    <td>Matériel</td>
-                    <td>BERNARD LAVILLIERS</td>
-                    <td>27j <sub><img class="icon_advance" src="/img/orange.svg" alt=""></sub></td>
-                    <td>13/04/2023</td>
-                    <td>10/05/2023</td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>93655</td>
-                    <td>Mon pc ne s'allume plus</td>
-                    <td>Matériel</td>
-                    <td>MICHEL BERGER</td>
-                    <td>27j <sub><img class="icon_advance" src="/img/yellow.svg" alt=""></sub></td>
-                    <td>18/04/2023</td>
-                    <td></td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>80063</td>
-                    <td>Mon pc ne s'allume plus</td>
-                    <td>Matériel</td>
-                    <td>ALAIN BASHUNG</td>
-                    <td>27j <sub><img class="icon_advance" src="/img/green.svg" alt=""></sub></td>
-                    <td>25/04/2023</td>
-                    <td>02/05/2023</td>
-                    <td>4</td>
-                </tr>
+                @if (!empty($Tickets))
+                    @foreach ($Tickets as $Ticket)
+                        <td>{{ $Ticket->id_ticket }}</td>
+                        <td>{{ $Ticket->sujet }}</td>
+                        <td>{{ $Ticket->type_de_panne }}</td>
+                        @if (!empty($IstecHotline) && $IsTecHotline)
+                            <td>{{ $Ticket->nom }}</td>
+                        @endif
+                        <td>
+                            {{ $Ticket->avancement }}j&#x20;
+                            @switch($Ticket->id_status)
+                                @case(11111)
+                                    <sub><img class="icon_advance" src="/img/red.svg" alt=""></sub>
+                                    @break
+                                @case(22222)
+                                    <sub><img class="icon_advance" src="/img/yellow.svg" alt=""></sub>
+                                    @break
+                                @case(33333)
+                                    <sub><img class="icon_advance" src="/img/green.svg" alt=""></sub>
+                                    @break
+                            @endswitch
+                        </td>
+                        <td>{{ $Ticket->date_de_creation }}</td>
+                        <td>{{ $Ticket->date_de_maj }}</td>
+                        <td>{{ $Ticket->nb_de_message }}</td>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </article>

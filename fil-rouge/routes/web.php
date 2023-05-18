@@ -23,21 +23,21 @@ Route::get('/', function () {
 })->name('connexion');
 
 // ------------------------------------------------------------
-Route::get('/techotline', function () {
-    return view('incidents',['hotline'=>true,'all'=>true]);
-})->name('tous_les_incidents');
+// Route::get('/techotline', function () {
+//     return view('incidents',['hotline'=>true,'all'=>true]);
+// })->name('tous_les_incidents');
 
 
 Route::controller(IncidentController::class)->group(function(){
     session()->put('hotline',true);
     session()->put('all',true);
     Route::get('/techotline','All_Tickets');
-    });
+    })->name('tous_les_incidents');
 
 
-Route::get('/techotline', function () {
-    return view('incidents',['hotline'=>true,'all'=>true]);
-})->name('tous_les_incidents');
+// Route::get('/techotline', function () {
+//     return view('incidents',['hotline'=>true,'all'=>true]);
+// })->name('tous_les_incidents');
 // ------------------------------------------------------------
 
 
