@@ -16,6 +16,13 @@ class TicketController extends Controller
         return view('tickets', ['data' => $data]);
     }
 
+    public function getMyTicket($idUser)
+    {
+        $db = new Ticket();
+        $data = $db->getMyTicket($idUser);
+        return view('tickets', ['data' => $data]);
+    }
+
 
 
     public function listOfTickets()
@@ -29,8 +36,6 @@ class TicketController extends Controller
          * Appel de la méthode getAll du modèle
          */
         $data = $db->getAll();
-
-        // $data = Emp::all();
 
         //dd($data);
         return view('tickets', ['data' => $data]);
