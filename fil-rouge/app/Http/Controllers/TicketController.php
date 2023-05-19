@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
+
+    public function getTickets()
+    {
+        $db = new Ticket();
+        $data = $db->getTickets();
+        // dd($data);
+        return view('tickets', ['data' => $data]);
+    }
+
+
+
     public function listOfTickets()
     {
         /**
@@ -25,13 +36,7 @@ class TicketController extends Controller
         return view('tickets', ['data' => $data]);
     }
 
-    public function getTicketsForVueIncidents()
-    {
-        $db = new Ticket();
-        $data = $db->getTicketsForVueIncidents();
-        // dd($data);
-        return view('tickets', ['data' => $data]);
-    }
+
 
     /**
      * Affichage de la page de selection d'employé

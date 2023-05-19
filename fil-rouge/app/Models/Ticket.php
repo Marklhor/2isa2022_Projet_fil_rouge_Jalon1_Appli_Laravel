@@ -31,7 +31,7 @@ class Ticket extends Model
         return DB::select('SELECT * FROM TICKETS WHERE Id = ?', [$Id]);
     }
 
-    public function getTicketsForVueIncidents()
+    public function getTickets()
     {
         return DB::select("SELECT
         TICKETS.Id AS 'id_ticket',
@@ -55,7 +55,7 @@ class Ticket extends Model
         );
     }
 
-    public function getTicketsForVueIncident(int $id_ticket)
+    public function getTicket(int $id_ticket)
     {
         return DB::select("SELECT
         TICKETS.Id AS 'id_ticket',

@@ -1,17 +1,18 @@
 @extends('template')
 
 @section('contenu')
-    @if (!empty($IstecHotline))
+    @if (!empty($data))
         <article>
             <section>
                 <detail>
                     <summary class="border">
-                        <h3>{{ $data->nom }}</h3>
-                        <p class="txt_inline">Incident n° <span class="ticket_values">{{ $data->id_ticket }}</span>
+
+                        <h3>{{ $data[0]->nom }}</h3>
+                        <p class="txt_inline">Incident n° <span class="ticket_values">{{ $data[0]->id_ticket }}</span>
                         </p>
                     </summary>
                     <div class="border" id="incident_detail">
-                        <p class="txt_inline">Statut : <span class="ticket_values">{{ $data->status_label }}</span></p>
+                        <p class="txt_inline">Statut : <span class="ticket_values">{{ $data[0]->status_label }}</span></p>
                         <p class="txt_inline">
                             <label for="panne_type"></label>
                             Type de panne :
@@ -28,10 +29,10 @@
                             </span>
                         </p>
                         <p class="txt_inline">Date d’ouverture : <span
-                                class="ticket_values">{{ $data->date_de_creation }}</span></p>
+                                class="ticket_values">{{ $data[0]->date_de_creation }}</span></p>
                         <p class="txt_inline">Dernière mise à jour : <span
-                                class="ticket_values">{{ $data->date_de_maj }}</span></p>
-                        <p class="txt_inline">Sujet : <span class="ticket_values">{{ $data->sujet }}</span>
+                                class="ticket_values">{{ $data[0]->date_de_maj }}</span></p>
+                        <p class="txt_inline">Sujet : <span class="ticket_values">{{ $data[0]->sujet }}</span>
                         </p>
                     </div>
                 </detail>
@@ -44,12 +45,28 @@
                     <div class="chat-container">
                         <ul class="chat">
                             @foreach ($data as $message)
-                                {
-                                <li class="message left">
-                                    <img class="logo" src="/img/computer-icons-clip-art-man.svg" alt="">
-                                    <p>{{ $message->msg }},</p>
+                                {{-- {{ var_bump($message) }} --}}
+
+                                <li @switch($message->id_role)
+                                    @case(77002)
+                                    lol
+                                        class="message right">
+                                        <img class="logo" src="/img/help-desk-technical-support.svg" alt="technicien">
+                                        @break
+
+                                    @case(77001)
+
+                                        class="message left">
+                                        <img class="logo" src="/img/computer-icons-clip-art-man.svg" alt="usager">
+                                        @break
+                                    @endswitch
+                                    <p>
+                                    {{ $message->msg }}
+                                    <p><span>{{ $message->nom }}</span> <span>{{ $message->date_message }}</span>
+                                        <span>{{ $message->id_role }}</span> </span>{{ $message->id_user }}<span>
+                                    </p>
+                                    </p>
                                 </li>
-                                }
                             @endforeach
                         </ul>
                         <textarea class="text_input" name="" id="" cols="30" rows="4" placeholder="Message..."></textarea>

@@ -36,7 +36,10 @@
                 @if (!empty($data))
                     @foreach ($data as $RowData)
                         <tr>
-                            <td><a href='{{ route('connexion') }}'>{{ $RowData->id_ticket }}</a> </td>
+                            <td><a href="{{ route('ticket', ['nb' => $RowData->id_ticket]) }}">{{ $RowData->id_ticket }}</a>
+                            </td>
+
+
                             <td>{{ $RowData->sujet }}</td>
                             <td>{{ $RowData->type_de_panne }}</td>
                             @if (!empty($IstecHotline) && $IsTecHotline)

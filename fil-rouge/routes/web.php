@@ -29,13 +29,20 @@ Route::get('/', function () {
 // Route::get('/employee', [TicketController::class, 'selectTicket'])->name('select.ticket');
 // Route::post('/employee', [TicketController::class, 'getTicketById'])->name('ticket.detail');
 
-Route::get('/incidents', [TicketController::class, 'getTicketsForVueIncidents'])->name('tickets');
+
 
 // Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', $nb])->name('ticket');
 
-Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', 'hotline' => true, 'id_incident' => $nb])->name('ticket');
-
-
+Route::get('/incidents', [TicketController::class, 'getTickets', ['all' => true]])->name('tickets');
+$nb = 0;
+Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', ['hotline' => true, 'id_incident' => $nb]])->name('ticket');
+// Route::get('/incident/{nb}', function (int $nb) {
+//     if ($nb = null || $nb = '') {
+//         return view('connexion');
+//     } else {
+//         Route::get('/incident/{?nb}', [MessageController::class, 'getAllMessagesForTicket', ['hotline' => true, 'id_incident' => $nb]])->name('ticket');
+//     }
+// });
 
 // ------------------------------------------------------------
 // Route::get('/techotline', function () {
