@@ -34,8 +34,8 @@ Route::get('/', function () {
 // Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', $nb])->name('ticket');
 
 Route::get('/incidents', [TicketController::class, 'getTickets', ['all' => true]])->name('tickets');
-$nb = 0;
-Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', ['hotline' => true, 'id_incident' => $nb]])->name('ticket');
+$nb = 11111;
+Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', ['hotline' => true, 'id_incident' => $nb]])->where('nb', '^[0-9]{5}')->name('ticket');
 // Route::get('/incident/{nb}', function (int $nb) {
 //     if ($nb = null || $nb = '') {
 //         return view('connexion');
