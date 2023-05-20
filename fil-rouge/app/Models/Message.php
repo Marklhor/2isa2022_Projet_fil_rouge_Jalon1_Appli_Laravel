@@ -25,4 +25,9 @@ class Message extends Model
             JOIN USERS_ROLE ur ON um.IdAuteur = ur.IdUser
         WHERE mt.IdTicket = ?", [$IdTicket]);
     }
+
+    public function postMysMessage(int $id, string $message){
+        return DB:: INSERT(table (nom_colonne_1, nom_colonne_2, ...
+        VALUES ('valeur 1', 'valeur 2', ...));
+    }
 }

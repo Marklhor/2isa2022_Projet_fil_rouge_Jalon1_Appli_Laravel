@@ -23,50 +23,54 @@ class TicketController extends Controller
         return view('tickets', ['data' => $data]);
     }
 
-
-
-    public function listOfTickets()
-    {
-        /**
-         * Création d'une instance du modèle EMP
-         */
-        $db = new Ticket();
-
-        /**
-         * Appel de la méthode getAll du modèle
-         */
-        $data = $db->getAll();
-
-        //dd($data);
-        return view('tickets', ['data' => $data]);
+    public function getNewTicket(){
+        return view('newticket');
     }
 
 
 
-    /**
-     * Affichage de la page de selection d'employé
-     */
-    public function selectTicket()
-    {
-        return view('ticketById');
-    }
+    // public function listOfTickets()
+    // {
+    //     /**
+    //      * Création d'une instance du modèle EMP
+    //      */
+    //     $db = new Ticket();
 
-    /**
-     * Affichage du détail d'un employé
-     */
-    public function getTicketById(Request $request)
-    {
-        $name = $request->input('Id');
+    //     /**
+    //      * Appel de la méthode getAll du modèle
+    //      */
+    //     $data = $db->getAll();
 
-        $db = new Ticket();
-        $data = $db->getTicketById($name);
+    //     //dd($data);
+    //     return view('tickets', ['data' => $data]);
+    // }
 
-        if (!is_null($data) && !empty($data)) {
-            return view('ticketById', compact('data'));
-        } else {
-            return redirect(route('select.ticket'));
-        }
-    }
+
+
+    // /**
+    //  * Affichage de la page de selection d'employé
+    //  */
+    // public function selectTicket()
+    // {
+    //     return view('ticketById');
+    // }
+
+    // /**
+    //  * Affichage du détail d'un employé
+    //  */
+    // public function getTicketById(Request $request)
+    // {
+    //     $name = $request->input('Id');
+
+    //     $db = new Ticket();
+    //     $data = $db->getTicketById($name);
+
+    //     if (!is_null($data) && !empty($data)) {
+    //         return view('ticketById', compact('data'));
+    //     } else {
+    //         return redirect(route('select.ticket'));
+    //     }
+    // }
 
 
 }

@@ -34,6 +34,7 @@ Route::get('/', function () {
 $nb = 11111;
 Route::get('/mesincidents/{idUser}', [TicketController::class, 'getMyTicket', ['idUser' => '82001', 'all' => true]])->name('mytickets'); //TODO get user id for model request
 Route::get('/incidents', [TicketController::class, 'getTickets', ['all' => true]])->name('tickets');
+Route::get('/signaler', [TicketController::class, 'getNewTicket'])->name('newticket');
 
 Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', ['idincident' => $nb, 'hotline' => true]])->where('nb', '^[0-9]{5}')->name('ticket');
 
