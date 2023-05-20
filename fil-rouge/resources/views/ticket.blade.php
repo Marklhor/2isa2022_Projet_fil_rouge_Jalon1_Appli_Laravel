@@ -69,7 +69,12 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <textarea class="text_input" name="" id="" cols="30" rows="4" placeholder="Message..."></textarea>
+                        <form action="{{ route('postmessage', ['nb' => $data[0]->id_ticket]) }}" method="POST">
+                            @csrf
+                            {{-- <input type="text" name="id_user" value="{{auth()->user}}" hidden> // TODO --}}
+                            <textarea class="text_input" name="message" id="" cols="30" rows="4" placeholder="Message..."></textarea>
+                            <button type="submit">Envoyer</button>
+                        </form>
                     </div>
                 </div>
 

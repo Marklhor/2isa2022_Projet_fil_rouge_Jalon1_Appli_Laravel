@@ -38,5 +38,4 @@
             </section>
         </article>
     @endif
-
 @endsection

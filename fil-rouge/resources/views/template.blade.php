@@ -17,13 +17,6 @@
 
         <main>
             @yield('contenu')
-            <div>
-                <?php
-                if (DB::connection()->getPdo()) {
-                    echo 'connexion avec BDD OK =>' . DB::connection()->getDatabaseName();
-                }
-                ?>
-            </div>
         </main>
 
         <footer>

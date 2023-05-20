@@ -18,4 +18,10 @@ class MessageController extends Controller
         // dd($data);
         return view('ticket', ['data' => $data]); //, 'dataTckt' => $dataTckt]);
     }
+
+    public function postMysMessage(Request $request){
+        $dbMsg = new Message();
+        $data = $dbMsg->postMysMessage($request->all);
+        route('msgtck',['IdTicket'=> $request->IdTicket]);
+    }
 }
