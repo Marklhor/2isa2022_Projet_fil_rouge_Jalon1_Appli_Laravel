@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\User;
+use App\Model\User;
 use App\Topic;
 use App\Category;
 use App\Post;
@@ -10,7 +10,8 @@ class TopicController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('topic.create', ['categories' => $categories]);
+        return view('tickets', ['data' => $categories]);
+        // return view('topic.create', ['categories' => $categories]);
     }
     public function save()
     {
@@ -53,7 +54,7 @@ class TopicController extends Controller
         $posts = Post::where('post_topic', $id)->get();
         $arrPosts = array();
         foreach ($posts as $post) {
-            $user = User::where('id', $post->post_by)->first();
+            $user = \App\Models\User::where('id', $post->post_by)->first();
             $arrPosts[] = array(
                 'post_by' => $user->name,
                 'post_content' => $post->post_content

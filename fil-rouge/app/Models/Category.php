@@ -11,6 +11,7 @@ class Category extends Model
 *
 * @var string
 */
-    protected $table = 'categories';
+    // protected $table = 'categories';
+    protected $table = 'TICKETS';
 }
 // TODO créer table et donnée
