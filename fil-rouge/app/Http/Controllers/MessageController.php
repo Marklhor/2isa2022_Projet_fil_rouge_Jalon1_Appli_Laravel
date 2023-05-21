@@ -22,6 +22,6 @@ class MessageController extends Controller
     public function postMysMessage(Request $request){
         $dbMsg = new Message();
         $data = $dbMsg->postMysMessage($request->all);
-        route('msgtck',['IdTicket'=> $request->IdTicket]);
+        route('msgtck',['IdTicket'=> $request->IdTicket,'IdMessage'=>Message::getNewId(false)]);
     }
 }

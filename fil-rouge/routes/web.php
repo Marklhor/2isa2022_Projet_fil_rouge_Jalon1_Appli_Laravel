@@ -32,4 +32,4 @@ Route::get('/signaler', [TicketController::class, 'getNewTicket'])->name('newtic
 Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', ['idincident' => $nb, 'hotline' => true]])->where('nb', '^[0-9]{5}')->name('ticket');
 Route::post('/incident/{nb}', [MessageController::class, 'postMysMessage',['idincident' => $nb]])->name('postmessage');
 //route de passage pour insérer des données dans la table de liaison MESSAGES_TYCKET
-Route::get('/intermed/messages_ticket',[MessagesTicket::class, 'postInLinkTableMsgTck'])->name('msgtckt');
+Route::get('/intermed/messages_ticket',[MessagesTicket::class, 'postInLinkTableMsgTck',['IdTicket','IdMessage']])->name('msgtckt');

@@ -14,8 +14,8 @@ class MessagesTicket extends Model
     protected $table = 'MESSAGES_TYCKET';
 
 
-    public function postInLinkTableMsgTck(int $IdTicket){
-        $dbInsert = DB:: insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)",[$request->IdMessage,$request->IdTicket]);
+    public function postInLinkTableMsgTck(int $IdTicket, int $IdMessage){
+        $dbInsert = DB:: insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)",[$IdTicket,$IdMessage]);
         route('ticket',['nb' => $IdTicket]);
     }
 }

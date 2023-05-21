@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
+use PHPUnit\Framework\Constraint\IsTrue;
 
 class Message extends Model
 {
@@ -13,7 +14,7 @@ class Message extends Model
 
     protected $table = 'USERS_MESSAGES';
 
-    private static $IdMessage = 50000;
+    private static int $IdMessage = 50000;
 
     public function getAllMessagesForTicket(int $IdTicket)
     {
@@ -31,9 +32,16 @@ class Message extends Model
 
     public function postMysMessage(Request $request)
     {
-        self::$IdMessage++; // TODO
-        $result = DB::insert("INSERT INTO USERS_MESSAGES (IdAuteur, Content) values(?,?)", [$request->IdUser, $request->message]);
+        $result = DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content) values(?,?,?)", [Message::getNewId(true), $request->IdUser, $request->message]);
         dd($result);
         return $result;
+    }
+
+    public function getNewId(bool $increment)
+    {
+        if ($increment) {
+            self::$IdMessage++;
+        }
+        return Message::$IdMessage;
     }
 }
