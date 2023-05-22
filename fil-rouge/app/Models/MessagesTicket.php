@@ -15,7 +15,8 @@ class MessagesTicket extends Model
 
 
     public function postInLinkTableMsgTck(int $IdTicket, int $IdMessage){
-        $dbInsert = DB:: insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)",[$IdTicket,$IdMessage]);
-        route('ticket',['nb' => $IdTicket]);
+        // $dbInsert = DB:: insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)",[$IdTicket,$IdMessage]);
+        // route('ticket',['nb' => $IdTicket]);
+        return DB:: insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)",[$IdTicket,$IdMessage]);
     }
 }

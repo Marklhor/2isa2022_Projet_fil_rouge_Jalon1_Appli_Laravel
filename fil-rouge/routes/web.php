@@ -25,11 +25,12 @@ Route::get('/', function () {
 
 
 $nb = 11111;
-Route::get('/mesincidents/{idUser}', [TicketController::class, 'getMyTicket', ['idUser' => '82001', 'all' => true]])->name('mytickets'); //TODO get user id for model request
+$iduser = 82002;
+Route::get('/mesincidents/{iduser}', [TicketController::class, 'getMyTicket', ['idUser' => $iduser, 'all' => true]])->name('mytickets');
 Route::get('/incidents', [TicketController::class, 'getTickets', ['all' => true]])->name('tickets');
 Route::get('/signaler', [TicketController::class, 'getNewTicket'])->name('newticket');
 
 Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', ['idincident' => $nb, 'hotline' => true]])->where('nb', '^[0-9]{5}')->name('ticket');
-Route::post('/incident/{nb}', [MessageController::class, 'postMysMessage',['idincident' => $nb]])->name('postmessage');
+Route::post('/incident/{nb}', [MessageController::class, 'postMysMessage', ['idincident' => $nb]])->name('postmessage');
 //route de passage pour insérer des données dans la table de liaison MESSAGES_TYCKET
-Route::get('/intermed/messages_ticket',[MessagesTicket::class, 'postInLinkTableMsgTck',['IdTicket','IdMessage']])->name('msgtckt');
+Route::get('/intermed/messages_ticket', [MessagesTicket::class, 'postInLinkTableMsgTck', ['IdTicket', 'IdMessage']])->name('msgtckt');

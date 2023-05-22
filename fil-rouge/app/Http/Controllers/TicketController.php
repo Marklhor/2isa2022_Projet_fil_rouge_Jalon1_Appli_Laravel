@@ -18,12 +18,18 @@ class TicketController extends Controller
 
     public function getMyTicket($idUser)
     {
+        // session(['idUser' => $idUser]);
+
+        // $idUser = 82001; // TODO voir avec authentification
+        session(['idUser' => $idUser]); // TODO idem+
+        dd(session()->all());
         $db = new Ticket();
-        $data = $db->getMyTicket($idUser);
+        $data = $db->getMyTicket(session()->get('idUser'));
         return view('tickets', ['data' => $data]);
     }
 
-    public function getNewTicket(){
+    public function getNewTicket()
+    {
         return view('newticket');
     }
 

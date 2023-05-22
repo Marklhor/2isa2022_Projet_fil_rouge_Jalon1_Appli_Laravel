@@ -41,7 +41,7 @@ class Message extends Model
         return $result;
     }
 
-    public function getNewId(bool $increment)
+    public static function getNewId(bool $increment)
     {
         if ($increment) {
             self::$IdMessage++;
