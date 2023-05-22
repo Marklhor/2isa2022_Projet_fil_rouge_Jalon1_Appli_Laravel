@@ -102,4 +102,6 @@ class Ticket extends Model
         WHERE USERS.Id = ?",[$id_user]
         );
     }
+
+
 }

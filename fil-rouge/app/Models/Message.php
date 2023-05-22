@@ -6,16 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
-use PHPUnit\Framework\Constraint\IsTrue;
+
+// use PHPUnit\Framework\Constraint\IsTrue;
 
 class Message extends Model
 {
     use HasFactory;
 
-    // protected $table = 'USERS_MESSAGES';
-
+    // Valeur arbitraire, pour être sup au Id du jeu de données
     private static int $IdMessage = 50000;
 
+    // *******************************************
+    // Methode pour récupérer tous les méssages pour un ticket suivant son Id
+    // *******************************************
     public function getAllMessagesForTicket(int $IdTicket)
     {
         /**
@@ -30,17 +33,23 @@ class Message extends Model
         WHERE mt.IdTicket = ?", [$IdTicket]);
     }
 
-    public function postMysMessage(Request $request)
+    // *******************************************
+    // Méthode pour poster un nouveau message via une transacion
+    // *******************************************
+    public function postMyMessage(Request $request): void
     {
-        // TODO la méthode doit faire l'ensemble des requêtes SQL dans une transaction sur toutes les bases concernées
-        // adapter la route est les varaibles entrantes suivant besoin
-        $result = DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content) values(?,?,?)", [Message::getNewId(true), $request->IdUser, $request->message]);
-        // TODO $dbInsert = DB:: insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)",[$IdTicket,$IdMessage]);
-
-        dd($result);
-        return $result;
+        /**
+         * Utilisation de la façade DB::transaction gérant seul les roolback et commit en fonction de la réussite des façade insert
+         */
+        DB::transaction(function (Request $request) {
+            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content) values(?,?,?)", [Message::getNewId(true), $request->IdUser, $request->message]);
+            DB::insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)", [session()->get('idTicket'), Message::getNewId(false)]);
+        });
     }
 
+    // *******************************************
+    // Méthode pour récupérer l'indice pour le nouveau message ($increment = true), ou le dernier indice ($increment = false)
+    // *******************************************
     public static function getNewId(bool $increment)
     {
         if ($increment) {
@@ -48,4 +57,8 @@ class Message extends Model
         }
         return Message::$IdMessage;
     }
+
+    // private static function setNewId()
+
+
 }

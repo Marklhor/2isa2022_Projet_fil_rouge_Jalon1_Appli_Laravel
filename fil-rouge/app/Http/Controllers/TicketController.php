@@ -2,27 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MyUser;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
 
+    // *******************************************
+    // liste l'ensemble des tickets
+    // *******************************************
     public function getTickets()
     {
-        $db = new Ticket();
-        $data = $db->getTickets();
-        // dd($data);
-        return view('tickets', ['data' => $data]);
+        if (!empty(session()->get('idUser'))) {
+
+            // $IsTecHotline = self::isTecHoline();
+            $IsTecHotline = this->isTecHoline();
+            // dd(session()->all());
+            $db = new Ticket();
+            $data = $db->getTickets();
+            dd($data);
+            return view('tickets', ['data' => $data, 'IsTecHotline' => $IsTecHotline]);
+        }
     }
 
+    // *******************************************
+    // Liste les tickets pour un utilisatuer suivant son Id
+    // *******************************************
     public function getMyTicket($idUser)
     {
-        // session(['idUser' => $idUser]);
+        /*
+         * Definition des éléments de la session
+         */
+        session(['idUser' => $idUser]);
 
-        // $idUser = 82001; // TODO voir avec authentification
-        session(['idUser' => $idUser]); // TODO idem+
-        dd(session()->all());
+        //dd(session()->all());
         $db = new Ticket();
         $data = $db->getMyTicket(session()->get('idUser'));
         return view('tickets', ['data' => $data]);
@@ -31,6 +45,20 @@ class TicketController extends Controller
     public function getNewTicket()
     {
         return view('newticket');
+    }
+
+    //défini si le user de la session est un techotline ou non
+    private function isTecHoline(): bool
+    {
+        $MyUser = new MyUser();
+        $data = $MyUser->isTecHoline();
+        // dd($data);
+        if ($data[0]->IdRole = 77002) {
+            // dd($data);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

@@ -18,7 +18,7 @@
                     <span class="mobil_text">Panne</span>
                     <span class="desk_text">Type de panne</span>
                 </th>
-                @if (!empty($IstecHotline) && $IsTecHotline)
+                @if (!empty($IsTecHotline) && $IsTecHotline)
                     <th>Auteur</th>
                 @endif
                 <th>
@@ -42,7 +42,7 @@
 
                             <td>{{ $RowData->sujet }}</td>
                             <td>{{ $RowData->type_de_panne }}</td>
-                            @if (!empty($IstecHotline) && $IsTecHotline)
+                            @if (!empty($IsTecHotline) && $IsTecHotline)
                                 <td>{{ $RowData->nom }}</td>
                             @endif
                             <td>
