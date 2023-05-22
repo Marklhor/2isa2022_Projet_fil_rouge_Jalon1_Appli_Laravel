@@ -32,10 +32,9 @@ class MessageController extends Controller
         $dbMsg = new Message();
         $dbMsg->postMysMessage($request->all);
         $dbMsgTck = new MessagesTicket();
-        $dbMsgTck->postInLinkTableMsgTck(session()->get('idTicket'), Message::getNewId(false))
+        $dbMsgTck->postInLinkTableMsgTck(session()->get('idTicket'), Message::getNewId(false));
 
-        // route('msgtck', ['IdTicket' => $request->IdTicket, 'IdMessage' => Message::getNewId(false)]);
-        MessageController::class , 'getAllMessagesForTicket',[session()->get('idTicket')];
+        $this->getAllMessagesForTicket(session()->get('idTicket'));
 
     }
 }
