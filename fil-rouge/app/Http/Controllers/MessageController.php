@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\MessagesTicket;
 // use App\Models\Ticket;
 use Illuminate\Http\Request;
 
@@ -10,6 +11,7 @@ class MessageController extends Controller
 {
     public function getAllMessagesForTicket($IdTicket)
     {
+        session(['idTicket' => $IdTicket]);
         $dbMsg = new Message();
         $data = $dbMsg->getAllMessagesForTicket($IdTicket);
         // $dbTicket = new Ticket();
@@ -19,15 +21,21 @@ class MessageController extends Controller
         return view('ticket', ['data' => $data]); //, 'dataTckt' => $dataTckt]);
     }
 
-    public function postMysMessage(Request $request)
+    public function postMysMessage(Request $request) :void
     {
+        // session(['id' => '007']); // test
+        dd($request->session()->all());
         $this->validate($request, [
-            'message'=>'required|nim:2'
+            'message' => 'required|nim:2'
         ]);
 
         $dbMsg = new Message();
         $dbMsg->postMysMessage($request->all);
-        
-        route('msgtck', ['IdTicket' => $request->IdTicket, 'IdMessage' => Message::getNewId(false)]);
+        $dbMsgTck = new MessagesTicket();
+        $dbMsgTck->postInLinkTableMsgTck(session()->get('idTicket'), Message::getNewId(false))
+
+        // route('msgtck', ['IdTicket' => $request->IdTicket, 'IdMessage' => Message::getNewId(false)]);
+        MessageController::class , 'getAllMessagesForTicket',[session()->get('idTicket')];
+
     }
 }
