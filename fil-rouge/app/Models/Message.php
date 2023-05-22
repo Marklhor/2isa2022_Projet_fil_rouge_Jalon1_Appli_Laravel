@@ -12,7 +12,7 @@ class Message extends Model
 {
     use HasFactory;
 
-    protected $table = 'USERS_MESSAGES';
+    // protected $table = 'USERS_MESSAGES';
 
     private static int $IdMessage = 50000;
 
@@ -33,6 +33,8 @@ class Message extends Model
     public function postMysMessage(Request $request)
     {
         $result = DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content) values(?,?,?)", [Message::getNewId(true), $request->IdUser, $request->message]);
+        $dbInsert = DB:: insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)",[$IdTicket,$IdMessage]);
+
         dd($result);
         return $result;
     }

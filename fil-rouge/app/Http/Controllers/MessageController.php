@@ -19,9 +19,15 @@ class MessageController extends Controller
         return view('ticket', ['data' => $data]); //, 'dataTckt' => $dataTckt]);
     }
 
-    public function postMysMessage(Request $request){
+    public function postMysMessage(Request $request)
+    {
+        $this->validate($request, [
+            'message'=>'required|nim:2'
+        ]);
+
         $dbMsg = new Message();
-        $data = $dbMsg->postMysMessage($request->all);
-        route('msgtck',['IdTicket'=> $request->IdTicket,'IdMessage'=>Message::getNewId(false)]);
+        $dbMsg->postMysMessage($request->all);
+        
+        route('msgtck', ['IdTicket' => $request->IdTicket, 'IdMessage' => Message::getNewId(false)]);
     }
 }

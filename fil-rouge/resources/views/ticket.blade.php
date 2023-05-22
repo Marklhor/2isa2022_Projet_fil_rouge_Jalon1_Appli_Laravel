@@ -49,7 +49,6 @@
 
                                 <li @switch($message->id_role)
                                     @case(77002)
-                                    lol
                                         class="message right">
                                         <img class="logo" src="/img/help-desk-technical-support.svg" alt="technicien">
                                         @break
@@ -75,6 +74,9 @@
                             <textarea class="text_input" name="message" id="" cols="30" rows="4" placeholder="Message..."></textarea>
                             <button type="submit">Envoyer</button>
                         </form>
+                        @error('message')
+                        {{$messsage}}
+                        @enderror
                     </div>
                 </div>
 
