@@ -32,8 +32,10 @@ class Message extends Model
 
     public function postMysMessage(Request $request)
     {
+        // TODO la méthode doit faire l'ensemble des requêtes SQL dans une transaction sur toutes les bases concernées
+        // adapter la route est les varaibles entrantes suivant besoin
         $result = DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content) values(?,?,?)", [Message::getNewId(true), $request->IdUser, $request->message]);
-        $dbInsert = DB:: insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)",[$IdTicket,$IdMessage]);
+        // TODO $dbInsert = DB:: insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)",[$IdTicket,$IdMessage]);
 
         dd($result);
         return $result;

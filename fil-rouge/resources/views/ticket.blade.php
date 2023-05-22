@@ -75,6 +75,7 @@
                             <button type="submit">Envoyer</button>
                         </form>
                         @error('message')
+                        {{-- TODO message --}}
                         {{$messsage}}
                         @enderror
                     </div>
