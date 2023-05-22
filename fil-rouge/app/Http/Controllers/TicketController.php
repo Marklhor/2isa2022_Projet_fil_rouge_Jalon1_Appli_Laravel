@@ -17,7 +17,7 @@ class TicketController extends Controller
         if (!empty(session()->get('idUser'))) {
 
             // $IsTecHotline = self::isTecHoline();
-            $IsTecHotline = this->isTecHoline();
+            $IsTecHotline = this->UserisTecHoline(); // TODO
             // dd(session()->all());
             $db = new Ticket();
             $data = $db->getTickets();
@@ -48,7 +48,7 @@ class TicketController extends Controller
     }
 
     //défini si le user de la session est un techotline ou non
-    private function isTecHoline(): bool
+    private function UserisTecHoline()
     {
         $MyUser = new MyUser();
         $data = $MyUser->isTecHoline();
