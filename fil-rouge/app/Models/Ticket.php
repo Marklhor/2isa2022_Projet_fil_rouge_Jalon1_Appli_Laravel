@@ -40,8 +40,8 @@ class Ticket extends Model
         STATUS_TYPE.Label AS 'status_label',
         PANNES_TYPE.Id AS 'id_type_de_panne',
         PANNES_TYPE.Label AS 'type_de_panne',
-        USERS.Id AS 'id_user',
-        CONCAT(USERS.Nom, ' ', LEFT(USERS.Prenom, 1), '.') AS 'nom',
+        users.id AS 'id_user',
+        CONCAT(users.name, ' ', LEFT(users.firstname, 1), '.') AS 'nom',
         DATEDIFF(TICKETS.UpdateAt, TICKETS.CreatedAt) AS 'avancement',
         TICKETS.CreatedAt AS 'date_de_creation',
         TICKETS.UpdateAt AS 'date_de_maj',
@@ -49,7 +49,7 @@ class Ticket extends Model
         FROM
             TICKETS
             JOIN PANNES_TYPE ON TICKETS.IdTypePanne = PANNES_TYPE.Id
-            JOIN USERS ON TICKETS.IdAuteur = USERS.Id
+            JOIN users ON TICKETS.IdAuteur = users.id
             JOIN STATUS_TYPE ON TICKETS.IdStatus = STATUS_TYPE.Id"
 
         );
@@ -88,8 +88,8 @@ class Ticket extends Model
         STATUS_TYPE.Label AS 'status_label',
         PANNES_TYPE.Id AS 'id_type_de_panne',
         PANNES_TYPE.Label AS 'type_de_panne',
-        USERS.Id AS 'id_user',
-        CONCAT(USERS.Nom, ' ', LEFT(USERS.Prenom, 1), '.') AS 'nom',
+        users.id AS 'id_user',
+        CONCAT(users.name, ' ', LEFT(users.firstname, 1), '.') AS 'nom',
         DATEDIFF(TICKETS.UpdateAt, TICKETS.CreatedAt) AS 'avancement',
         TICKETS.CreatedAt AS 'date_de_creation',
         TICKETS.UpdateAt AS 'date_de_maj',
@@ -97,9 +97,9 @@ class Ticket extends Model
         FROM
             TICKETS
             JOIN PANNES_TYPE ON TICKETS.IdTypePanne = PANNES_TYPE.Id
-            JOIN USERS ON TICKETS.IdAuteur = USERS.Id
+            JOIN users ON TICKETS.IdAuteur = users.id
             JOIN STATUS_TYPE ON TICKETS.IdStatus = STATUS_TYPE.Id
-        WHERE USERS.Id = ?",[$id_user]
+        WHERE users.id = ?",[$id_user]
         );
     }
 

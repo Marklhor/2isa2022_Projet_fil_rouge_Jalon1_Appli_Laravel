@@ -21,7 +21,7 @@ class TicketController extends Controller
             // dd(session()->all());
             $db = new Ticket();
             $data = $db->getTickets();
-            dd($data);
+            // dd($data);
             return view('tickets', ['data' => $data, 'IsTecHotline' => $IsTecHotline]);
         }
     }
