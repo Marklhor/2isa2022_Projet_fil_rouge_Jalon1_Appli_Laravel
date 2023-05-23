@@ -6,6 +6,7 @@ use App\Models\Message;
 // use App\Models\MessagesTicket;
 // use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -40,8 +41,9 @@ class MessageController extends Controller
         // Vérifications de données de la requête
         // *******************************************
         $this->validate($request, [
-            'message' => 'required|nim:2'
+            'message' => 'required|min:2'
         ]);
+        // dd($request);
         // *******************************************
         // Création d'une instance du modèle Message
         // *******************************************
@@ -49,10 +51,10 @@ class MessageController extends Controller
         // *******************************************
         // Appel de la méthode postMysMessage du modèle
         // *******************************************
-        $dbMsg->postMyMessage($request->all);
+        $data = $dbMsg->postMyMessage($request->get('message'));
         // $dbMsgTck = new MessagesTicket();
         // $dbMsgTck->postInLinkTableMsgTck(session()->get('idTicket'), Message::getNewId(false));
-
+        dd($data);
         // *******************************************
         // Appel de la méthode postInLinkTableMsgTck du modèle
         // *******************************************

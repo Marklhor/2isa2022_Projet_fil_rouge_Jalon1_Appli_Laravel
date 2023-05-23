@@ -68,15 +68,17 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <form action="{{ route('postmessage', ['nb' => $data[0]->id_ticket]) }}" method="POST">
+                        <form class="chat-form" action="{{ route('postmessage', ['nb' => $data[0]->id_ticket]) }}" method="POST">
                             @csrf
                             {{-- <input type="text" name="id_user" value="{{auth()->user}}" hidden> // TODO --}}
                             <textarea class="text_input" name="message" id="" cols="30" rows="4" placeholder="Message..."></textarea>
-                            <button type="submit">Envoyer</button>
+                            <button class="input bt_submit" type="submit">Envoyer</button>
                         </form>
                         @error('message')
-                        {{-- TODO message --}}
-                        {{$messsage}}
+                        <dir class="error">
+                            {{-- TODO message --}}
+                            {{$messsage}}
+                        </dir>
                         @enderror
                     </div>
                 </div>

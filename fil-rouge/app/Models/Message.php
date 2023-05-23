@@ -36,15 +36,17 @@ class Message extends Model
     // *******************************************
     // Méthode pour poster un nouveau message via une transacion
     // *******************************************
-    public function postMyMessage(Request $request): void
+    public function postMyMessage($message)
     {
+        // $message = strval($message);
+        // dd(session()->all());
         /**
          * Utilisation de la façade DB::transaction gérant seul les roolback et commit en fonction de la réussite des façade insert
          */
-        DB::transaction(function (Request $request) {
-            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content) values(?,?,?)", [Message::getNewId(true), $request->IdUser, $request->message]);
+        // return DB::transaction(function ($message) {
+            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content) values(?,?,?)", [Message::getNewId(true), session()->get('idUser'), $message]);
             DB::insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)", [session()->get('idTicket'), Message::getNewId(false)]);
-        });
+        // });
     }
 
     // *******************************************

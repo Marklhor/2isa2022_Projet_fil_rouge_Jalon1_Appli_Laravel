@@ -215,7 +215,7 @@ footer {
     font-size: 1em;
 }
 
-.bt_ok {
+.bt_ok, .bt_submit {
     background-color: #4CAF50;
     /* Green */
     text-align: center;
@@ -244,7 +244,7 @@ a {
     text-decoration: none;
 }
 
-/* 
+/*
 .clear {
     clear: both;
     height: 200px;
