@@ -33,7 +33,7 @@ class MessageController extends Controller
         return view('ticket', ['data' => $data]);
     }
 
-    public function postMysMessage(Request $request): void
+    public function postMysMessage(Request $request) : void
     {
         //dd($request->session()->all());
 
@@ -48,13 +48,21 @@ class MessageController extends Controller
         // Création d'une instance du modèle Message
         // *******************************************
         $dbMsg = new Message();
+
+
+
+        // dd($IdMax[0]->max + 1);
+        // $test = (float)$IdMax + 1;
+        // dd($test);
         // *******************************************
         // Appel de la méthode postMysMessage du modèle
         // *******************************************
-        $data = $dbMsg->postMyMessage($request->get('message'));
+        // dd($request->get('message'));
+
+        $data = $dbMsg->postMyMessage($request->get('message'), self::getNewID() );
         // $dbMsgTck = new MessagesTicket();
         // $dbMsgTck->postInLinkTableMsgTck(session()->get('idTicket'), Message::getNewId(false));
-        dd($data);
+        //dd($data);
         // *******************************************
         // Appel de la méthode postInLinkTableMsgTck du modèle
         // *******************************************
@@ -63,6 +71,18 @@ class MessageController extends Controller
         // *******************************************
         // Appel de la méthode getAllMessagesForTicket du controller
         // *******************************************
-        $this->getAllMessagesForTicket(session()->get('idTicket'));
+        // $this->getAllMessagesForTicket(session()->get('idTicket'));
+
+        route('ticket',['nb' => session()->get('idTicket')]);
+    }
+
+    private static function getNewID(){
+
+        /*
+        * Définition du nouvel Id pour le message
+        */
+        // $dbId = new Message();
+        $IdMax = Message::getMaxId();
+        return $IdMax[0]->max + 1;
     }
 }

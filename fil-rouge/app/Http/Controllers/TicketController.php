@@ -17,7 +17,7 @@ class TicketController extends Controller
         if (!empty(session()->get('idUser'))) {
 
             // $IsTecHotline = self::isTecHoline();
-            $IsTecHotline = this->UserisTecHoline(); // TODO
+            $IsTecHotline = $this->UserisTecHoline(); // TODO
             // dd(session()->all());
             $db = new Ticket();
             $data = $db->getTickets();

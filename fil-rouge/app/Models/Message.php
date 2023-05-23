@@ -14,7 +14,7 @@ class Message extends Model
     use HasFactory;
 
     // Valeur arbitraire, pour être sup au Id du jeu de données
-    private static int $IdMessage = 50000;
+    private static int $IdMessage;
 
     // *******************************************
     // Methode pour récupérer tous les méssages pour un ticket suivant son Id
@@ -36,17 +36,36 @@ class Message extends Model
     // *******************************************
     // Méthode pour poster un nouveau message via une transacion
     // *******************************************
-    public function postMyMessage($message)
+    public function postMyMessage($msg, $newID)
     {
-        // $message = strval($message);
-        // dd(session()->all());
         /**
          * Utilisation de la façade DB::transaction gérant seul les roolback et commit en fonction de la réussite des façade insert
          */
-        // return DB::transaction(function ($message) {
-            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content) values(?,?,?)", [Message::getNewId(true), session()->get('idUser'), $message]);
-            DB::insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)", [session()->get('idTicket'), Message::getNewId(false)]);
-        // });
+        return DB::transaction(function () use ($msg, $newID) {
+
+            $this->getMaxId();
+            //dd($msg);
+            // définition de la date dans le code et non via la BD pour obtenir les mêmes dans les tables USERS_MESSAGES et TICKETS
+            $ToDay =strval(date("Y-m-d H:i:s")) ;
+            $message = strval($msg);
+            // l'Id du message est défini par la variable statique est la méthode getNewId
+            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newID, session()->get('idUser'), $message, $ToDay]);
+            // return true if request ok
+
+            DB::insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)", [$newID, session()->get('idTicket')]);
+            // return true if request ok
+
+            DB::update("UPDATE TICKETS SET UpdateAt = ? WHERE Id = ?", [$ToDay, session()->get('idTicket')]);
+            // return 1 if request ok
+
+            // dd($data1,$data2,$data3);
+
+        });
+    }
+
+    public static function getMaxId(){
+        return DB::select("SELECT MAX(Id) AS 'max' FROM USERS_MESSAGES");
+
     }
 
     // *******************************************
