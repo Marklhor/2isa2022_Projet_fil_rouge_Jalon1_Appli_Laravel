@@ -38,7 +38,7 @@ class MessageController extends Controller
         $dbMsg = new Message();
 
         // Appel de la méthode postMysMessage du modèle
-        $data = $dbMsg->postMyMessage($request->get('message'), self::getNewID() );
+        $data = $dbMsg->postMyMessage(strval($request->input('message')), self::getNewID() );
 
         // redirection vers la route ticket (même page)
         route('ticket',['nb' => session()->get('idTicket')]);

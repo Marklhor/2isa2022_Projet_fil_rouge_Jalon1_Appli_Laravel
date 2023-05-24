@@ -6,6 +6,7 @@ use App\Models\MyUser;
 use App\Models\TypePannes;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use App\Http\Controllers\session;
 
 class TicketController extends Controller
 {
@@ -51,7 +52,7 @@ class TicketController extends Controller
             $data = $db->getMyTickets(session()->get('idUser'));
             return view('tickets', ['data' => $data]);
         }else{
-            abort(404);
+            abort(404, "Erreur sur l'identité de l'utilisateur");
         }
 
 
@@ -63,12 +64,12 @@ class TicketController extends Controller
         $dbPannes = new TypePannes();
         $ListePannes = $dbPannes->getAllFailures();
 
-
+        dd(session::all());
         return view('newticket',['liste_pannes'=> $ListePannes]);
     }
 
 
-    public function postNewTicket(Request $request){
+    public function postNewTicket(Request $request){ // TODO
         // dd($request);
 
         $this->validate($request, [
@@ -78,12 +79,25 @@ class TicketController extends Controller
 
         $newIdTicket = self::getNewID();
         $newIdMessage = MessageController::getNewID();
-        $dbNewTicket = new Ticket();
-        $NewTicket = $dbNewTicket->postMyTicket($request,$newIdTicket);
+        $idUser = session()->get('idUser');
+        $Sujet = strval($request->input('sujet'));
+        $PanneType = (int)$request->input('panne_type');
+        $Message = strval($request->input('message'));
 
-        $request->session()->flash('succes', 'Votre nouvel incident est posté avec succès');
-        // TODO
-        return view('ticket', ['nb' => $newIdTicket]);
+        $test = [$Sujet, $PanneType, $idUser, $Message];
+// dd($test);
+
+        if ($Sujet == Null | $PanneType == Null | $Message == Null ) {
+            # code...
+            $dbNewTicket = new Ticket();
+            $NewTicket = $dbNewTicket->postMyTicket($newIdTicket, $newIdMessage, $Sujet, $PanneType, $idUser, $Message);
+            // TODO test du retour de la requêtes
+            $request->session()->flash('succes', 'Votre nouvel incident est posté avec succès'); //TODO
+            
+            return view('ticket', ['nb' => $newIdTicket]);
+        }else{
+            abort(404,"Erreur sur les données à envoyer"); // TODO
+        }
 
     }
 

@@ -4,17 +4,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request;
 
 class Ticket extends Model
 {
     use HasFactory;
 
     private static $ValueNewIdTicket = 99400;
-    /**
-     * Nom de la table dans la BDD
-     */
-    protected $table = 'TICKETS';
 
     public function getAll()
     {
@@ -24,7 +19,7 @@ class Ticket extends Model
         return DB::select('SELECT * FROM TICKETS');
     }
 
-    public function getTicketById($Id)
+    public function getTicketById(int $Id)
     {
         /**
          * Construction d'une requète préparée
@@ -81,17 +76,17 @@ class Ticket extends Model
         );
     }
 
-    public function postMyTicket(Resquest $resquest, $newIdTicket, $newIdMessage){
+    public function postMyTicket(int $newIdTicket, int $newIdMessage, string $Sujet, int $PanneType, int $idUser, string $Message){
 
-        return DB::transaction(function () use ($resquest, $newIdTicket, $newIdMessage) {
+        return DB::transaction(function () use ($newIdTicket, $newIdMessage, $Sujet, $PanneType, $idUser, $Message) {
             
             //$IdMax = self::getMaxId();
             $ToDay =strval(date("Y-m-d H:i:s")) ;
-            $message = strval($resquest->message);
+            $Message = strval($Message);
 
-            DB::insert("INSERT INTO TICKETS (Id,Sujet,IdStatus,IdTypePanne,IdAuteur,CreatedAT) values (?,?,?,?,?,?)", [$newIdTicket, $resquest->get('sujet'),11111, $resquest->get('panne_type'), session()->get('idUser'), $ToDay]);
+            DB::insert("INSERT INTO TICKETS (Id,Sujet,IdStatus,IdTypePanne,IdAuteur,CreatedAT) values (?,?,?,?,?,?)", [$newIdTicket, $Sujet,11111, $PanneType, $idUser, $ToDay]);
 
-            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newIdMessage, session()->get('idUser'), $message, $ToDay]);
+            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newIdMessage, $idUser, $Message, $ToDay]);
             // return true if request ok
 
             DB::insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)", [$newIdMessage, $newIdTicket]);
@@ -111,6 +106,4 @@ class Ticket extends Model
             return $max;
         }
     }
-
-
 }
