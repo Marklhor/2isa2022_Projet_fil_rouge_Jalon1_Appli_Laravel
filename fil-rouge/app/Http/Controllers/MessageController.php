@@ -26,7 +26,7 @@ class MessageController extends Controller
         return view('ticket', ['data' => $data]);
     }
 
-    // poster un message à un incident
+    // poster un message sur un incident
     public function postMysMessage(Request $request) : void
     {
         // Vérifications de données de la requête

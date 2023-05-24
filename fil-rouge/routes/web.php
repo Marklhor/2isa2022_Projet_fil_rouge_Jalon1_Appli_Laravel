@@ -53,14 +53,14 @@ $iduser = 96101; // techHotline : 96101
 // *******************************************
 // Routes les listes des incidents, tickets, soit celle d'un utilisateur, soit celle de l'ensemble
 // *******************************************
-Route::get('/mesincidents/{iduser}', [TicketController::class, 'getMyTicket', ['idUser' => session()->get('idUser')]])->where('iduser', '^[0-9]{5}')->name('mytickets');
+Route::get('/mesincidents/{iduser}', [TicketController::class, 'getMyTickets', ['idUser' => session()->get('idUser')]])->where('iduser', '^[0-9]{5}')->name('mytickets');
 Route::get('/incidents', [TicketController::class, 'getTickets'])->name('tickets');
 
 // *******************************************
 // Routes de signalement d'un incident
 // *******************************************
 Route::get('/signaler', [TicketController::class, 'getNewTicket'])->name('newticket');
-Route::post('/signaler', [TicketController::class, 'getNewTicket'])->name('postnewticket');
+Route::post('/signaler', [TicketController::class, 'postNewTicket'])->name('postnewticket');
 
 // *******************************************
 // Route pour visualiser un incident suivant son Id et pour poster un message

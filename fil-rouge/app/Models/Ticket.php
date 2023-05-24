@@ -79,7 +79,7 @@ class Ticket extends Model
     //     );
     // }
 
-    public function getMyTicket(int $id_user)
+    public function getMyTickets(int $id_user)
     {
         return DB::select("SELECT
         TICKETS.Id AS 'id_ticket',

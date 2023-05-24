@@ -43,7 +43,7 @@ class Message extends Model
          */
         return DB::transaction(function () use ($msg, $newID) {
 
-            $this->getMaxId();
+            // $this->getMaxId();
             //dd($msg);
             // définition de la date dans le code et non via la BD pour obtenir les mêmes dans les tables USERS_MESSAGES et TICKETS
             $ToDay =strval(date("Y-m-d H:i:s")) ;
@@ -68,16 +68,6 @@ class Message extends Model
 
     }
 
-    // *******************************************
-    // Méthode pour récupérer l'indice pour le nouveau message ($increment = true), ou le dernier indice ($increment = false)
-    // *******************************************
-    public static function getNewId(bool $increment)
-    {
-        if ($increment) {
-            self::$IdMessage++;
-        }
-        return Message::$IdMessage;
-    }
 
     // private static function setNewId()
 

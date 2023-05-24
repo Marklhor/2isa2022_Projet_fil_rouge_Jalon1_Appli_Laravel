@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MyUser;
+use App\Models\TypePannes;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 
@@ -29,22 +30,55 @@ class TicketController extends Controller
     // *******************************************
     // Liste les tickets pour un utilisatuer suivant son Id
     // *******************************************
-    public function getMyTicket($idUser)
+    public function getMyTickets($idUser)
     {
-        /*
-         * Definition des éléments de la session
-         */
-        session(['idUser' => $idUser]);
 
-        //dd(session()->all());
-        $db = new Ticket();
-        $data = $db->getMyTicket(session()->get('idUser'));
-        return view('tickets', ['data' => $data]);
+        // $dblistId = new MyUser();
+        // récupère l'ide de l'utilisateur ou vide si non existant
+        $IsUser = MyUser::getAllUserId($idUser);
+        // dd($IsUser);
+
+        // si utilisateur existant
+        if(!empty($IsUser) && $IsUser->id == $idUser){
+            // dd($IsUser);
+            /*
+            * Definition des éléments de la session
+            */
+            session(['idUser' => $idUser]);
+
+            //dd(session()->all());
+            $db = new Ticket();
+            $data = $db->getMyTickets(session()->get('idUser'));
+            return view('tickets', ['data' => $data]);
+        }else{
+            abort(404);
+        }
+
+
+
     }
 
     public function getNewTicket()
     {
-        return view('newticket');
+        $dbPannes = new TypePannes();
+        $ListePannes = $dbPannes->getAllFailures();
+
+
+        return view('newticket',['liste_pannes'=> $ListePannes]);
+    }
+
+
+    public function postNewTicket(Request $request){
+        // dd($request);
+
+        $this->validate($request, [
+            'message' => 'required|min:2',
+            'sujet' => 'required|min:2'
+        ]);
+
+        $dbNewTicket = new Ticket();
+        // TODO
+
     }
 
     //défini si le user de la session est un techotline ou non
