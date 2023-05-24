@@ -76,11 +76,14 @@ class TicketController extends Controller
             'sujet' => 'required|min:2'
         ]);
 
+        $newIdTicket = self::getNewID();
+        $newIdMessage = MessageController::getNewID();
         $dbNewTicket = new Ticket();
-        $NewTicket = $dbNewTicket->postMyTicket($request);
+        $NewTicket = $dbNewTicket->postMyTicket($request,$newIdTicket);
 
+        $request->session()->flash('succes', 'Votre nouvel incident est posté avec succès');
         // TODO
-        return view('', ['data' => $data, 'IsTecHotline' => $IsTecHotline]);
+        return view('ticket', ['nb' => $newIdTicket]);
 
     }
 
@@ -97,51 +100,9 @@ class TicketController extends Controller
             return false;
         }
     }
-
-
-
-    // public function listOfTickets()
-    // {
-    //     /**
-    //      * Création d'une instance du modèle EMP
-    //      */
-    //     $db = new Ticket();
-
-    //     /**
-    //      * Appel de la méthode getAll du modèle
-    //      */
-    //     $data = $db->getAll();
-
-    //     //dd($data);
-    //     return view('tickets', ['data' => $data]);
-    // }
-
-
-
-    // /**
-    //  * Affichage de la page de selection d'employé
-    //  */
-    // public function selectTicket()
-    // {
-    //     return view('ticketById');
-    // }
-
-    // /**
-    //  * Affichage du détail d'un employé
-    //  */
-    // public function getTicketById(Request $request)
-    // {
-    //     $name = $request->input('Id');
-
-    //     $db = new Ticket();
-    //     $data = $db->getTicketById($name);
-
-    //     if (!is_null($data) && !empty($data)) {
-    //         return view('ticketById', compact('data'));
-    //     } else {
-    //         return redirect(route('select.ticket'));
-    //     }
-    // }
-
-
+    // Définition du nouvel Id pour le message
+    private static function getNewID(){
+        $IdMax = (int)TICKET::getMaxId();
+        return $IdMax + 1;
+    }
 }

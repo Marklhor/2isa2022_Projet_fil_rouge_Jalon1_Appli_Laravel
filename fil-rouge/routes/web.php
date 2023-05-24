@@ -23,7 +23,7 @@ use App\Http\Controllers\IncidentController;
 // NOTE NOMMAGE
 // *******************************************
 // NOM DES VARIABLES :
-// - variables de routes, de session et les méthodes de class -> pascalCase
+// - variables de routes, de session et de méthode de class -> pascalCase
 // - autres variables -> CamelCase
 // - variables de l'uri et nom de route -> minuscul sans symboles
 //
@@ -40,7 +40,9 @@ Route::get('/', function () {
 // *******************************************
 // session(['idUser' => 82001]);
 session(['idUser' => 96101]);
-
+//
+// test Route
+//Route::get('/test',[TicketController::class, 'isTecHoline']);
 
 // *******************************************
 // variables d'initialisation pour les routes
@@ -67,9 +69,6 @@ Route::post('/signaler', [TicketController::class, 'postNewTicket'])->name('post
 // *******************************************
 Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->name('ticket');
 Route::post('/incident/{nb}', [MessageController::class, 'postMysMessage', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->name('postmessage');
-//route de passage pour insérer des données dans la table de liaison MESSAGES_TYCKET
-// Route::get('/intermed/messages_ticket', [MessagesTicket::class, 'postInLinkTableMsgTck', ['IdTicket', 'IdMessage']])->name('msgtckt');
 
 
-// test
-Route::get('/test',[TicketController::class, 'isTecHoline']);
+
