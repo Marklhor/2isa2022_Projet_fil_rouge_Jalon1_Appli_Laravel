@@ -77,7 +77,10 @@ class TicketController extends Controller
         ]);
 
         $dbNewTicket = new Ticket();
+        $NewTicket = $dbNewTicket->postMyTicket($request);
+
         // TODO
+        return view('', ['data' => $data, 'IsTecHotline' => $IsTecHotline]);
 
     }
 

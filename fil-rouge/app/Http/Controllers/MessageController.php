@@ -47,6 +47,6 @@ class MessageController extends Controller
     // Définition du nouvel Id pour le message
     private static function getNewID(){
         $IdMax = Message::getMaxId();
-        return $IdMax[0]->max + 1;
+        return $IdMax->max + 1;
     }
 }

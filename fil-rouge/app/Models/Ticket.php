@@ -4,11 +4,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 class Ticket extends Model
 {
     use HasFactory;
 
+    private static $NewIdTicket = 99400;
     /**
      * Nom de la table dans la BDD
      */
@@ -55,6 +57,7 @@ class Ticket extends Model
         );
     }
 
+    /*
     // public function getTicket(int $id_ticket)
     // {
     //     return DB::select("SELECT
@@ -78,6 +81,7 @@ class Ticket extends Model
     //     WHERE TICKETS.Id = ?",[$id_ticket]
     //     );
     // }
+        */
 
     public function getMyTickets(int $id_user)
     {
@@ -101,6 +105,40 @@ class Ticket extends Model
             JOIN STATUS_TYPE ON TICKETS.IdStatus = STATUS_TYPE.Id
         WHERE users.id = ?",[$id_user]
         );
+    }
+
+    public function postMyTicket(Resquest $resquest){
+
+        return DB::transaction(function () use ($resquest) {
+            
+            
+            $IdMax = self::getMaxId();
+            $ToDay =strval(date("Y-m-d H:i:s")) ;
+            $message = strval($resquest->message);
+
+            DB::insert("INSERT INTO TICKETS (Id,Sujet,IdStatus,IdTypePanne,IdAuteur,CreatedAT) values (?,?,?,?,?,?)", [$IdMax+1, $resquest->sujet])
+
+            // l'Id du message est défini par la variable statique est la méthode getNewId
+            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newID, session()->get('idUser'), $message, $ToDay]);
+            // return true if request ok
+// TODO
+            DB::insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)", [$newID, session()->get('idTicket')]);
+            // return true if request ok
+
+            DB::update("UPDATE TICKETS SET UpdateAt = ? WHERE Id = ?", [$ToDay, session()->get('idTicket')]);
+            // return 1 if request ok
+
+        });
+    }
+
+    public static function getMaxId(){
+
+        $max = DB::selectone("SELECT MAX(Id) AS 'max' FROM TICKETS");
+        if ($max < self::NewIdTicket) {
+            return self::NewIdTicket;
+        }else{
+            return $max;
+        }
     }
 
 

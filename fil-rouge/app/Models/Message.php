@@ -64,7 +64,7 @@ class Message extends Model
     }
 
     public static function getMaxId(){
-        return DB::select("SELECT MAX(Id) AS 'max' FROM USERS_MESSAGES");
+        return DB::selectone("SELECT MAX(Id) AS 'max' FROM USERS_MESSAGES");
 
     }
 
