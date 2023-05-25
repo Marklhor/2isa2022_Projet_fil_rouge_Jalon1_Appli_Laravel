@@ -40,7 +40,7 @@ class TicketController extends Controller
         // dd($IsUser);
 
         // si utilisateur existant
-        if(!empty($IsUser) && $IsUser->id == $idUser){
+        // if(!empty($IsUser) && $IsUser->id == $idUser){
             // dd($IsUser);
             /*
             * Definition des éléments de la session
@@ -51,9 +51,9 @@ class TicketController extends Controller
             $db = new Ticket();
             $data = $db->getMyTickets(session()->get('idUser'));
             return view('tickets', ['data' => $data]);
-        }else{
-            abort(404, "Erreur sur l'identité de l'utilisateur");
-        }
+        // }else{
+        //     abort(404, "Erreur sur l'identité de l'utilisateur");
+        // }
 
 
 
@@ -64,7 +64,7 @@ class TicketController extends Controller
         $dbPannes = new TypePannes();
         $ListePannes = $dbPannes->getAllFailures();
 
-        dd(session::all());
+        // dd(session()->all());
         return view('newticket',['liste_pannes'=> $ListePannes]);
     }
 
@@ -87,17 +87,17 @@ class TicketController extends Controller
         $test = [$Sujet, $PanneType, $idUser, $Message];
 // dd($test);
 
-        if ($Sujet == Null | $PanneType == Null | $Message == Null ) {
+        //if ($Sujet == Null | $PanneType == Null | $Message == Null ) {
             # code...
             $dbNewTicket = new Ticket();
             $NewTicket = $dbNewTicket->postMyTicket($newIdTicket, $newIdMessage, $Sujet, $PanneType, $idUser, $Message);
             // TODO test du retour de la requêtes
             $request->session()->flash('succes', 'Votre nouvel incident est posté avec succès'); //TODO
             
-            return view('ticket', ['nb' => $newIdTicket]);
-        }else{
-            abort(404,"Erreur sur les données à envoyer"); // TODO
-        }
+            return redirect()->route('ticket', ['nb' => $newIdTicket]);
+        // }else{
+        //     abort(404,"Erreur sur les données à envoyer"); // TODO
+        // }
 
     }
 
@@ -116,7 +116,8 @@ class TicketController extends Controller
     }
     // Définition du nouvel Id pour le message
     private static function getNewID(){
-        $IdMax = (int)TICKET::getMaxId();
-        return $IdMax + 1;
+        $IdMax = TICKET::getMaxId();
+        // dd($IdMax);
+        return $IdMax->max + 1;
     }
 }

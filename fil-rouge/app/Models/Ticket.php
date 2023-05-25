@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +32,8 @@ class Ticket extends Model
 
     public function getTickets()
     {
-        return DB::select("SELECT
+        return DB::select(
+            "SELECT
         TICKETS.Id AS 'id_ticket',
         TICKETS.Sujet AS 'sujet',
         STATUS_TYPE.Id AS 'id_status',
@@ -54,7 +57,8 @@ class Ticket extends Model
 
     public function getMyTickets(int $id_user)
     {
-        return DB::select("SELECT
+        return DB::select(
+            "SELECT
         TICKETS.Id AS 'id_ticket',
         TICKETS.Sujet AS 'sujet',
         STATUS_TYPE.Id AS 'id_status',
@@ -72,37 +76,42 @@ class Ticket extends Model
             JOIN PANNES_TYPE ON TICKETS.IdTypePanne = PANNES_TYPE.Id
             JOIN users ON TICKETS.IdAuteur = users.id
             JOIN STATUS_TYPE ON TICKETS.IdStatus = STATUS_TYPE.Id
-        WHERE users.id = ?",[$id_user]
+        WHERE users.id = ?",
+            [$id_user]
         );
     }
 
-    public function postMyTicket(int $newIdTicket, int $newIdMessage, string $Sujet, int $PanneType, int $idUser, string $Message){
-
-        return DB::transaction(function () use ($newIdTicket, $newIdMessage, $Sujet, $PanneType, $idUser, $Message) {
-            
-            //$IdMax = self::getMaxId();
-            $ToDay =strval(date("Y-m-d H:i:s")) ;
+    public function postMyTicket(int $newIdTicket, int $newIdMessage, string $Sujet, int $PanneType, int $idUser, string $Message)
+    {
+        DB::beginTransaction();
+        try {
+            $ToDay = strval(date("Y-m-d H:i:s"));
             $Message = strval($Message);
-
-            DB::insert("INSERT INTO TICKETS (Id,Sujet,IdStatus,IdTypePanne,IdAuteur,CreatedAT) values (?,?,?,?,?,?)", [$newIdTicket, $Sujet,11111, $PanneType, $idUser, $ToDay]);
+            DB::insert("INSERT INTO TICKETS (Id,Sujet,IdStatus,IdTypePanne,IdAuteur,CreatedAT) values (?,?,?,?,?,?)", [77777, $Sujet, 11111, $PanneType, $idUser, $ToDay]);
 
             DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newIdMessage, $idUser, $Message, $ToDay]);
             // return true if request ok
 
             DB::insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)", [$newIdMessage, $newIdTicket]);
             // return true if request ok
-
-            // DB::update("UPDATE TICKETS SET UpdateAt = ? WHERE Id = ?", [$ToDay, $newIdTicket]);
-            // return 1 if request ok, nb of ligne update
-        });
+            DB::commit();
+            // return true;
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return false;
+        }
+        // dd($return);
+        return true;
     }
 
-    public static function getMaxId(){
+    public static function getMaxId()
+    {
 
         $max = DB::selectone("SELECT MAX(Id) AS 'max' FROM TICKETS");
         if ($max->max < self::$ValueNewIdTicket) {
             return self::$ValueNewIdTicket;
-        }else{
+        } else {
             return $max;
         }
     }

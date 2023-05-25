@@ -38,8 +38,8 @@ Route::get('/', function () {
 // *******************************************
 // Test
 // *******************************************
-// session(['idUser' => 82001]);
-session(['idUser' => 96101]);
+session(['idUser' => 82001]);
+// session(['idUser' => 96101]);
 //
 // test Route
 //Route::get('/test',[TicketController::class, 'isTecHoline']);
@@ -49,8 +49,8 @@ session(['idUser' => 96101]);
 // utilité, ou autres méthodes, bonnes pratiques ? TODO
 // *******************************************
 $nb = 11111; // 99006, 99304
-// $iduser = 82001; // techHotline : 96101
-$iduser = 96101; // techHotline : 96101
+$iduser = 82001; // techHotline : 96101
+// $iduser = 96101; // techHotline : 96101
 
 // *******************************************
 // Routes les listes des incidents, tickets, soit celle d'un utilisateur, soit celle de l'ensemble

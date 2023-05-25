@@ -41,9 +41,9 @@ class Message extends Model
         /**
          * Utilisation de la façade DB::transaction gérant seul les roolback et commit en fonction de la réussite des façade insert
          */
-        return DB::transaction(function () use ($msg, $newID) {
-
-            // $this->getMaxId();
+        DB::beginTransaction();
+        try {
+             // $this->getMaxId();
             //dd($msg);
             // définition de la date dans le code et non via la BD pour obtenir les mêmes dans les tables USERS_MESSAGES et TICKETS
             $ToDay =strval(date("Y-m-d H:i:s")) ;
@@ -59,8 +59,14 @@ class Message extends Model
             // return 1 if request ok
 
             // dd($data1,$data2,$data3);
+            // return true;
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return false;
+        }
+        return true;
 
-        });
     }
 
     public static function getMaxId(){
