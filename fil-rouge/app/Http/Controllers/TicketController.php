@@ -41,16 +41,16 @@ class TicketController extends Controller
 
         // si utilisateur existant
         // if(!empty($IsUser) && $IsUser->id == $idUser){
-            // dd($IsUser);
-            /*
+        // dd($IsUser);
+        /*
             * Definition des éléments de la session
             */
-            session(['idUser' => $idUser]);
+        session(['idUser' => $idUser]);
 
-            //dd(session()->all());
-            $db = new Ticket();
-            $data = $db->getMyTickets(session()->get('idUser'));
-            return view('tickets', ['data' => $data]);
+        //dd(session()->all());
+        $db = new Ticket();
+        $data = $db->getMyTickets(session()->get('idUser'));
+        return view('tickets', ['data' => $data]);
         // }else{
         //     abort(404, "Erreur sur l'identité de l'utilisateur");
         // }
@@ -65,11 +65,12 @@ class TicketController extends Controller
         $ListePannes = $dbPannes->getAllFailures();
 
         // dd(session()->all());
-        return view('newticket',['liste_pannes'=> $ListePannes]);
+        return view('newticket', ['liste_pannes' => $ListePannes]);
     }
 
 
-    public function postNewTicket(Request $request){ // TODO
+    public function postNewTicket(Request $request)
+    { // TODO
         // dd($request);
 
         $this->validate($request, [
@@ -84,21 +85,26 @@ class TicketController extends Controller
         $PanneType = (int)$request->input('panne_type');
         $Message = strval($request->input('message'));
 
-        $test = [$Sujet, $PanneType, $idUser, $Message];
-// dd($test);
+        // $test = [$Sujet, $PanneType, $idUser, $Message];
+        // dd($test);
 
-        //if ($Sujet == Null | $PanneType == Null | $Message == Null ) {
+        if ($Sujet != Null | $PanneType != Null | $Message != Null) {
             # code...
             $dbNewTicket = new Ticket();
             $NewTicket = $dbNewTicket->postMyTicket($newIdTicket, $newIdMessage, $Sujet, $PanneType, $idUser, $Message);
-            // TODO test du retour de la requêtes
-            $request->session()->flash('succes', 'Votre nouvel incident est posté avec succès'); //TODO
-            
-            return redirect()->route('ticket', ['nb' => $newIdTicket]);
-        // }else{
-        //     abort(404,"Erreur sur les données à envoyer"); // TODO
-        // }
-
+            if ($NewTicket) {
+                # code...
+                return redirect()->route('ticket', ['nb' => $newIdTicket]);
+            } else {
+                # code...
+                session()->flash('error', "Votre nouvel incident n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer"); //TODO
+                return redirect()->route('newticket');
+            }
+        } else {
+            # code...
+            session()->flash('error', "Votre nouvel incident n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer"); //TODO
+            return redirect()->route('newticket');
+        }
     }
 
     //défini si le user de la session est un techotline ou non
@@ -115,7 +121,8 @@ class TicketController extends Controller
         }
     }
     // Définition du nouvel Id pour le message
-    private static function getNewID(){
+    private static function getNewID()
+    {
         $IdMax = TICKET::getMaxId();
         // dd($IdMax);
         return $IdMax->max + 1;

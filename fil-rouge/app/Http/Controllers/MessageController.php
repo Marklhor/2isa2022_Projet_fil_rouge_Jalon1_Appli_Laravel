@@ -27,25 +27,40 @@ class MessageController extends Controller
     }
 
     // poster un message sur un incident
-    public function postMysMessage(Request $request) : void
+    public function postMysMessage(Request $request)
     {
         // Vérifications de données de la requête
         $this->validate($request, [
             'message' => 'required|min:2'
         ]);
+        $Message = strval($request->input('message'));
 
+        if ($Message != Null) {
+            $dbMsg = new Message();
+
+            // Appel de la méthode postMysMessage du modèle
+            $NewMessage = $dbMsg->postMyMessage($Message, self::getNewID());
+            if ($NewMessage) {
+                # code...
+                route('ticket', ['nb' => session()->get('idTicket')]);
+            } else {
+                session()->flash('error', "Votre nouveau message n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer"); 
+                return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
+            }
+
+            // redirection vers la route ticket (même page)
+        } else {
+            # code...
+            session()->flash('error', "Votre nouveau message n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer"); 
+            return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
+        }
         // Création d'une instance du modèle Message
-        $dbMsg = new Message();
 
-        // Appel de la méthode postMysMessage du modèle
-        $data = $dbMsg->postMyMessage(strval($request->input('message')), self::getNewID() );
-
-        // redirection vers la route ticket (même page)
-        route('ticket',['nb' => session()->get('idTicket')]);
     }
 
     // Définition du nouvel Id pour le message
-    public static function getNewID(){
+    public static function getNewID()
+    {
         $IdMax = Message::getMaxId();
         return $IdMax->max + 1;
     }

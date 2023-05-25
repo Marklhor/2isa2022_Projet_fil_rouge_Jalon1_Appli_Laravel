@@ -108,7 +108,7 @@
     width: 300px;
 }
 
-.bt_submit{
+.bt_submit {
     margin-top: 10px;
 }
 
@@ -131,6 +131,15 @@
     flex-direction: column;
 }
 
+.error,
+.fieldset_newticket {
+    width: 300px;
+}
+
+.error {
+    text-align: center;
+}
+
 /* rapports: chat width = media/1.25; message width = chat width / 1.5 */
 
 
@@ -150,7 +159,9 @@
         width: 221px;
     }
 
-    .text_input {
+    .text_input,
+    .error,
+    .fieldset_newticket {
         width: 332px;
     }
 }
@@ -165,7 +176,9 @@
         width: 288px;
     }
 
-    .text_input {
+    .text_input,
+    .error,
+    .fieldset_newticket {
         width: 432px;
     }
 }
@@ -189,7 +202,9 @@
         width: 400px;
     }
 
-    .text_input {
+    .text_input,
+    .error,
+    .fieldset_newticket {
         width: 600px;
     }
 }
@@ -215,7 +230,9 @@
         width: 300px;
     }
 
-    .text_input {
+    .text_input,
+    .error,
+    .fieldset_newticket {
         width: 400px;
     }
 
@@ -234,7 +251,9 @@
         width: 400px;
     }
 
-    .text_input {
+    .text_input,
+    .error,
+    .fieldset_newticket {
         width: 600px;
     }
 

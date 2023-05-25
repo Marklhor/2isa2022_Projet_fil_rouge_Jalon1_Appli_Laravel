@@ -43,10 +43,10 @@ class Message extends Model
          */
         DB::beginTransaction();
         try {
-             // $this->getMaxId();
+            // $this->getMaxId();
             //dd($msg);
             // définition de la date dans le code et non via la BD pour obtenir les mêmes dans les tables USERS_MESSAGES et TICKETS
-            $ToDay =strval(date("Y-m-d H:i:s")) ;
+            $ToDay = strval(date("Y-m-d H:i:s"));
             $message = strval($msg);
             // l'Id du message est défini par la variable statique est la méthode getNewId
             DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newID, session()->get('idUser'), $message, $ToDay]);
@@ -66,12 +66,11 @@ class Message extends Model
             return false;
         }
         return true;
-
     }
 
-    public static function getMaxId(){
+    public static function getMaxId()
+    {
         return DB::selectone("SELECT MAX(Id) AS 'max' FROM USERS_MESSAGES");
-
     }
 
 

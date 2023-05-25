@@ -116,12 +116,15 @@ h3 {
 
 }
 
-caption {
+caption,
+.error {
     color: #FB667A;
 }
 
+
+
 h2 a {
-    font-weight: 700;
+    /* font-weight: 700; */
     text-transform: uppercase;
     color: #FB667A;
     text-decoration: none;
@@ -215,7 +218,8 @@ footer {
     font-size: 1em;
 }
 
-.bt_ok, .bt_submit {
+.bt_ok,
+.bt_submit {
     background-color: #4CAF50;
     /* Green */
     text-align: center;
@@ -260,4 +264,8 @@ a {
     z-index: -10;
 }
 
-@media only screen and (min-width: 768px) {}
+#new_message{
+    font-size: 1.3em;
+}
+
+/* @media only screen and (min-width: 768px) {} */

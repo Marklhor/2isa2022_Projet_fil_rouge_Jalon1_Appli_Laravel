@@ -4,7 +4,7 @@
     <article>
         <form action="{{ route('postnewticket') }}" method="POST">
             @csrf
-            <fieldset>
+            <fieldset class="fieldset_newticket">
                 <legend>Nouvel incident</legend>
                 <label for="sujet" class="">Entrer le sujet :</label>
                 <input class="input bt_value" type="text" id="new_sujet" name="sujet" value=""
@@ -24,7 +24,11 @@
                 <button class="input bt_submit" type="submit">Envoyer</button>
 
                 <button class="input bt_nok" type="">Annuler</button>
+                @if (session()->has('error'))
+                    @include('templates.error')
+                @endif
             </fieldset>
         </form>
+
     </article>
 @endsection
