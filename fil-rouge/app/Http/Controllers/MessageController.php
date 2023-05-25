@@ -34,7 +34,7 @@ class MessageController extends Controller
             'message' => 'required|min:2'
         ]);
         $Message = strval($request->input('message'));
-
+        dd('coucouc');
         if ($Message != Null) {
             $dbMsg = new Message();
 

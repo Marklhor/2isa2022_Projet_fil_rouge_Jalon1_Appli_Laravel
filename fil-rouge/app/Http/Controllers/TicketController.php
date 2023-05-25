@@ -19,7 +19,7 @@ class TicketController extends Controller
         if (!empty(session()->get('idUser'))) {
 
             // $IsTecHotline = self::isTecHoline();
-            $IsTecHotline = $this->UserisTecHoline(); // TODO
+            $IsTecHotline = $this->UserisTecHoline();
             // dd(session()->all());
             $db = new Ticket();
             $data = $db->getTickets();
@@ -70,7 +70,7 @@ class TicketController extends Controller
 
 
     public function postNewTicket(Request $request)
-    { // TODO
+    {
         // dd($request);
 
         $this->validate($request, [
@@ -97,12 +97,12 @@ class TicketController extends Controller
                 return redirect()->route('ticket', ['nb' => $newIdTicket]);
             } else {
                 # code...
-                session()->flash('error', "Votre nouvel incident n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer"); //TODO
+                session()->flash('error', "Votre nouvel incident n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer");
                 return redirect()->route('newticket');
             }
         } else {
             # code...
-            session()->flash('error', "Votre nouvel incident n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer"); //TODO
+            session()->flash('error', "Votre nouvel incident n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer");
             return redirect()->route('newticket');
         }
     }

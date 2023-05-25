@@ -27,6 +27,7 @@
                 @if (session()->has('error'))
                     @include('templates.error')
                 @endif
+                
             </fieldset>
         </form>
 
