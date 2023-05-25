@@ -17,21 +17,15 @@
                             <label for="panne_type"></label>
                             Type de panne :
                             <span class="ticket_values">
-                                <select id="panne_type">
-                                    <option value="">à définir</option>
-                                    <option value="type01">type01</option>
-                                    <option value="type02">type02</option>
-                                    <option value="type03">type03</option>
-                                    <option value="type04">type04</option>
-                                    <option value="type05">type05</option>
-                                    <option value="type06">type06</option>
-                                </select>
+                                {{ $data[0]->label_panne }}
                             </span>
                         </p>
-                        <p class="txt_inline">Date d’ouverture : <span
-                                class="ticket_values">{{ $data[0]->date_de_creation }}</span></p>
-                        <p class="txt_inline">Dernière mise à jour : <span
-                                class="ticket_values">{{ $data[0]->date_de_maj }}</span></p>
+                        <p class="txt_inline">Date d’ouverture : <time
+                                class="ticket_values" datetime="{{ $data[0]->date_de_creation }}">{{ $data[0]->date_de_creation }}</time>
+                        </p>
+                        <p class="txt_inline">Dernière mise à jour : <time
+                                class="ticket_values" datetime="{{ $data[0]->date_de_maj }}">{{ $data[0]->date_de_maj }}</time>
+                        </p>
                         <p class="txt_inline">Sujet : <span class="ticket_values">{{ $data[0]->sujet }}</span>
                         </p>
                     </div>
@@ -47,22 +41,23 @@
                             @foreach ($data as $message)
                                 {{-- {{ var_bump($message) }} --}}
 
-                                <li @switch($message->id_role)
-                                    @case(77002)
+                                <li @switch($message->id_user)
+                                    @case (session()->get('idUser'))
                                         class="message right">
-                                        <img class="logo" src="/img/help-desk-technical-support.svg" alt="technicien">
-                                        @break
-
-                                    @case(77001)
-
-                                        class="message left">
                                         <img class="logo" src="/img/computer-icons-clip-art-man.svg" alt="usager">
+                                        @break
+                                    @default
+                                        class="message left">
+                                        <img class="logo" src="/img/help-desk-technical-support.svg" alt="technicien">
                                         @break
                                     @endswitch
                                     <p>
                                     {{ $message->msg }}
-                                    <p><span>{{ $message->nom }}</span> <span>{{ $message->date_message }}</span>
-                                        <span>{{ $message->id_role }}</span> </span>{{ $message->id_user }}<span>
+                                    <p>
+                                        @if ($message->id_user != session()->get('idUser'))
+                                            <span>{{ $message->nom }}</span>
+                                        @endif
+                                        <time datetime="{{ $message->date_message }}">{{ $message->date_message }}</time>
                                     </p>
                                     </p>
                                 </li>
