@@ -43,28 +43,32 @@ class Message extends Model
          */
         DB::beginTransaction();
         try {
+            // dd($msg, $newID);
             // $this->getMaxId();
             //dd($msg);
             // définition de la date dans le code et non via la BD pour obtenir les mêmes dans les tables USERS_MESSAGES et TICKETS
             $ToDay = strval(date("Y-m-d H:i:s"));
             $message = strval($msg);
             // l'Id du message est défini par la variable statique est la méthode getNewId
-            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newID, session()->get('idUser'), $message, $ToDay]);
+            $rq01 = DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newID, session()->get('idUser'), $message, $ToDay]);
             // return true if request ok
 
-            DB::insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)", [$newID, session()->get('idTicket')]);
+            $rq02 = DB::insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)", [$newID, session()->get('idTicket')]);
             // return true if request ok
 
-            DB::update("UPDATE TICKETS SET UpdateAt = ? WHERE Id = ?", [$ToDay, session()->get('idTicket')]);
+            $rq03 = DB::update("UPDATE TICKETS SET UpdateAt = ? WHERE Id = ?", [$ToDay, session()->get('idTicket')]);
             // return 1 if request ok
 
-            // dd($data1,$data2,$data3);
-            // return true;
+            // dd($rq01, $rq02, $rq03);
+
+            DB::commit();
         } catch (\Throwable $th) {
+            // dd('erreur DB');
             //throw $th;
             DB::rollBack();
             return false;
         }
+        // dd('OK DB');
         return true;
     }
 

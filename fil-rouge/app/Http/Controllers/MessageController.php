@@ -34,7 +34,6 @@ class MessageController extends Controller
             'message' => 'required|min:2'
         ]);
         $Message = strval($request->input('message'));
-        dd('coucouc');
         if ($Message != Null) {
             $dbMsg = new Message();
 
@@ -42,16 +41,18 @@ class MessageController extends Controller
             $NewMessage = $dbMsg->postMyMessage($Message, self::getNewID());
             if ($NewMessage) {
                 # code...
-                route('ticket', ['nb' => session()->get('idTicket')]);
+                // dd($Message);
+                return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
+                // route('ticket', ['nb' => session()->get('idTicket')]);
             } else {
-                session()->flash('error', "Votre nouveau message n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer"); 
+                session()->flash('error', "Votre nouveau message n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer");
                 return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
             }
 
             // redirection vers la route ticket (même page)
         } else {
             # code...
-            session()->flash('error', "Votre nouveau message n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer"); 
+            session()->flash('error', "Votre nouveau message n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer");
             return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
         }
         // Création d'une instance du modèle Message
