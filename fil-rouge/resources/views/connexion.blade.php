@@ -23,15 +23,15 @@
                 <h2 class="text_center">GESTION DES INCIDENTS</h2>
             </hgroup>
             <article>
-                <form action="">
+                <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <fieldset>
                         <legend>Connectez-vous</legend>
-                        <label for="email" class="hidden">Entrer votre email:</label>
-                        <input class="input bt_value" type="email" id="email" name="email" value="email"
-                            required>
-                        <label for="mdp" class="hidden">Entrer votre mot-de-passe</label>
-                        <input class="input  bt_value" type="password" id="mdp" name="mdp"
+                        <label for="email" class="hidden"></label>
+                        <input class="input bt_value" type="email" id="email" name="email" value=""
+                            placeholder="Entrer votre email" required>
+                        <label for="password" class="hidden">Entrer votre mot-de-passe</label>
+                        <input class="input  bt_value" type="password" id="password" name="password"
                             placeholder="Entrer votre mot-de-passe" required>
                         <button class="input bt_ok pointer" name="button">Se connecter</button>
                         <div>

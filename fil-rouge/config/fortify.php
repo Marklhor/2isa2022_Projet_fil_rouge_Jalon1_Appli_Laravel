@@ -1,4 +1,4 @@
-<?php
+<?php // Fortift pour connexion
 
 use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
@@ -61,6 +61,7 @@ return [
     |
     */
 
+    // 'home' => RouteServiceProvider::tickets,
     'home' => RouteServiceProvider::HOME,
 
     /*
@@ -133,10 +134,10 @@ return [
 
     'features' => [
         Features::registration(),
-        Features::resetPasswords(),
+        // Features::resetPasswords(),
         // Features::emailVerification(),
         // Features::updateProfileInformation(),
-        Features::updatePasswords(),
+        // Features::updatePasswords(),
         // Features::twoFactorAuthentication([
         //     'confirm' => true,
         //     'confirmPassword' => true,

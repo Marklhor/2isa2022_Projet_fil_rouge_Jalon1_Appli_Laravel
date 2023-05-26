@@ -9,8 +9,13 @@
             {{-- TODO get user id --}}
             <li><a href="{{ route('mytickets', ['iduser' => session()->get('idUser')]) }}">Mes incidents</a></li>
             <li><a href="{{ route('newticket') }}">Signaler un incident</a></li>
-            <li><a href='#'>Se déconnecter</a></li>
-            {{-- <li><a href='{{ route('logOut') }}'>Se déconnecter</a></li> --}}
+            <li>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="" name="">Se déconnecter</button>
+                </form>
+                {{-- <a href='{{ route('logout') }}'>Se déconnecter</a> --}}
+            </li>
         </ul>
     </div>
 </nav>

@@ -31,16 +31,29 @@ use App\Http\Controllers\IncidentController;
 // - dans les URI le terme employé pour un ticket est 'incident"
 
 
+
+// *******************************************
+// FORTIFY ROUTE
+// *******************************************
+// Route::get('/', function () {
+//     return view('welcome'); // page d'accueil apès connexion
+// })->name('home');
+
 Route::get('/', function () {
-    return view('welcome'); // page d'accueil apès connexion
+    return view('connexion'); // page d'accueil apès connexion
 })->name('home');
 
-Route::get('home', function(){ 
-    return view('home'); 
-})->middleware('auth'); 
 
- 
+Route::get('home', function(){ 
+    return view('tickets'); 
+})->middleware('auth'); 
 // ->middleware('auth') => à la fin de chaque route pour obligé à l'athentification
+
+
+
+
+
+
 // *******************************************
 // Test
 // *******************************************
@@ -48,7 +61,7 @@ session(['idUser' => 82001]);
 // session(['idUser' => 96101]);
 //
 // test Route
-//Route::get('/test',[TicketController::class, 'isTecHoline']);
+Route::get('/test',[TicketController::class, 'getTickets'])->middleware('auth');
 
 // *******************************************
 // variables d'initialisation pour les routes
