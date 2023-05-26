@@ -108,10 +108,11 @@ class TicketController extends Controller
     }
 
     public function updateToCloseThisTicket(int $IdTicket){
+        // dd('ici');
 
         $dbTicket = new Ticket();
         $data  = $dbTicket->updateToCloseThisTicket($IdTicket);
-        session()->flash('succes', "L'incident est clôturé");
+        session()->flash('success', "L'incident est clôturé");
         return redirect()->route('ticket', ['nb' => $IdTicket]);
     }
 

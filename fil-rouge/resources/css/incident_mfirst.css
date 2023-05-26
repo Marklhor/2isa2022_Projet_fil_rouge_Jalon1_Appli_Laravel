@@ -141,6 +141,7 @@ min-width: 280px;
     grid-gap: 10px;
     align-items: center;
     margin-bottom: 0;
+    box-sizing: content-box;
 }
 
 .margin_top_zerosix {

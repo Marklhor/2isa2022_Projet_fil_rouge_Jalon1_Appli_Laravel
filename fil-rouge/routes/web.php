@@ -32,9 +32,15 @@ use App\Http\Controllers\IncidentController;
 
 
 Route::get('/', function () {
-    return view('connexion');
-})->name('connexion');
+    return view('welcome'); // page d'accueil apès connexion
+})->name('home');
 
+Route::get('home', function(){ 
+    return view('home'); 
+})->middleware('auth'); 
+
+ 
+// ->middleware('auth') => à la fin de chaque route pour obligé à l'athentification
 // *******************************************
 // Test
 // *******************************************
@@ -73,5 +79,5 @@ Route::post('/incident/{nb}', [MessageController::class, 'postMysMessage', ['idi
 // *******************************************
 // Route pour cloturer un incident, uniquement accessible par les TecHotline
 // *******************************************
-Route::post('/incident/{nb}', [TicketController::class, 'updateToCloseThisTicket', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->name('closeticket');
+Route::post('/incident/close/{nb}', [TicketController::class, 'updateToCloseThisTicket', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->name('closeticket');
 

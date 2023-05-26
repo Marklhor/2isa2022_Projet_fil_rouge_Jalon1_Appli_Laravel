@@ -33,10 +33,17 @@
                                     @endswitch
                                 </span>
                             </span>
-                            <button class="bt_submit bt_close_ticket"
-                                href="{{ redirect()->route('updateToCloseThisTicket', ['idincident' => $data[0]->id_ticket]) }}"
-                                name="button">Clôturer</button>
+                            <span>
+                                <form class="" action="{{ route('closeticket', ['nb' => $data[0]->id_ticket]) }}"
+                                    method="POST">
+                                    @csrf
+                                    <button class="bt_submit bt_close_ticket" type="submit">Clôturer</button>
+                                </form>
+                            </span>
                         </p>
+                        @if (session()->has('success'))
+                            @include('templates.success')
+                        @endif
                         <p class="margin_top_zerosix">
                             <label for="panne_type"></label>
                             Type de panne :
