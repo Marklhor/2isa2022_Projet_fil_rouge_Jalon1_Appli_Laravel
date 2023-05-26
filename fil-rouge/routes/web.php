@@ -70,5 +70,8 @@ Route::post('/signaler', [TicketController::class, 'postNewTicket'])->name('post
 Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->name('ticket');
 Route::post('/incident/{nb}', [MessageController::class, 'postMysMessage', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->name('postmessage');
 
-
+// *******************************************
+// Route pour cloturer un incident, uniquement accessible par les TecHotline
+// *******************************************
+Route::post('/incident/{nb}', [TicketController::class, 'updateToCloseThisTicket', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->name('closeticket');
 
