@@ -43,5 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
+    public function getRole()
+    {
+        // requete sql en utilisant $this->id
+    }
 }
