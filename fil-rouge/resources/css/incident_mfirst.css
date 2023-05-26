@@ -126,9 +126,25 @@
     padding: 0.2em; */
 }
 
+/* .detail_ticket{
+min-width: 280px;
+} */
+
 #incident_detail {
     display: flex;
     flex-direction: column;
+}
+
+.statut_zone {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 10px;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.margin_top_zerosix {
+    margin-top: 0.6em;
 }
 
 .error,
@@ -158,6 +174,10 @@
     .message {
         width: 221px;
     }
+
+    /* .detail_ticket{
+        min-width: 310;
+    } */
 
     .text_input,
     .error,

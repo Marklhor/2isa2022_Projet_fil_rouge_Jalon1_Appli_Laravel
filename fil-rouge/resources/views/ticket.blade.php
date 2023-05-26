@@ -5,34 +5,39 @@
         {{-- <?php dd($data); ?> --}}
         <article>
             <section>
-                <detail>
+                <detail class="detail_ticket">
                     <summary class="border">
 
                         <h3>{{ $data[0]->nom }}</h3>
-                        <p class="txt_inline">Incident n° <span class="ticket_values">{{ $data[0]->id_ticket }}</span>
+                        <p class="txt_inline">n° <span class="ticket_values">{{ $data[0]->id_ticket }}</span>
                         </p>
                     </summary>
                     <div class="border" id="incident_detail">
-                        <p class="txt_inline">
-                            Statut :
-                            <span class="ticket_values">
-                                {{ $data[0]->status_label }}
-                                @switch($data[0]->id_status)
-                                    @case(11111)
-                                        <img class="icon_advance" src="/img/red.svg" alt="">
-                                    @break
+                        <p class="statut_zone">
+                            <span>
+                                Statut :
+                                <span class="ticket_values">
+                                    {{ $data[0]->status_label }}
+                                    @switch($data[0]->id_status)
+                                        @case(11111)
+                                            <img class="icon_advance" src="/img/red.svg" alt="">
+                                        @break
 
-                                    @case(22222)
-                                        <img class="icon_advance" src="/img/yellow.svg" alt="">
-                                    @break
+                                        @case(22222)
+                                            <img class="icon_advance" src="/img/yellow.svg" alt="">
+                                        @break
 
-                                    @case(33333)
-                                        <img class="icon_advance" src="/img/green.svg" alt="">
-                                    @break
-                                @endswitch
+                                        @case(33333)
+                                            <img class="icon_advance" src="/img/green.svg" alt="">
+                                        @break
+                                    @endswitch
+                                </span>
                             </span>
+                            <button class="bt_submit bt_close_ticket"
+                                href="{{ redirect()->route('updateToCloseThisTicket', ['idincident' => $data[0]->id_ticket]) }}"
+                                name="button">Clôturer</button>
                         </p>
-                        <p class="txt_inline">
+                        <p class="margin_top_zerosix">
                             <label for="panne_type"></label>
                             Type de panne :
                             <span class="ticket_values">

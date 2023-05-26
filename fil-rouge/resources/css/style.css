@@ -135,6 +135,9 @@ h2 a {
     border-bottom: 2px solid #FB667A;
 }
 
+.txt_inline {
+    text-align: left;
+}
 
 
 dd {
@@ -234,6 +237,19 @@ footer {
     color: #08EFFD;
 }
 
+.bt_close_ticket {
+    background-color: #232F3F;
+    /* Green */
+    text-align: center;
+    color: #FB667A;
+
+    /* border: none; */
+    padding: 15px 32px;
+    /* text-decoration: none; */
+    display: inline-block;
+    font-size: 1em;
+}
+
 .pointer {
     cursor: pointer;
 }
@@ -278,7 +294,7 @@ time {
     font-style: italic;
 }
 
-.sujet{
+.sujet {
     color: #08EFFD;
 }
 

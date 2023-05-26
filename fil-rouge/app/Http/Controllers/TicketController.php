@@ -107,6 +107,14 @@ class TicketController extends Controller
         }
     }
 
+    public function updateToCloseThisTicket(int $IdTicket){
+
+        $dbTicket = new Ticket();
+        $data  = $dbTicket->updateToCloseThisTicket($IdTicket);
+        session()->flash('succes', "L'incident est clôturé");
+        return redirect()->route('ticket', ['nb' => $IdTicket]);
+    }
+
     //défini si le user de la session est un techotline ou non
     private function UserisTecHoline()
     {

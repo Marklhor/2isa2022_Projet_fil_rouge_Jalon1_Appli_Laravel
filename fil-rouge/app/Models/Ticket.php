@@ -105,6 +105,11 @@ class Ticket extends Model
         return true;
     }
 
+    public function updateToCloseThisTicket(int $IdTicket){
+
+        return true;
+    }
+
     public static function getMaxId()
     {
 

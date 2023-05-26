@@ -12,7 +12,7 @@
 
                 <label for="panne_type">Choisir le type de panne :</label>
                 <select class="input bt_value ticket_values" id="panne_type" name="panne_type">
-                    {{-- <option value="">à définir</option> --}}
+                    <option value="">à définir</option>
                     @foreach ($liste_pannes as $panne)
                         <option value="{{ $panne->Id }}">{{ $panne->Label }}</option>
                     @endforeach
