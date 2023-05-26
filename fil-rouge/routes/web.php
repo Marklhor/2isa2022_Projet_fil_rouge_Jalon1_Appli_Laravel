@@ -61,7 +61,10 @@ Route::get('home', function(){
 // session(['idUser' => 96101]);
 //
 // test Route
-Route::get('/test',[TicketController::class, 'getTickets'])->middleware('auth');
+Route::get('/test',function () 
+{
+    return 'tets';
+})->middleware('auth');
 
 // *******************************************
 // variables d'initialisation pour les routes

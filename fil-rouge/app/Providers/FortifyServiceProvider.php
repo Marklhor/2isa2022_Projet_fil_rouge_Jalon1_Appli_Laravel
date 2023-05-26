@@ -52,7 +52,7 @@ class FortifyServiceProvider extends ServiceProvider
 
         // Fortify::loginView(fn () => view('auth.login')); 
         Fortify::loginView(function () { 
-        return view('auth.login'); 
+        return view('connexion'); 
         });
     }
 }

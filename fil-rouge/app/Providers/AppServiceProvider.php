@@ -22,5 +22,6 @@ class AppServiceProvider extends ServiceProvider
         \URL::forceScheme(
             'https'
         );
+        $this->app['request']->server->set('HTTPS', true);
     }
 }

@@ -38,7 +38,8 @@
                             <input class="pointer" type="checkbox" id="scales" name="scales" checked>
                             <label for="scales">Se souvenir de moi ?</label>
                         </div>
-                        <button class="input bt_nok pointer" name="button">Mot-de-passe oublier ?</button>
+                        <a class="input bt_nok pointer" name="">Mot-de-passe oublier ?</a>
+                        <a class="input bt_nok pointer" href="{{ route('register') }}" name="">S'enregistrer</a>
                     </fieldset>
                 </form>
             </article>

@@ -7,7 +7,7 @@
         <ul>
             <li><a href="{{ route('tickets') }}">Tous les incidents</a></li>
             {{-- TODO get user id --}}
-            <li><a href="{{ route('mytickets', ['iduser' => session()->get('idUser')]) }}">Mes incidents</a></li>
+            <li><a href="{{ route('mytickets', ['iduser' => Auth::id()]) }}">Mes incidents</a></li>
             <li><a href="{{ route('newticket') }}">Signaler un incident</a></li>
             <li>
                 <form method="POST" action="{{ route('logout') }}" hidden>
