@@ -14,7 +14,6 @@
                     @csrf
                     <button class="" name="">Se déconnecter</button>
                 </form>
-                {{-- <a href='{{ route('logout') }}'>Se déconnecter</a> --}}
             </li>
         </ul>
     </div>
