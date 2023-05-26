@@ -10,9 +10,9 @@
             <li><a href="{{ route('mytickets', ['iduser' => session()->get('idUser')]) }}">Mes incidents</a></li>
             <li><a href="{{ route('newticket') }}">Signaler un incident</a></li>
             <li>
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('logout') }}" hidden>
                     @csrf
-                    <button class="" name="">Se déconnecter</button>
+                    <button class="bt_logout" name="">Se déconnecter</button>
                 </form>
             </li>
         </ul>

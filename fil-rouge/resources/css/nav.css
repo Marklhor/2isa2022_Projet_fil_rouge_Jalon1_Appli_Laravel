@@ -130,13 +130,16 @@ header {
     list-style: none;
     /* padding: 0.5em; */
 }
-
+.menu>div>ul>li>form{
+    margin: 0;
+}
 .menu>div>ul>li>a,
 .menu>div>ul>li>form>button {
     color: black;
     text-decoration: none;
     font-size: 2em;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }
 
 /* WHEN THE TOGGLER IS CHECKED, CHANGE THE VISIBILITY TO VISIBLE :  */
@@ -150,4 +153,15 @@ header {
 .toggler:checked~.menu>div>ul>li>a:hover,
 .menu>div>ul>li>form>button:hover {
     color: #FB667A;
+}
+
+.bt_logout {
+    cursor: pointer;
+    border: none;
+    background-color: #ffffff;
+    /* color: #000;
+    text-decoration: none;
+    font-size: 2em;
+    font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif; */
+    font-weight: bold;
 }

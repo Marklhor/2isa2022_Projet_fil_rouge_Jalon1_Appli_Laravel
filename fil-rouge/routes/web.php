@@ -57,7 +57,7 @@ Route::get('home', function(){
 // *******************************************
 // Test
 // *******************************************
-session(['idUser' => 82001]);
+// session(['idUser' => 82001]);
 // session(['idUser' => 96101]);
 //
 // test Route
@@ -74,23 +74,23 @@ $iduser = 82001; // techHotline : 96101
 // *******************************************
 // Routes les listes des incidents, tickets, soit celle d'un utilisateur, soit celle de l'ensemble
 // *******************************************
-Route::get('/mesincidents/{iduser}', [TicketController::class, 'getMyTickets', ['idUser' => session()->get('idUser')]])->where('iduser', '^[0-9]{5}')->name('mytickets');
-Route::get('/incidents', [TicketController::class, 'getTickets'])->name('tickets');
+Route::get('/mesincidents/{iduser}', [TicketController::class, 'getMyTickets', ['idUser' => session()->get('idUser')]])->where('iduser', '^[0-9]{5}')->middleware('auth')->name('mytickets');
+Route::get('/incidents', [TicketController::class, 'getTickets'])->middleware('auth')->name('tickets');
 
 // *******************************************
 // Routes de signalement d'un incident
 // *******************************************
-Route::get('/signaler', [TicketController::class, 'getNewTicket'])->name('newticket');
-Route::post('/signaler', [TicketController::class, 'postNewTicket'])->name('postnewticket');
+Route::get('/signaler', [TicketController::class, 'getNewTicket'])->middleware('auth')->name('newticket');
+Route::post('/signaler', [TicketController::class, 'postNewTicket'])->middleware('auth')->name('postnewticket');
 
 // *******************************************
 // Route pour visualiser un incident suivant son Id et pour poster un message
 // *******************************************
-Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->name('ticket');
-Route::post('/incident/{nb}', [MessageController::class, 'postMysMessage', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->name('postmessage');
+Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->middleware('auth')->name('ticket');
+Route::post('/incident/{nb}', [MessageController::class, 'postMysMessage', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->middleware('auth')->name('postmessage');
 
 // *******************************************
 // Route pour cloturer un incident, uniquement accessible par les TecHotline
 // *******************************************
-Route::post('/incident/close/{nb}', [TicketController::class, 'updateToCloseThisTicket', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->name('closeticket');
+Route::post('/incident/close/{nb}', [TicketController::class, 'updateToCloseThisTicket', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->middleware('auth')->name('closeticket');
 
