@@ -34,9 +34,14 @@ class TicketController extends Controller
     public function getMyTickets($idUser)
     {
 
+        // FORTIFY ******************************************
+        // dd(Auth::user());
+
+        // ******************************************
+
         // $dblistId = new MyUser();
         // récupère l'ide de l'utilisateur ou vide si non existant
-        $IsUser = MyUser::getAllUserId($idUser);
+        $IsUser = MyUser::getUserId($idUser);
         // dd($IsUser);
 
         // si utilisateur existant
@@ -94,16 +99,16 @@ class TicketController extends Controller
             $NewTicket = $dbNewTicket->postMyTicket($newIdTicket, $newIdMessage, $Sujet, $PanneType, $idUser, $Message);
             if ($NewTicket) {
                 # code...
-                return redirect()->route('ticket', ['nb' => $newIdTicket]);
+                return redirect()->route('ticket', ['nb' => $newIdTicket])->middleware('auth');
             } else {
                 # code...
                 session()->flash('error', "Votre nouvel incident n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer");
-                return redirect()->route('newticket');
+                return redirect()->route('newticket')->middleware('auth');
             }
         } else {
             # code...
             session()->flash('error', "Votre nouvel incident n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer");
-            return redirect()->route('newticket');
+            return redirect()->route('newticket')->middleware('auth');
         }
     }
 
@@ -113,7 +118,7 @@ class TicketController extends Controller
         $dbTicket = new Ticket();
         $data  = $dbTicket->updateToCloseThisTicket($IdTicket);
         session()->flash('success', "L'incident est clôturé");
-        return redirect()->route('ticket', ['nb' => $IdTicket]);
+        return redirect()->route('ticket', ['nb' => $IdTicket])->middleware('auth');
     }
 
     //défini si le user de la session est un techotline ou non
@@ -136,4 +141,5 @@ class TicketController extends Controller
         // dd($IdMax);
         return $IdMax->max + 1;
     }
+    
 }

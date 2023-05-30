@@ -42,18 +42,18 @@ class MessageController extends Controller
             if ($NewMessage) {
                 # code...
                 // dd($Message);
-                return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
+                return redirect()->route('ticket', ['nb' => session()->get('idTicket')])->middleware('auth');
                 // route('ticket', ['nb' => session()->get('idTicket')]);
             } else {
                 session()->flash('error', "Votre nouveau message n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer");
-                return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
+                return redirect()->route('ticket', ['nb' => session()->get('idTicket')])->middleware('auth');
             }
 
             // redirection vers la route ticket (même page)
         } else {
             # code...
             session()->flash('error', "Votre nouveau message n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer");
-            return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
+            return redirect()->route('ticket', ['nb' => session()->get('idTicket')])->middleware('auth');
         }
         // Création d'une instance du modèle Message
 

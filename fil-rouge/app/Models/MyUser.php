@@ -17,7 +17,7 @@ class MyUser extends Model
 
     }
 
-    public static function getAllUserId($IdUser){
+    public static function getUserId($IdUser){
         return DB::selectone("SELECT users.id FROM users WHERE id = ?",[$IdUser]);
     }
 }
