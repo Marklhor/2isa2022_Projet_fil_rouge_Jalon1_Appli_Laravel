@@ -19,6 +19,7 @@ class TicketController extends Controller
     public function getTickets()
     {
         if (!empty(session()->get('idUser'))) {
+        // if (Auth::id()) { // TODO
 
             // $IsTecHotline = self::isTecHoline();
             $IsTecHotline = $this->UserisTecHoline();

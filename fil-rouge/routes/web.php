@@ -52,14 +52,18 @@ Route::get('/', function () {
 
 
 Route::get('home', function(Request $request){ 
+    // dd(Auth::id());
     // dd($request->user()->id);
     // dd($request->session());
-    return redirect()->route('mytickets',['iduser' => $request->user()->id]);; 
+    return redirect()->route('redirect');
+    // return redirect()->route('mytickets',['iduser' => $request->user()->id]);
+
     // return view('tickets'); 
 })->middleware('auth'); 
 // ->middleware('auth') => à la fin de chaque route pour obligé à l'athentification
 
 
+Route::get('/redirect', [MyUserController::class, 'choiseHomePageToRoleAndSetSession', ['idUser'=> Auth::id()]])->middleware('auth')->name('redirect');
 
 
 

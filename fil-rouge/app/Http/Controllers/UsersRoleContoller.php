@@ -12,6 +12,8 @@ use App\Http\Controllers\session;
 
 class UsersRoleContoller extends Controller
 {
+    
+    
     /**
      * Ajout un rôle à l'utilisateur
      * 
@@ -29,4 +31,9 @@ class UsersRoleContoller extends Controller
             return false;
         }
     } 
+
+
+
+
+    
 }
