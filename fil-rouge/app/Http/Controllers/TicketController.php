@@ -37,7 +37,7 @@ class TicketController extends Controller
     {
         
         MyUserController::getUserIdToSession($request);
-        
+
         $db = new Ticket();
         $data = $db->getMyTickets(session()->get('idUser'));
         return view('tickets', ['data' => $data]);
@@ -56,7 +56,7 @@ class TicketController extends Controller
     public function postNewTicket(Request $request)
     {
         // dd($request);
-
+        // dd(session()->all());
         $this->validate($request, [
             'message' => 'required|min:2',
             'sujet' => 'required|min:2'
