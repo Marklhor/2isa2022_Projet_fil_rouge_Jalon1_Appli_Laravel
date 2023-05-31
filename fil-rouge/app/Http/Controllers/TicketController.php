@@ -35,37 +35,12 @@ class TicketController extends Controller
     // *******************************************
     public function getMyTickets(Request $request, $idUser)
     {
-        // dd($request->user()->id); // OK
-
+        
         MyUserController::getUserIdToSession($request);
-
-        // FORTIFY ******************************************
-        // dd(Auth::user());
-
-        // ******************************************
-
-        // $dblistId = new MyUser();
-        // récupère l'ide de l'utilisateur ou vide si non existant
-        // $IsUser = MyUser::getUserId($idUser);
-        // dd($IsUser);
-
-        // si utilisateur existant
-        // if(!empty($IsUser) && $IsUser->id == $idUser){
-        // dd($IsUser);
-        /*
-            * Definition des éléments de la session
-            */
-        // session(['idUser' => $idUser]);
-        //dd(session()->all());
+        
         $db = new Ticket();
         $data = $db->getMyTickets(session()->get('idUser'));
         return view('tickets', ['data' => $data]);
-        // }else{
-        //     abort(404, "Erreur sur l'identité de l'utilisateur");
-        // }
-
-
-
     }
 
     public function getNewTicket()
@@ -73,7 +48,7 @@ class TicketController extends Controller
         $dbPannes = new TypePannes();
         $ListePannes = $dbPannes->getAllFailures();
 
-        // dd(session()->all());
+        dd(session()->all());
         return view('newticket', ['liste_pannes' => $ListePannes]);
     }
 

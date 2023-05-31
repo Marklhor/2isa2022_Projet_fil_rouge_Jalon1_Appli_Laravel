@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\UsersRoleContoller;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -32,15 +35,23 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
         
-            // attribution du role dans la table USERS_ROLE
-
-
-        return User::create([
-            'name' => $input['name'],
-            'firstname' => $input['firstname'],
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
-            'role_id' => 77001
-        ]);
+            $myUser = User::create([
+                'name' => $input['name'],
+                'firstname' => $input['firstname'],
+                'email' => $input['email'],
+                'password' => Hash::make($input['password']),
+                'role_id' => 77001
+            ]);
+            
+            $data = UsersRoleContoller::addRoleForUser($myUser->id, 77001);
+            MyUserController::getUserIdToSession($request);
+            return $myUser;
+        // return User::create([
+        //     'name' => $input['name'],
+        //     'firstname' => $input['firstname'],
+        //     'email' => $input['email'],
+        //     'password' => Hash::make($input['password']),
+        //     'role_id' => 77001
+        // ]);
     }
 }
