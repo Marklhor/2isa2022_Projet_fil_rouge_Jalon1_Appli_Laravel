@@ -42,7 +42,9 @@ class CreateNewUser implements CreatesNewUsers
                 'password' => Hash::make($input['password']),
                 'role_id' => 77001
             ]);
-            
+            // définition de l'identifien de l'utilisateur dans la session après sa création
+            MyUserController::getUserIdToSession($myUser->id);
+            // défini l'utilisateur comme un usager
             $data = UsersRoleContoller::addRoleForUser($myUser->id, 77001);
             // MyUserController::getUserIdToSession($request);
             return $myUser;

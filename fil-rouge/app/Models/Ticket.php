@@ -30,6 +30,11 @@ class Ticket extends Model
         return DB::select('SELECT * FROM TICKETS WHERE Id = ?', [$Id]);
     }
 
+    /**
+     * Récupère l'ensemble de tous les incidents
+     * 
+     * @return array
+     */
     public function getTickets()
     {
         return DB::select(
@@ -51,10 +56,17 @@ class Ticket extends Model
             JOIN PANNES_TYPE ON TICKETS.IdTypePanne = PANNES_TYPE.Id
             JOIN users ON TICKETS.IdAuteur = users.id
             JOIN STATUS_TYPE ON TICKETS.IdStatus = STATUS_TYPE.Id"
+        // ORDER BY 'date_de_creation' ASC
 
         );
     }
 
+    /**
+     * Récupère l'ensemble des incidents pour un utilisateur donné
+     * 
+     * @param int $id_user
+     * @return array
+     */
     public function getMyTickets(int $id_user)
     {
         return DB::select(
@@ -78,9 +90,20 @@ class Ticket extends Model
             JOIN STATUS_TYPE ON TICKETS.IdStatus = STATUS_TYPE.Id
         WHERE users.id = ?",
             [$id_user]
+        // ORDER BY 'date_de_creation' ASC
         );
     }
-
+    /**
+     * Ajout d'un nouvel incident
+     * 
+     * @param int $newIdTicket, 
+     * @param int $newIdMessage, 
+     * @param string $Sujet, 
+     * @param int $PanneType, 
+     * @param int $idUser, 
+     * @param string $Message
+     * @return bool true si la transaction en base de données s'est parfaitement réalisée
+     */
     public function postMyTicket(int $newIdTicket, int $newIdMessage, string $Sujet, int $PanneType, int $idUser, string $Message)
     {
         DB::beginTransaction();
@@ -105,8 +128,23 @@ class Ticket extends Model
         return true;
     }
 
+    /**
+     * Mise à jour de l'incident, ticket à "cloturé" (33333)
+     * 
+     * @param int $IdTicket Identifiant de l'incident
+     * @return bool true si la transaction en base de données s'est parfaitement réalisée
+     */
     public function updateToCloseThisTicket(int $IdTicket){
-
+        DB::beginTransaction();
+        try {
+            DB::update("UPDATE TICKETS set IdStatus = 33333 where Id = ?", [$IdTicket]);
+            DB::commit();
+            // dd('ok');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            // dd('nok');
+            return false;
+        };
         return true;
     }
 

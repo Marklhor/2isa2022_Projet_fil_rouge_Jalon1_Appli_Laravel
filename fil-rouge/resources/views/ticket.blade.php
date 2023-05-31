@@ -1,7 +1,6 @@
 @extends('template')
 
 @section('contenu')
-    {{-- <?php dd($data); ?>  --}}
     @if (!empty($data))
         <article>
             <section>
@@ -33,18 +32,19 @@
                                     @endswitch
                                 </span>
                             </span>
-                            <span>
-                                <form class="" action="{{ route('closeticket', ['nb' => $data[0]->id_ticket]) }}"
-                                    method="POST">
-                                    @csrf
-                                    <button class="bt_submit bt_close_ticket" type="submit">Clôturer</button>
-                                </form>
-                            </span>
+                            @if ($data[0]->id_status != 33333)
+                                <span>
+                                    <form class="" action="{{ route('closeticket', ['nb' => $data[0]->id_ticket]) }}"
+                                        method="POST">
+                                        @csrf
+                                        <button class="bt_submit bt_close_ticket" type="submit">Clôturer</button>
+                                        @include('templates.request_result')
+                                    </form>
+                                </span>
+                            @endif
                         </p>
-                        @if (session()->has('success'))
-                            @include('templates.success')
-                        @endif
-                        <p class="margin_top_zerosix">
+                        @include('templates.request_result')
+                        <p class="txt_inline">
                             <label for="panne_type"></label>
                             Type de panne :
                             <span class="ticket_values">
@@ -97,23 +97,22 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <form class="chat-form" action="{{ route('postmessage', ['nb' => $data[0]->id_ticket]) }}"
-                            method="POST">
-                            @csrf
-                            {{-- <input type="text" name="id_user" value="{{auth()->user}}" hidden> // TODO --}}
-                            <textarea class="text_input" name="message" id="" cols="30" rows="4" placeholder="Message..."></textarea>
-                            <button class="input bt_submit" type="submit">Envoyer</button>
-                            @if (session()->has('error'))
-                                @include('templates.error')
-                            @endif
-                        </form>
-                        @error('message')
-                            <dir class="error">
-                                {{-- TODO message --}}
-                                {{ $messsage }}
-                            </dir>
-                        @enderror
-
+                        @if ($data[0]->id_status != 33333)
+                            <form class="chat-form" action="{{ route('postmessage', ['nb' => $data[0]->id_ticket]) }}"
+                                method="POST">
+                                @csrf
+                                {{-- <input type="text" name="id_user" value="{{auth()->user}}" hidden> // TODO --}}
+                                <textarea class="text_input" name="message" id="" cols="30" rows="4" placeholder="Message..."></textarea>
+                                <button class="input bt_submit" type="submit">Envoyer</button>
+                                @include('templates.request_result')
+                            </form>
+                            @error('message')
+                                <dir class="error">
+                                    {{-- TODO message --}}
+                                    {{ $messsage }}
+                                </dir>
+                            @enderror
+                        @endif
                     </div>
                 </div>
 

@@ -24,10 +24,7 @@
                 <button class="input bt_submit" type="submit">Envoyer</button>
 
                 <button class="input bt_nok" type="">Annuler</button>
-                @if (session()->has('error'))
-                    @include('templates.error')
-                @endif
-                
+                @include('templates.request_result')
             </fieldset>
         </form>
 

@@ -1,3 +1,3 @@
-<div class="succes">
-    {{ dd(session()->get('success')) }}
+<div class="success">
+    {{ session()->get('success') }}
 </div>

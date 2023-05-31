@@ -27,7 +27,7 @@ class MessageController extends Controller
 
         // Appel de la méthode du modèle
         $data = $dbMsg->getAllMessagesForTicket($IdTicket);
-        dd($data);
+        // dd($data);
         // Affichage de la page d'un incident, un ticket
         return view('ticket', ['data' => $data]);
     }

@@ -9,14 +9,21 @@ use App\Model\RoleType;
 
 class MyUserController extends Controller
 {
-    public static function getUserIdToSession(Request $request) : void
+    public static function getUserIdToSession(int $UserId) : void
     {
-        session(['idUser' => $request->user()->id]);
+        session(['idUser' => $UserId]);
     }
+    
 
     // public function newUser(){
 
     //     $dataRole = RoleType::getAllRoleType();
     //     return redirect()->route('register', ['dataRole'=> $dataRole]);
     // }
+
+    public function hasOldPssword(){
+        // 'password' => Hash::make($input['password'])
+
+        
+    }
 }

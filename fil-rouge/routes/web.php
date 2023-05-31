@@ -8,6 +8,11 @@ use Hamcrest\Type\IsNumeric;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncidentController;
 
+use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MyUserController;
+ 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,8 +51,11 @@ Route::get('/', function () {
 // route::get('/register',  [MyUserController::class, 'newUser']);
 
 
-Route::get('home', function(){ 
-    return view('tickets'); 
+Route::get('home', function(Request $request){ 
+    // dd($request->user()->id);
+    // dd($request->session());
+    return redirect()->route('mytickets',['iduser' => $request->user()->id]);; 
+    // return view('tickets'); 
 })->middleware('auth'); 
 // ->middleware('auth') => à la fin de chaque route pour obligé à l'athentification
 
@@ -95,7 +103,7 @@ Route::get('/incident/{nb}', [MessageController::class, 'getAllMessagesForTicket
 Route::post('/incident/{nb}', [MessageController::class, 'postMysMessage', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->middleware('auth')->name('postmessage');
 
 // *******************************************
-// Route pour cloturer un incident, uniquement accessible par les TecHotline
+// Route pour cloturer un incident, uniquement accessible par les TecHotline TODO
 // *******************************************
 Route::post('/incident/close/{nb}', [TicketController::class, 'updateToCloseThisTicket', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->middleware('auth')->name('closeticket');
 

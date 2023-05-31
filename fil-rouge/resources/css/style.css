@@ -116,6 +116,10 @@ h3 {
 
 }
 
+.success {
+    color: #08EFFD;
+}
+
 caption,
 .error {
     color: #FB667A;

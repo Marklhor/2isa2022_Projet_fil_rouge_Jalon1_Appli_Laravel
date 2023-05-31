@@ -14,10 +14,11 @@
         @include('templates.menu')
     </header>
     <div id="flex_part">
-
-        <main>
-            @yield('contenu')
-        </main>
+        @auth
+            <main>
+                @yield('contenu')
+            </main>
+        @endauth
 
         <footer>
             @include('templates.footer')

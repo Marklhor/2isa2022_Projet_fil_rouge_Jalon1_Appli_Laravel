@@ -36,7 +36,7 @@ class TicketController extends Controller
     public function getMyTickets(Request $request, $idUser)
     {
         
-        MyUserController::getUserIdToSession($request);
+        MyUserController::getUserIdToSession($request->user()->id);
 
         $db = new Ticket();
         $data = $db->getMyTickets(session()->get('idUser'));
@@ -48,7 +48,7 @@ class TicketController extends Controller
         $dbPannes = new TypePannes();
         $ListePannes = $dbPannes->getAllFailures();
 
-        dd(session()->all());
+        // dd(session()->all());
         return view('newticket', ['liste_pannes' => $ListePannes]);
     }
 
@@ -93,12 +93,16 @@ class TicketController extends Controller
     }
 
     public function updateToCloseThisTicket(int $IdTicket){
-        // dd('ici');
+        // dd($IdTicket);
 
         $dbTicket = new Ticket();
         $data  = $dbTicket->updateToCloseThisTicket($IdTicket);
-        session()->flash('success', "L'incident est clôturé");
-        return redirect()->route('ticket', ['nb' => $IdTicket])->middleware('auth');
+        if ($data) {
+            session()->flash('success', "L'incident est clôturé");
+        }else{
+            session()->flash('error', "L'incident n'est pas clôturé");
+        }
+        return redirect()->route('ticket', ['nb' => $IdTicket]);
     }
 
     //défini si le user de la session est un techotline ou non
@@ -106,7 +110,7 @@ class TicketController extends Controller
     {
         $MyUser = new MyUser();
         $data = $MyUser->isTecHoline();
-        dd($data);
+        // dd($data);
         if ($data[0]->IdRole = 77002) {
             // dd($data);
             return true;
