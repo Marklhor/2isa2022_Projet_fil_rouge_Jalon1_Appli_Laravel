@@ -1,8 +1,8 @@
 @extends('template')
 
 @section('contenu')
+    {{-- <?php dd($data); ?>  --}}
     @if (!empty($data))
-        {{-- <?php dd($data); ?> --}}
         <article>
             <section>
                 <detail class="detail_ticket">

@@ -43,6 +43,8 @@ Route::get('/', function () {
     return view('connexion'); // page d'accueil apès connexion
 })->name('home');
 
+// route::get('/register',  [MyUserController::class, 'newUser']);
+
 
 Route::get('home', function(){ 
     return view('tickets'); 

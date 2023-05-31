@@ -6,7 +6,9 @@ use App\Models\MyUser;
 use App\Models\TypePannes;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\session;
+use App\Http\Controllers\MyUserController;
 
 class TicketController extends Controller
 {
@@ -31,8 +33,11 @@ class TicketController extends Controller
     // *******************************************
     // Liste les tickets pour un utilisatuer suivant son Id
     // *******************************************
-    public function getMyTickets($idUser)
+    public function getMyTickets(Request $request, $idUser)
     {
+        // dd($request->user()->id); // OK
+
+        MyUserController::getUserIdToSession($request);
 
         // FORTIFY ******************************************
         // dd(Auth::user());
@@ -41,7 +46,7 @@ class TicketController extends Controller
 
         // $dblistId = new MyUser();
         // récupère l'ide de l'utilisateur ou vide si non existant
-        $IsUser = MyUser::getUserId($idUser);
+        // $IsUser = MyUser::getUserId($idUser);
         // dd($IsUser);
 
         // si utilisateur existant
@@ -50,8 +55,7 @@ class TicketController extends Controller
         /*
             * Definition des éléments de la session
             */
-        session(['idUser' => $idUser]);
-
+        // session(['idUser' => $idUser]);
         //dd(session()->all());
         $db = new Ticket();
         $data = $db->getMyTickets(session()->get('idUser'));
@@ -86,6 +90,7 @@ class TicketController extends Controller
         $newIdTicket = self::getNewID();
         $newIdMessage = MessageController::getNewID();
         $idUser = session()->get('idUser');
+        // dd( $idUser);
         $Sujet = strval($request->input('sujet'));
         $PanneType = (int)$request->input('panne_type');
         $Message = strval($request->input('message'));
@@ -99,16 +104,16 @@ class TicketController extends Controller
             $NewTicket = $dbNewTicket->postMyTicket($newIdTicket, $newIdMessage, $Sujet, $PanneType, $idUser, $Message);
             if ($NewTicket) {
                 # code...
-                return redirect()->route('ticket', ['nb' => $newIdTicket])->middleware('auth');
+                return redirect()->route('ticket', ['nb' => $newIdTicket]);
             } else {
                 # code...
                 session()->flash('error', "Votre nouvel incident n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer");
-                return redirect()->route('newticket')->middleware('auth');
+                return redirect()->route('newticket');
             }
         } else {
             # code...
             session()->flash('error', "Votre nouvel incident n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer");
-            return redirect()->route('newticket')->middleware('auth');
+            return redirect()->route('newticket');
         }
     }
 
@@ -126,7 +131,7 @@ class TicketController extends Controller
     {
         $MyUser = new MyUser();
         $data = $MyUser->isTecHoline();
-        // dd($data);
+        dd($data);
         if ($data[0]->IdRole = 77002) {
             // dd($data);
             return true;
@@ -141,5 +146,7 @@ class TicketController extends Controller
         // dd($IdMax);
         return $IdMax->max + 1;
     }
+
+
     
 }
