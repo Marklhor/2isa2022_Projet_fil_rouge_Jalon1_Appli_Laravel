@@ -31,12 +31,16 @@ class CreateNewUser implements CreatesNewUsers
             ],
             'password' => $this->passwordRules(),
         ])->validate();
+        
+            // attribution du role dans la table USERS_ROLE
+
 
         return User::create([
             'name' => $input['name'],
             'firstname' => $input['firstname'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'role_id' => 77001
         ]);
     }
 }
