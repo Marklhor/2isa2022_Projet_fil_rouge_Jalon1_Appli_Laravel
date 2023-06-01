@@ -10,8 +10,14 @@ class MyUser extends Model
 {
     use HasFactory;
 
-    public function isTecHoline(int $idUser)
+    /**
+     * Ré"cupère l'Id du rôle pour un utilisateur donné
+     * 
+     * @param int $idUser Identifiant de l'utilisateur, int $IdRole Identifiant du rôle
+     * @return int Id du rôle
+     */
+    public function getIdRole(int $idUser)
     {
-        return DB::select("SELECT IdRole FROM USERS_ROLE WHERE IdUser = ?", [$idUser]);
+        return DB::selectone("SELECT IdRole FROM USERS_ROLE WHERE IdUser = ?", [$idUser]);
     }
 }

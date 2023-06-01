@@ -14,11 +14,14 @@ class Message extends Model
     use HasFactory;
 
     // Valeur arbitraire, pour être sup au Id du jeu de données
-    private static int $IdMessage;
+    // private static int $IdMessage;
 
-    // *******************************************
-    // Methode pour récupérer tous les méssages pour un ticket suivant son Id
-    // *******************************************
+    /**
+     * Récupère l'ensemble des messages pour un ticket donné
+     * 
+     * @param int $IdTicket Identifiant du ticket
+     * @return array
+     */
     public function getAllMessagesForTicket(int $IdTicket)
     {
         /**
@@ -34,9 +37,14 @@ class Message extends Model
         WHERE mt.IdTicket = ?", [$IdTicket]);
     }
 
-    // *******************************************
-    // Méthode pour poster un nouveau message via une transacion
-    // *******************************************
+    /**
+     * Méthode pour poster un nouveau message via une transacion
+     * 
+     * @param string $msg le message à poster
+     * @param int $newID nouvel identifiant pour le nouveau message
+     * 
+     * @return bool True si la transaction s'est réalisée sans erreurs; Flase si non
+     */
     public function postMyMessage($msg, $newID)
     {
         /**

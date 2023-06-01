@@ -12,10 +12,11 @@ use App\Http\Controllers\MyUserController;
 
 class TicketController extends Controller
 {
-
-    // *******************************************
-    // liste l'ensemble des tickets
-    // *******************************************
+    /**
+     * liste l'ensemble des tickets
+     * 
+     * @return redirect vers la vue de tous les tickets
+     */
     public function getTickets()
     {
         if (!empty(session()->get('idUser') & !empty(session()->get('IsTecHotline')))) {
@@ -30,10 +31,12 @@ class TicketController extends Controller
         }
     }
 
-    // *******************************************
-    // Liste les tickets pour un utilisatuer suivant son Id
-    // *******************************************
-    public function getMyTickets(Request $request, $idUser)
+    /**
+     * Liste les tickets pour un utilisatuer suivant son identifiant en session
+     * 
+     * @return redirect vers la vue de tous les tickets de l'utilisateur
+     */
+    public function getMyTickets()
     {
         
         // MyUserController::getUserIdToSession($request->user()->id);
@@ -45,6 +48,11 @@ class TicketController extends Controller
         return view('tickets', ['data' => $data]);
     }
 
+    /**
+     * Revoie vers la vue de création d'un nouveau ticket, incident
+     * 
+     * @return view
+     */
     public function getNewTicket()
     {
         $dbPannes = new TypePannes();
@@ -54,7 +62,12 @@ class TicketController extends Controller
         return view('newticket', ['liste_pannes' => $ListePannes]);
     }
 
-
+    /**
+     * Ajout un nouveau ticket, incident
+     * 
+     * @param Request requête provenant du formulaire en Post
+     * @return redirect vers la vue du des messages du nouveau ticket
+     */
     public function postNewTicket(Request $request)
     {
         $this->validate($request, [
@@ -84,6 +97,12 @@ class TicketController extends Controller
         }
     }
 
+    /**
+     * Cloture un ticket donné
+     * 
+     * @param int $IdTicket Identifiant du ticket
+     * @return redirect route tickets (même page) 
+     */
     public function updateToCloseThisTicket(int $IdTicket){
 
         $dbTicket = new Ticket();
@@ -96,17 +115,7 @@ class TicketController extends Controller
         return redirect()->route('ticket', ['nb' => $IdTicket]);
     }
 
-    //défini si le user de la session est un techotline ou non
-    private function UserisTecHoline()
-    {
-        $MyUser = new MyUser();
-        $data = $MyUser->isTecHoline();
-        if ($data[0]->IdRole = 77002) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
     // Définition du nouvel Id pour le message
     private static function getNewID()
     {

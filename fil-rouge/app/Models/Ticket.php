@@ -13,23 +13,6 @@ class Ticket extends Model
 
     private static $ValueNewIdTicket = 99400;
 
-    public function getAll()
-    {
-        /**
-         * Utilisation de la façade DB::select
-         */
-        return DB::select('SELECT * FROM TICKETS');
-    }
-
-    public function getTicketById(int $Id)
-    {
-        /**
-         * Construction d'une requète préparée
-         * pour se protéger des injection SQL
-         */
-        return DB::select('SELECT * FROM TICKETS WHERE Id = ?', [$Id]);
-    }
-
     /**
      * Récupère l'ensemble de tous les incidents
      * 

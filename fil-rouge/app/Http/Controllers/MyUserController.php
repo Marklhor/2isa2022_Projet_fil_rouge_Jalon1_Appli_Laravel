@@ -13,11 +13,12 @@ use App\Models\MyUser;
 
 class MyUserController extends Controller
 {
-    public static function getUserIdToSession(int $UserId) : void
-    {
-        session(['idUser' => $UserId]);
-    }
-    
+    /**
+     * défini si le user de la session est un techotline ou non
+     * 
+     * @param int $idUser identifiant de l'utilisateur
+     * @return redirect route tickets si techotline, mytickets si usager
+     */
     public static function choiseHomePageToRoleAndSetSession(int $idUser){ //TODO
         session(['idUser' => $idUser]);
         if(self::UserisTecHoline($idUser)){
@@ -28,14 +29,18 @@ class MyUserController extends Controller
             session(['IsTecHotline' => false]);
             return redirect()->route('mytickets',['iduser' => $idUser]);
         }
-
     }
-    //défini si le user de la session est un techotline ou non
+    /**
+     * défini si le user de la session est un techotline ou non
+     * 
+     * @param int $idUser identifiant de l'utilisateur
+     * @return bool
+     */
     private static function UserisTecHoline(int $idUser)
     {
         $MyUser = new MyUser();
-        $data = $MyUser->isTecHoline($idUser);
-        if ($data[0]->IdRole == 77002) {
+        $data = $MyUser->getIdRole($idUser);
+        if ($data->IdRole == 77002) {
             return true;
         } else {
             return false;

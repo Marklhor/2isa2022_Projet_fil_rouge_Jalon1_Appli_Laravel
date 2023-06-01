@@ -30,7 +30,13 @@ class MessageController extends Controller
         return view('ticket', ['data' => $data]);
     }
 
-    // poster un message sur un incident
+    /**
+     * Ajoute un message à un incident
+     * 
+     * @param Request $request provenant du formulaire en post
+     * @return redirect route ticket, vue des message du ticket
+     */
+    // 
     public function postMysMessage(Request $request)
     {
         // Vérifications de données de la requête
