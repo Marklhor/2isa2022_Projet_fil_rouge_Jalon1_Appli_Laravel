@@ -1,5 +1,5 @@
 @extends('template')
-
+@vite('resources/js/liste_incidents.js')
 @section('title')
     Service informatique AMIO - Gestion des incidents
 @endsection
@@ -39,7 +39,7 @@
             <tbody>
                 @if (!empty($data))
                     @foreach ($data as $RowData)
-                        <tr>
+                        <tr onclick="goToIncident()">
                             <td><a href="{{ route('ticket', ['nb' => $RowData->id_ticket]) }}">{{ $RowData->id_ticket }}</a>
                             </td>
                             <td>{{ $RowData->sujet }}</td>

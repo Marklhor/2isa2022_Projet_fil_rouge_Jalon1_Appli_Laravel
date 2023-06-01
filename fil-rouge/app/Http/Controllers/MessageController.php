@@ -20,14 +20,12 @@ class MessageController extends Controller
     {
         // Definition des éléments de la session
         session(['idTicket' => $IdTicket]);
-        // dd(session('idTicket'));
 
         // Création d'une instance du modèle Message
         $dbMsg = new Message();
 
         // Appel de la méthode du modèle
         $data = $dbMsg->getAllMessagesForTicket($IdTicket);
-        // dd($data);
         // Affichage de la page d'un incident, un ticket
         return view('ticket', ['data' => $data]);
     }
@@ -46,10 +44,8 @@ class MessageController extends Controller
             // Appel de la méthode postMysMessage du modèle
             $NewMessage = $dbMsg->postMyMessage($Message, self::getNewID());
             if ($NewMessage) {
-                # code...
-                // dd($Message);
+
                 return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
-                // route('ticket', ['nb' => session()->get('idTicket')]);
             } else {
                 session()->flash('error', "Votre nouveau message n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer");
                 return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
@@ -57,12 +53,9 @@ class MessageController extends Controller
 
             // redirection vers la route ticket (même page)
         } else {
-            # code...
             session()->flash('error', "Votre nouveau message n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer");
             return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
         }
-        // Création d'une instance du modèle Message
-
     }
 
     // Définition du nouvel Id pour le message

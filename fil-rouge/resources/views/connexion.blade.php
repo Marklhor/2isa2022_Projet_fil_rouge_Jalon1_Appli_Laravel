@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.1">
 
     <link rel="stylesheet" href="{{ Vite::asset('resources/css/style.css') }}">
     <title>Elements du site</title>
@@ -33,7 +33,7 @@
                         <label for="password" class="hidden">Entrer votre mot-de-passe</label>
                         <input class="input  bt_value" type="password" id="password" name="password"
                             placeholder="Entrer votre mot-de-passe" required>
-                        <button class="input bt_ok pointer" name="button">Se connecter</button>
+                        <button type="submit" class="input bt_ok pointer" name="button">Se connecter</button>
                         <div>
                             <input class="pointer" type="checkbox" id="scales" name="scales" checked>
                             <label for="scales">Se souvenir de moi ?</label>

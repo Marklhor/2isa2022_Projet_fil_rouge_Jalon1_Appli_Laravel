@@ -57,8 +57,6 @@ class TicketController extends Controller
 
     public function postNewTicket(Request $request)
     {
-        // dd($request);
-        // dd(session()->all());
         $this->validate($request, [
             'message' => 'required|min:2',
             'sujet' => 'required|min:2'
@@ -67,35 +65,26 @@ class TicketController extends Controller
         $newIdTicket = self::getNewID();
         $newIdMessage = MessageController::getNewID();
         $idUser = session()->get('idUser');
-        // dd( $idUser);
         $Sujet = strval($request->input('sujet'));
         $PanneType = (int)$request->input('panne_type');
         $Message = strval($request->input('message'));
 
-        // $test = [$Sujet, $PanneType, $idUser, $Message];
-        // dd($test);
-
         if ($Sujet != Null | $PanneType != Null | $Message != Null) {
-            # code...
             $dbNewTicket = new Ticket();
             $NewTicket = $dbNewTicket->postMyTicket($newIdTicket, $newIdMessage, $Sujet, $PanneType, $idUser, $Message);
             if ($NewTicket) {
-                # code...
                 return redirect()->route('ticket', ['nb' => $newIdTicket]);
             } else {
-                # code...
                 session()->flash('error', "Votre nouvel incident n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer");
                 return redirect()->route('newticket');
             }
         } else {
-            # code...
             session()->flash('error', "Votre nouvel incident n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer");
             return redirect()->route('newticket');
         }
     }
 
     public function updateToCloseThisTicket(int $IdTicket){
-        // dd($IdTicket);
 
         $dbTicket = new Ticket();
         $data  = $dbTicket->updateToCloseThisTicket($IdTicket);
@@ -112,9 +101,7 @@ class TicketController extends Controller
     {
         $MyUser = new MyUser();
         $data = $MyUser->isTecHoline();
-        // dd($data);
         if ($data[0]->IdRole = 77002) {
-            // dd($data);
             return true;
         } else {
             return false;
@@ -124,7 +111,6 @@ class TicketController extends Controller
     private static function getNewID()
     {
         $IdMax = TICKET::getMaxId();
-        // dd($IdMax);
         return $IdMax->max + 1;
     }
 

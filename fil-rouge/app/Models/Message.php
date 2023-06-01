@@ -21,7 +21,6 @@ class Message extends Model
     // *******************************************
     public function getAllMessagesForTicket(int $IdTicket)
     {
-        // dd($IdTicket);
         /**
          * Utilisation de la façade DB::select
          */
@@ -45,9 +44,6 @@ class Message extends Model
          */
         DB::beginTransaction();
         try {
-            // dd($msg, $newID);
-            // $this->getMaxId();
-            //dd($msg);
             // définition de la date dans le code et non via la BD pour obtenir les mêmes dans les tables USERS_MESSAGES et TICKETS
             $ToDay = strval(date("Y-m-d H:i:s"));
             $message = strval($msg);
@@ -61,16 +57,11 @@ class Message extends Model
             $rq03 = DB::update("UPDATE TICKETS SET UpdateAt = ? WHERE Id = ?", [$ToDay, session()->get('idTicket')]);
             // return 1 if request ok
 
-            // dd($rq01, $rq02, $rq03);
-
             DB::commit();
         } catch (\Throwable $th) {
-            // dd('erreur DB');
-            //throw $th;
             DB::rollBack();
             return false;
         }
-        // dd('OK DB');
         return true;
     }
 
@@ -78,9 +69,4 @@ class Message extends Model
     {
         return DB::selectone("SELECT MAX(Id) AS 'max' FROM USERS_MESSAGES");
     }
-
-
-    // private static function setNewId()
-
-
 }

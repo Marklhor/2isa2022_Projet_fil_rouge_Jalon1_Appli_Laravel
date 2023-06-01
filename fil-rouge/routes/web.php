@@ -36,51 +36,24 @@ use App\Http\Controllers\MyUserController;
 // - dans les URI le terme employé pour un ticket est 'incident"
 
 
-
 // *******************************************
 // FORTIFY ROUTE
 // *******************************************
-// Route::get('/', function () {
-//     return view('welcome'); // page d'accueil apès connexion
-// })->name('home');
 
 Route::get('/', function () {
     return view('connexion'); // page d'accueil apès connexion
 })->name('home');
 
-// route::get('/register',  [MyUserController::class, 'newUser']);
-
-
+/**
+ * Route de gestion des utilisateurs en fonction de leurs roles
+ */
 Route::get('home', function(Request $request){ 
-    // dd(Auth::id());
-    // dd($request->user()->id);
-    // dd($request->session());
-    // return redirect()->route('mytickets',['iduser' => $request->user()->id]);
-    // return view('tickets'); 
-    
-    // return redirect()->route('redirect');
+
     return MyUserController::choiseHomePageToRoleAndSetSession(Auth::id());
 
 })->middleware('auth'); 
 // ->middleware('auth') => à la fin de chaque route pour obligé à l'athentification
 
-
-// Route::get('/redirect', [MyUserController::class, 'choiseHomePageToRoleAndSetSession', ['idUser'=> Auth::id()]])->middleware('auth')->name('redirect');
-
-
-
-
-// *******************************************
-// Test
-// *******************************************
-// session(['idUser' => 82001]);
-// session(['idUser' => 96101]);
-//
-// test Route
-Route::get('/test',function () 
-{
-    return 'tets';
-})->middleware('auth');
 
 // *******************************************
 // variables d'initialisation pour les routes
