@@ -10,7 +10,11 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public static function forgetItemsSession(){
+    /**
+     * Supprimer de la session en cours les valeurs pour les clefs 'errordb' et 'noticket'
+     */
+    public static function forgetItemsSession() : void
+    { 
         session()->forget('errordb');
         session()->forget('noticket');
     }

@@ -17,6 +17,7 @@
                         </p>
                     </summary>
                     <div class="border" id="incident_detail">
+                        @include('templates.request_result')
                         <p class="statut_zone">
                             <span>
                                 Statut :
@@ -43,7 +44,6 @@
                                         method="POST">
                                         @csrf
                                         <button class="bt_submit bt_close_ticket" type="submit">Clôturer</button>
-                                        @include('templates.request_result')
                                     </form>
                                 </span>
                             @endif
@@ -75,8 +75,6 @@
                     <div class="chat-container">
                         <ul class="chat">
                             @foreach ($data as $message)
-                                {{-- {{ var_bump($message) }} --}}
-
                                 <li @switch($message->id_user)
                                     @case ($data[0]->id_user)
                                         class="message right">
@@ -96,7 +94,8 @@
                                                 <span>{{ $message->nom }} </span>
                                             @endif
                                             <time
-                                                datetime="{{ $message->date_message }}">{{ $message->date_message }}</time>
+                                                datetime="{{ $message->date_message }}">{{ $message->date_message }}
+                                            </time>
                                         </p>
                                     </div>
                                 </li>

@@ -85,6 +85,3 @@ Route::post('/incident/{nb}', [MessageController::class, 'postMysMessage', ['idi
 // Route pour cloturer un incident, uniquement accessible par les TecHotline TODO
 // *******************************************
 Route::post('/incident/close/{nb}', [TicketController::class, 'updateToCloseThisTicket', ['idincident' => $nb]])->where('nb', '^[0-9]{5}')->middleware('auth')->name('closeticket');
-
-
-Route::view('/errordb', 'errordb');

@@ -29,8 +29,7 @@ class TicketController extends Controller
                 session(['noticket' => "Vous n'avez pas d'incidents"]);
             }
         }else{
-            session(['errordb' => "Votre base de donnée renvoie une erreur"]);
-            return view('errordb');
+            session(['errordb' => "Vous ne devriez pas être ici"]);
         }
         return view('tickets', ['data' => $data, 'IsTecHotline' => session()->get('IsTecHotline')]);
     }
@@ -45,15 +44,14 @@ class TicketController extends Controller
         Controller::forgetItemsSession();
 
         if (!empty(session()->get('idUser'))) {
-                $db = new Ticket();
-                $data = $db->getMyTickets(session()->get('idUser'));
-                if (empty($data)) {
-                    session(['noticket' => "Vous n'avez pas d'incidents"]);
-                }
-            }else{
-                session(['errordb' => "Votre base de donnée renvoie une erreur"]);
-                return view('errordb');
+            $db = new Ticket();
+            $data = $db->getMyTickets(session()->get('idUser'));
+            if (empty($data)) {
+                session(['noticket' => "Aucun incident"]);
             }
+        }else{
+            session(['errordb' => "Vous ne devriez pas être ici"]);
+        }
         return view('tickets', ['data' => $data]);
     }
 
