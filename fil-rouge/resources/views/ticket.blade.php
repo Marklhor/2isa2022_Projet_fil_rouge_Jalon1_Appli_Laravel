@@ -1,5 +1,10 @@
 @extends('template')
 
+@section('title')
+Service informatique AMIO - Incident
+@endsection
+
+
 @section('contenu')
     @if (!empty($data))
         <article>

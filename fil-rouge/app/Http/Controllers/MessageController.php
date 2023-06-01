@@ -18,16 +18,27 @@ class MessageController extends Controller
      */
     public function getAllMessagesForTicket(int $IdTicket)
     {
-        // Definition des éléments de la session
         session(['idTicket' => $IdTicket]);
 
         // Création d'une instance du modèle Message
         $dbMsg = new Message();
 
         // Appel de la méthode du modèle
-        $data = $dbMsg->getAllMessagesForTicket($IdTicket);
-        // Affichage de la page d'un incident, un ticket
-        return view('ticket', ['data' => $data]);
+        $data = $dbMsg->getAllMessagesForTicket($IdTicket); // TODO
+        if (!empty($data)) {
+            if (session()->get('IsTecHotline')) {
+                return view('ticket', ['data' => $data]);
+            } else if($data[0]->id_user == session()->get('idUser')){
+                // vérifier si c'est l'auteur du ticket
+                return view('ticket', ['data' => $data]);
+            }else {
+                session(['errordb' => "Vous n'êtes pas autorisé à accéder à cette page"]);
+                return view('errordb');
+            }
+        } else {
+            session(['errordb' => "Votre base de donnée renvoie une erreur"]);
+            return view('errordb');
+        }
     }
 
     /**
