@@ -27,8 +27,14 @@ class TicketController extends Controller
             // dd(session()->all());
             $db = new Ticket();
             $data = $db->getTickets();
-            return view('tickets', ['data' => $data, 'IsTecHotline' => session()->get('IsTecHotline')]);
+            if (empty($data)) {
+                session(['noticket' => "Vous n'avez pas d'incidents"]);
+            }
+        }else{
+            session(['errordb' => "Votre base de donnée renvoie une erreur"]);
+            return view('errordb');
         }
+        return view('tickets', ['data' => $data, 'IsTecHotline' => session()->get('IsTecHotline')]);
     }
 
     /**
@@ -39,12 +45,21 @@ class TicketController extends Controller
     public function getMyTickets()
     {
         
-        // MyUserController::getUserIdToSession($request->user()->id);
-
-        $db = new Ticket();
-        $data = $db->getMyTickets(session()->get('idUser'));
-        // dd($data);
-
+        if (!empty(session()->get('idUser'))) {
+            // if (Auth::id()) { // TODO
+    
+                // $IsTecHotline = self::isTecHoline();
+                // $IsTecHotline = $this->UserisTecHoline();
+                // dd(session()->all());
+                $db = new Ticket();
+                $data = $db->getMyTickets(session()->get('idUser'));
+                if (empty($data)) {
+                    session(['noticket' => "Vous n'avez pas d'incidents"]);
+                }
+            }else{
+                session(['errordb' => "Votre base de donnée renvoie une erreur"]);
+                return view('errordb');
+            }
         return view('tickets', ['data' => $data]);
     }
 

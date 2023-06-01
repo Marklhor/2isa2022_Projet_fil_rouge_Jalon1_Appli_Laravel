@@ -126,7 +126,7 @@ caption.fixed {
 thead.fixed {
     position: sticky;
     /* make the table heads sticky */
-    top: 23px;
+    top: 33px;
     z-index: 2;
     /* table head will be placed from the top of the table and sticks to it */
 }

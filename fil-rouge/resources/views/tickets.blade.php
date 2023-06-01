@@ -38,9 +38,9 @@
                     </th>
                 </thead>
                 <tbody>
-                    @if (!empty($data))
+                    @if (!session()->get('noticket'))
                         @foreach ($data as $RowData)
-                            <tr onclick="goToIncident()">
+                            <tr onclick="goToIncident('{{ route('ticket', ['nb' => $RowData->id_ticket]) }}')">
                                 <td><a
                                         href="{{ route('ticket', ['nb' => $RowData->id_ticket]) }}">{{ $RowData->id_ticket }}</a>
                                 </td>
@@ -70,10 +70,20 @@
                                 <td>{{ $RowData->nb_de_message }}</td>
                             </tr>
                         @endforeach
+                    @else
+                        @include('templates.request_result')
                     @endif
                 </tbody>
             </table>
         </div>
-
     </article>
+    <script>
+        /**
+         * Envoi vers la page incident
+         * @param {String} url 
+         */
+        function goToIncident(url) {
+            window.location.href = url;
+        }
+    </script>
 @endsection
