@@ -99,9 +99,9 @@ tbody tr:hover {
 
 .table_fix_head {
     overflow: auto;
-    height: 700px;
+    height: 100vw;
     margin: 0;
-    /* width: 1000px; */
+    padding-bottom: 30px
 
 }
 

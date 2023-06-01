@@ -20,9 +20,11 @@
             </main>
         @endauth
 
-        <footer>
-            @include('templates.footer')
-        </footer>
+        @guest
+            <footer>
+                @include('templates.footer')
+            </footer>
+        @endguest
     </div>
 </body>
 
