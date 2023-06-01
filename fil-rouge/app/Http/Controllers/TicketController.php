@@ -18,16 +18,15 @@ class TicketController extends Controller
     // *******************************************
     public function getTickets()
     {
-        if (!empty(session()->get('idUser'))) {
+        if (!empty(session()->get('idUser') & !empty(session()->get('IsTecHotline')))) {
         // if (Auth::id()) { // TODO
 
             // $IsTecHotline = self::isTecHoline();
-            $IsTecHotline = $this->UserisTecHoline();
+            // $IsTecHotline = $this->UserisTecHoline();
             // dd(session()->all());
             $db = new Ticket();
             $data = $db->getTickets();
-            // dd($data);
-            return view('tickets', ['data' => $data, 'IsTecHotline' => $IsTecHotline]);
+            return view('tickets', ['data' => $data, 'IsTecHotline' => session()->get('IsTecHotline')]);
         }
     }
 
@@ -37,10 +36,12 @@ class TicketController extends Controller
     public function getMyTickets(Request $request, $idUser)
     {
         
-        MyUserController::getUserIdToSession($request->user()->id);
+        // MyUserController::getUserIdToSession($request->user()->id);
 
         $db = new Ticket();
         $data = $db->getMyTickets(session()->get('idUser'));
+        // dd($data);
+
         return view('tickets', ['data' => $data]);
     }
 

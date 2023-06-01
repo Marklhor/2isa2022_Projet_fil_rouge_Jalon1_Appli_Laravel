@@ -39,25 +39,24 @@ class Ticket extends Model
     {
         return DB::select(
             "SELECT
-        TICKETS.Id AS 'id_ticket',
-        TICKETS.Sujet AS 'sujet',
-        STATUS_TYPE.Id AS 'id_status',
-        STATUS_TYPE.Label AS 'status_label',
-        PANNES_TYPE.Id AS 'id_type_de_panne',
-        PANNES_TYPE.Label AS 'type_de_panne',
-        users.id AS 'id_user',
-        CONCAT(users.name, ' ', LEFT(users.firstname, 1), '.') AS 'nom',
-        DATEDIFF(TICKETS.UpdateAt, TICKETS.CreatedAt) AS 'avancement',
-        TICKETS.CreatedAt AS 'date_de_creation',
-        TICKETS.UpdateAt AS 'date_de_maj',
-        (SELECT COUNT(*) FROM MESSAGES_TYCKET WHERE MESSAGES_TYCKET.IdTicket = TICKETS.Id) AS 'nb_de_message'
-        FROM
-            TICKETS
-            JOIN PANNES_TYPE ON TICKETS.IdTypePanne = PANNES_TYPE.Id
-            JOIN users ON TICKETS.IdAuteur = users.id
-            JOIN STATUS_TYPE ON TICKETS.IdStatus = STATUS_TYPE.Id"
-        // ORDER BY 'date_de_creation' ASC
-
+            TICKETS.Id AS 'id_ticket',
+            TICKETS.Sujet AS 'sujet',
+            STATUS_TYPE.Id AS 'id_status',
+            STATUS_TYPE.Label AS 'status_label',
+            PANNES_TYPE.Id AS 'id_type_de_panne',
+            PANNES_TYPE.Label AS 'type_de_panne',
+            users.id AS 'id_user',
+            CONCAT(users.name, ' ', LEFT(users.firstname, 1), '.') AS 'nom',
+            DATEDIFF(TICKETS.UpdateAt, TICKETS.CreatedAt) AS 'avancement',
+            TICKETS.CreatedAt AS 'date_de_creation',
+            TICKETS.UpdateAt AS 'date_de_maj',
+            (SELECT COUNT(*) FROM MESSAGES_TYCKET WHERE MESSAGES_TYCKET.IdTicket = TICKETS.Id) AS 'nb_de_message'
+            FROM
+                TICKETS
+                JOIN PANNES_TYPE ON TICKETS.IdTypePanne = PANNES_TYPE.Id
+                JOIN users ON TICKETS.IdAuteur = users.id
+                JOIN STATUS_TYPE ON TICKETS.IdStatus = STATUS_TYPE.Id
+            ORDER BY 'date_de_creation' ASC"
         );
     }
 
@@ -88,9 +87,9 @@ class Ticket extends Model
             JOIN PANNES_TYPE ON TICKETS.IdTypePanne = PANNES_TYPE.Id
             JOIN users ON TICKETS.IdAuteur = users.id
             JOIN STATUS_TYPE ON TICKETS.IdStatus = STATUS_TYPE.Id
-        WHERE users.id = ?",
+        WHERE users.id = ?
+        ORDER BY 'date_de_creation' ASC",
             [$id_user]
-        // ORDER BY 'date_de_creation' ASC
         );
     }
     /**

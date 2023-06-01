@@ -7,7 +7,11 @@
 @section('contenu')
     <article class="table_fix_head">
         <table class="container">
-            <caption class="fixed">TOUS LES INCIDENTS</caption>
+            @if (!empty($IsTecHotline) && $IsTecHotline)
+                <caption class="fixed">TOUS LES INCIDENTS</caption>
+            @else
+                <caption class="fixed">TOUS MES INCIDENTS</caption>
+            @endif
             <thead class="fixed">
                 <th>
                     <span class="mobil_text">n°</span>
@@ -36,7 +40,8 @@
                 @if (!empty($data))
                     @foreach ($data as $RowData)
                         <tr>
-                            <td><a href="{{ route('ticket', ['nb' => $RowData->id_ticket]) }}">{{ $RowData->id_ticket }}</a></td>
+                            <td><a href="{{ route('ticket', ['nb' => $RowData->id_ticket]) }}">{{ $RowData->id_ticket }}</a>
+                            </td>
                             <td>{{ $RowData->sujet }}</td>
                             <td>{{ $RowData->type_de_panne }}</td>
                             @if (!empty($IsTecHotline) && $IsTecHotline)
