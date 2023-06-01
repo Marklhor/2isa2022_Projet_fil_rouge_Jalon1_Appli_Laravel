@@ -23,6 +23,7 @@ header {
     height: 40px;
     width: 40px;
     padding: 0.6em;
+    margin-right: 10px;
 
     /* FOR DISPLAYING EVERY ELEMENT IN THE CENTER : */
 
@@ -130,9 +131,11 @@ header {
     list-style: none;
     /* padding: 0.5em; */
 }
-.menu>div>ul>li>form{
+
+.menu>div>ul>li>form {
     margin: 0;
 }
+
 .menu>div>ul>li>a,
 .menu>div>ul>li>form>button {
     color: black;

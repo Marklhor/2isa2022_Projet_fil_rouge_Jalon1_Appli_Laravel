@@ -7,9 +7,16 @@
 }
  */
 
+.tableau {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+
+}
+
 .container {
     text-align: center;
-    width: 80%;
+    width: auto;
     height: auto;
     margin: 0;
     display: table;
