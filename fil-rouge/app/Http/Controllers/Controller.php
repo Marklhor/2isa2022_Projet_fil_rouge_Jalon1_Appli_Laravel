@@ -17,6 +17,8 @@ class Controller extends BaseController
     { 
         session()->forget('errordb');
         session()->forget('noticket');
+        session()->forget('error');
+
     }
 }
 

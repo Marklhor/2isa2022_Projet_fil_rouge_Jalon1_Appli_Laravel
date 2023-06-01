@@ -18,6 +18,7 @@ class MessageController extends Controller
      */
     public function getAllMessagesForTicket(int $IdTicket)
     {
+        Controller::forgetItemsSession();
         session(['idTicket' => $IdTicket]);
 
         // Création d'une instance du modèle Message
@@ -51,6 +52,8 @@ class MessageController extends Controller
     // 
     public function postMysMessage(Request $request)
     {
+        Controller::forgetItemsSession();
+
         // Vérifications de données de la requête
         $this->validate($request, [
             'message' => 'required|string|max:2'

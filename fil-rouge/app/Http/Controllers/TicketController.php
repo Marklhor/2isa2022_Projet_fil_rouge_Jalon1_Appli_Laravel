@@ -62,6 +62,8 @@ class TicketController extends Controller
      */
     public function getNewTicket()
     {
+        Controller::forgetItemsSession();
+
         $dbPannes = new TypePannes();
         $ListePannes = $dbPannes->getAllFailures();
 
@@ -77,6 +79,8 @@ class TicketController extends Controller
      */
     public function postNewTicket(Request $request)
     {
+        Controller::forgetItemsSession();
+
         $this->validate($request, [
             'message' => 'required|min:2',
             'sujet' => 'required|min:2'
@@ -111,6 +115,8 @@ class TicketController extends Controller
      * @return redirect route tickets (même page) 
      */
     public function updateToCloseThisTicket(int $IdTicket){
+
+        Controller::forgetItemsSession();
 
         $dbTicket = new Ticket();
         $data  = $dbTicket->updateToCloseThisTicket($IdTicket);

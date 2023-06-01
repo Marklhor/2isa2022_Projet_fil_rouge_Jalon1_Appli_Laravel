@@ -1,17 +1,7 @@
-@if (session()->has('error'))
-
+@if (session()->has('error') || session()->has('errordb'))
     @include('templates.error')
-
-@elseif (session()->has('errordb'))
-
-    @include('templates.errordb')
-    
 @elseif (session()->has('success'))
-
     @include('templates.success')
-
 @elseif (session()->has('noticket'))
-
     @include('templates.noticket')
-
 @endif

@@ -1,10 +1,9 @@
 <div class="error">
-    <?php if(!isset(session()->get('error')){ ?>
-
+    {{-- @if (!isset(session()->get('error')))
         {{ session()->get('error') }}
-
-    <?php }else{ ?>
-
+    @else
         {{ session()->get('errordb') }}
-    <? } ?>
+    @endif --}}
+    {{ session()->get('error') }}
+    {{ session()->get('errordb') }}
 </div>
