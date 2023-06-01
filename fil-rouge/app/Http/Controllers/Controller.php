@@ -10,5 +10,10 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
+    public static function forgetItemsSession(){
+        session()->forget('errordb');
+        session()->forget('noticket');
+    }
+
 }
 

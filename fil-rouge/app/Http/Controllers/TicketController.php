@@ -19,6 +19,9 @@ class TicketController extends Controller
      */
     public function getTickets()
     {
+        Controller::forgetItemsSession();
+        
+
         if (!empty(session()->get('idUser') & !empty(session()->get('IsTecHotline')))) {
             $db = new Ticket();
             $data = $db->getTickets();
@@ -39,7 +42,8 @@ class TicketController extends Controller
      */
     public function getMyTickets()
     {
-        
+        Controller::forgetItemsSession();
+
         if (!empty(session()->get('idUser'))) {
                 $db = new Ticket();
                 $data = $db->getMyTickets(session()->get('idUser'));

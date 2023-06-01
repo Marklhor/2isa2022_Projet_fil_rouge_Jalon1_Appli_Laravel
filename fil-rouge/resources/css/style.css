@@ -308,21 +308,17 @@ time {
  *  STYLE 4
  */
 
-.table_fix_head::-webkit-scrollbar-track
- {
-     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-     background-color: #232F3F;
- }
- 
-.table_fix_head::-webkit-scrollbar
- {
-     width: 10px;
-     background-color: #232F3F;
- }
- 
-.table_fix_head::-webkit-scrollbar-thumb
- {
-     background-color: #08EFFD;
-     border: 2px solid #464A52;
- }
- 
+.table_fix_head::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #232F3F;
+}
+
+.table_fix_head::-webkit-scrollbar {
+    width: 10px;
+    background-color: #232F3F;
+}
+
+.table_fix_head::-webkit-scrollbar-thumb {
+    background-color: #FB667A;
+    border: 2px solid #464A52;
+}
