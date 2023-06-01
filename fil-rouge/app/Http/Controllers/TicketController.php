@@ -20,11 +20,6 @@ class TicketController extends Controller
     public function getTickets()
     {
         if (!empty(session()->get('idUser') & !empty(session()->get('IsTecHotline')))) {
-        // if (Auth::id()) { // TODO
-
-            // $IsTecHotline = self::isTecHoline();
-            // $IsTecHotline = $this->UserisTecHoline();
-            // dd(session()->all());
             $db = new Ticket();
             $data = $db->getTickets();
             if (empty($data)) {
@@ -46,11 +41,6 @@ class TicketController extends Controller
     {
         
         if (!empty(session()->get('idUser'))) {
-            // if (Auth::id()) { // TODO
-    
-                // $IsTecHotline = self::isTecHoline();
-                // $IsTecHotline = $this->UserisTecHoline();
-                // dd(session()->all());
                 $db = new Ticket();
                 $data = $db->getMyTickets(session()->get('idUser'));
                 if (empty($data)) {

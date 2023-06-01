@@ -24,7 +24,7 @@ class MessageController extends Controller
         $dbMsg = new Message();
 
         // Appel de la méthode du modèle
-        $data = $dbMsg->getAllMessagesForTicket($IdTicket); // TODO
+        $data = $dbMsg->getAllMessagesForTicket($IdTicket);
         if (!empty($data)) {
             if (session()->get('IsTecHotline')) {
                 return view('ticket', ['data' => $data]);

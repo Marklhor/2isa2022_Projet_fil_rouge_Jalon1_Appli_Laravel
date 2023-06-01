@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title')
-Service informatique AMIO - Incident
+    Service informatique AMIO - Incident
 @endsection
 
 
@@ -106,14 +106,12 @@ Service informatique AMIO - Incident
                             <form class="chat-form" action="{{ route('postmessage', ['nb' => $data[0]->id_ticket]) }}"
                                 method="POST">
                                 @csrf
-                                {{-- <input type="text" name="id_user" value="{{auth()->user}}" hidden> // TODO --}}
                                 <textarea class="text_input" name="message" id="" cols="30" rows="4" placeholder="Message..."></textarea>
                                 <button class="input bt_submit" type="submit">Envoyer</button>
                                 @include('templates.request_result')
                             </form>
                             @error('message')
                                 <dir class="error">
-                                    {{-- TODO message --}}
                                     {{ $messsage }}
                                 </dir>
                             @enderror

@@ -19,7 +19,7 @@ class MyUserController extends Controller
      * @param int $idUser identifiant de l'utilisateur
      * @return redirect route tickets si techotline, mytickets si usager
      */
-    public static function choiseHomePageToRoleAndSetSession(int $idUser){ //TODO
+    public static function choiseHomePageToRoleAndSetSession(int $idUser){
         session(['idUser' => $idUser]);
         if(self::UserisTecHoline($idUser)){
             session(['IsTecHotline' => true]);
