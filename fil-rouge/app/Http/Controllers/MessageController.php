@@ -39,6 +39,8 @@ class MessageController extends Controller
             session(['errordb' => "Votre base de donnée renvoie une erreur"]);
             return view('errordb');
         }
+        // session(['errordb' => "Veuillez contacter votre gestionnaire de park informatique"]);
+        // return view('errordb');
     }
 
     /**
