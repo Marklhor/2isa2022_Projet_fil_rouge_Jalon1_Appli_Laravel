@@ -23,10 +23,9 @@
 
                 <button class="input bt_submit" type="submit">Envoyer</button>
 
-                <button class="input bt_nok" type="">Annuler</button>
                 @include('templates.request_result')
+                <a class="input bt_nok" href="{{ route('choisehome') }}">Annuler</a>
             </fieldset>
         </form>
-
     </article>
 @endsection

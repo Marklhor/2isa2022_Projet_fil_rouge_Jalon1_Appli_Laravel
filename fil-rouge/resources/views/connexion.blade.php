@@ -35,7 +35,8 @@
                             placeholder="Entrer votre mot-de-passe" required>
                         <button type="submit" class="input bt_ok pointer" name="button">Se connecter</button>
                         <div>
-                            <input class="pointer" type="checkbox" id="scales" name="scales" checked>
+                            {{-- <input class="pointer" type="checkbox" id="scales" name="scales" checked> --}}
+                            <input type="checkbox" id="remember" />
                             <label for="scales">Se souvenir de moi ?</label>
                         </div>
                         <a class="input bt_nok pointer" name="">Mot-de-passe oublier ?</a>

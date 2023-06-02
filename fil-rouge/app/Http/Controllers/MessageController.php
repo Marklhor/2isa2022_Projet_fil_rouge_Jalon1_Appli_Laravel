@@ -27,8 +27,9 @@ class MessageController extends Controller
         // Appel de la méthode du modèle
         $data = $dbMsg->getAllMessagesForTicket($IdTicket);
         if (!empty($data)) {
-            if (!session()->get('IsTecHotline') || $data[0]->id_user != session()->get('idUser')) {
+            if (!session()->get('IsTecHotline') && $data[0]->id_user != session()->get('idUser')) {
                 session(['errordb' => "Vous n'êtes pas autorisé à accéder à cette page"]);
+                $data=[];
             }
         } else {
             if (session()->get('IsTecHotline')) {

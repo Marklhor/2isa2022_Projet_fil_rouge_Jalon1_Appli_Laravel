@@ -51,7 +51,7 @@ Route::get('home', function(Request $request){
 
     return MyUserController::choiseHomePageToRoleAndSetSession(Auth::id());
 
-})->middleware('auth'); 
+})->middleware('auth')->name('choisehome'); 
 // ->middleware('auth') => à la fin de chaque route pour obligé à l'athentification
 
 
