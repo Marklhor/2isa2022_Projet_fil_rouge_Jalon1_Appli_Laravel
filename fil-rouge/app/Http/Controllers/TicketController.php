@@ -66,11 +66,17 @@ class TicketController extends Controller
     public function getNewTicket()
     {
         Controller::forgetItemsSession();
+        $ListePannes = [];
 
-        $dbPannes = new TypePannes();
-        $ListePannes = $dbPannes->getAllFailures();
-
-        // dd(session()->all());
+        if (!empty(session()->get('idUser'))) {
+            $dbPannes = new TypePannes();
+            $ListePannes = $dbPannes->getAllFailures();
+            if (empty($data)) {
+                session(['error' => "pas de type de panne, veuillez contacter le service informatique"]);
+            }
+        }else{
+            session(['errordb' => "Vous ne devriez pas être ici"]);
+        }
         return view('newticket', ['liste_pannes' => $ListePannes]);
     }
 
