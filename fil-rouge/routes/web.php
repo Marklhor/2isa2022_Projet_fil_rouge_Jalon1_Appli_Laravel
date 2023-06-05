@@ -54,6 +54,12 @@ Route::get('home', function(Request $request){
 })->middleware('auth')->name('choisehome'); 
 // ->middleware('auth') => à la fin de chaque route pour obligé à l'athentification
 
+// /**
+//  * Route de réinitialisation du mot-de-passe
+//  */
+// Route::get('/forgot', function () {
+//     return view('auth.forgot-password'); // page d'accueil apès connexion
+// })->name('forgot-password');
 
 // *******************************************
 // variables d'initialisation pour les routes
