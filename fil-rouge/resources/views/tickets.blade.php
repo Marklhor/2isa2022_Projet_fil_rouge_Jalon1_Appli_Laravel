@@ -71,7 +71,6 @@
                             </tr>
                         @endforeach
                     @else
-                        
                         @include('templates.request_result')
                     @endif
                 </tbody>

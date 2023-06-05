@@ -71,7 +71,7 @@ class TicketController extends Controller
         if (!empty(session()->get('idUser'))) {
             $dbPannes = new TypePannes();
             $ListePannes = $dbPannes->getAllFailures();
-            if (empty($data)) {
+            if (empty($ListePannes)) {
                 session(['error' => "pas de type de panne, veuillez contacter le service informatique"]);
             }
         }else{

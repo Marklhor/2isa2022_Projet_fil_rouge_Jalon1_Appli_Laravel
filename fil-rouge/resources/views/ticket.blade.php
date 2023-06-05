@@ -75,8 +75,8 @@
                     <div class="chat-container">
                         <ul class="chat">
                             @foreach ($data as $message)
-                                <li @switch($message->id_user)
-                                    @case ($data[0]->id_user)
+                                <li @switch(session()->get('idUser'))
+                                    @case ($message->id_user)
                                         class="message right">
                                         <img class="logo" src="/img/computer-icons-clip-art-man.svg" alt="usager">
                                         @break
@@ -90,11 +90,10 @@
                                     </p>
                                     <div class="date">
                                         <p>
-                                            @if ($message->id_user != $data[0]->id_user)
+                                            @if ($message->id_user != session()->get('idUser'))
                                                 <span>{{ $message->nom }} </span>
                                             @endif
-                                            <time
-                                                datetime="{{ $message->date_message }}">{{ $message->date_message }}
+                                            <time datetime="{{ $message->date_message }}">{{ $message->date_message }}
                                             </time>
                                         </p>
                                     </div>
@@ -105,13 +104,14 @@
                             <form class="chat-form" action="{{ route('postmessage', ['nb' => $data[0]->id_ticket]) }}"
                                 method="POST">
                                 @csrf
-                                <textarea class="text_input" name="message" id="" cols="30" rows="4" placeholder="Message..."></textarea>
+                                <textarea class="text_input" name="message" id="" cols="30" rows="4" type="text"
+                                    placeholder="Message..."></textarea>
                                 <button class="input bt_submit" type="submit">Envoyer</button>
                                 @include('templates.request_result')
                             </form>
                             @error('message')
                                 <dir class="error">
-                                    {{ $messsage }}
+                                    {{-- {{ $messsage }} --}} // TODO ERROR
                                 </dir>
                             @enderror
                         @endif

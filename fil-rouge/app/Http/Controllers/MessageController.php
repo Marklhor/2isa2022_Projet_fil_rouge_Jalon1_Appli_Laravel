@@ -31,7 +31,7 @@ class MessageController extends Controller
                 session(['errordb' => "Vous n'êtes pas autorisé à accéder à cette page"]);
                 $data=[];
             }
-        } else {
+        }else {
             if (session()->get('IsTecHotline')) {
                 session(['errordb' => "Cet incident a aucun message ou n'existe pas. Voir avec l'auteur et ou supprimer ce message de la base de données"]);
             }else{
@@ -54,7 +54,7 @@ class MessageController extends Controller
     public function postMysMessage(Request $request)
     {
         Controller::forgetItemsSession();
-
+        
         // Vérifications de données de la requête
         $this->validate($request, [
             'message' => 'required|string|max:2'
@@ -67,9 +67,10 @@ class MessageController extends Controller
             if ($NewMessage == 0) {
                 session()->flash('error', "Votre nouveau message n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer");
             } 
-        } else {
+        }else {
             session()->flash('error', "Votre nouveau message n'est pas enregistré, il existe une erreur dans vos données envoyées.\nVeuillez recommencer");
         }
+        dd($Message);
         return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
     }
 
