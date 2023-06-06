@@ -51,7 +51,7 @@
     padding: 15px 20px 15px 45px;
     border-radius: 0 10px 0 10px;
     align-items: flex-start;
-    border: 3px solid #4DC3FA;
+    /* border: 3px solid #4DC3FA; */
 
 }
 
@@ -60,6 +60,20 @@
     padding: 15px 45px 15px 20px;
     border-radius: 10px 0 10px 0;
     align-items: flex-end;
+    /* border: 3px solid #FB667A; */
+}
+
+.techhotline{
+    border: 3px solid #4DC3FA;
+}
+
+.usager{
+    border: 3px solid #FB667A;
+}
+.techhotline .logo{
+    border: 3px solid #4DC3FA;
+}
+.usager .logo{
     border: 3px solid #FB667A;
 }
 
@@ -72,7 +86,7 @@
     top: -25px;
     width: 50px;
     height: 50px;
-    border: 3px solid #4DC3FA;
+    /* border: 3px solid #4DC3FA; */
 
 
 }
@@ -80,7 +94,7 @@
 .message.right .logo {
     left: auto;
     right: -1em;
-    border: 3px solid #FB667A;
+    /* border: 3px solid #FB667A; */
 
 }
 

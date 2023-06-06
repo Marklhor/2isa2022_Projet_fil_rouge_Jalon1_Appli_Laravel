@@ -22,7 +22,7 @@
                             <span>
                                 Statut :
                                 <span class="ticket_values">
-                                    {{ $data[0]->status_label }}
+                                    {{-- {{ $data[0]->status_label }} --}}
                                     @switch($data[0]->id_status)
                                         @case(11111)
                                             <img class="icon_advance" src="/img/red.svg" alt="">
@@ -38,7 +38,7 @@
                                     @endswitch
                                 </span>
                             </span>
-                            @if ($data[0]->id_status != 33333)
+                            @if ($data[0]->id_status != 33333 && session()->get('IsTecHotline') == true)
                                 <span>
                                     <form class="" action="{{ route('closeticket', ['nb' => $data[0]->id_ticket]) }}"
                                         method="POST">
@@ -75,16 +75,23 @@
                     <div class="chat-container">
                         <ul class="chat">
                             @foreach ($data as $message)
-                                <li @switch(session()->get('idUser'))
-                                    @case ($message->id_user)
-                                        class="message right">
-                                        <img class="logo" src="/img/computer-icons-clip-art-man.svg" alt="usager">
-                                        @break
-                                    @default
-                                        class="message left">
-                                        <img class="logo" src="/img/help-desk-technical-support.svg" alt="technicien">
-                                        @break
-                                    @endswitch
+                                @php
+                                    $maclasse = '';
+                                    if (session()->get('idUser') == $message->id_user) {
+                                        $maclasse = 'message right';
+                                    } else {
+                                        $maclasse = 'message left';
+                                    }
+                                    if ($message->id_role == 77002) {
+                                        $maclasse .= ' techhotline';
+                                    } else {
+                                        $maclasse .= ' usager';
+                                    }
+                                @endphp
+
+                                <li @if ($message->id_role == 77002) class="{{ $maclasse }}"><img class="logo" src="/img/help-desk-technical-support.svg" alt="technicien">
+                                    @else
+                                        class="{{ $maclasse }}"><img class="logo" src="/img/computer-icons-clip-art-man.svg" alt="usager"> @endif
                                     <p>
                                     {{ $message->msg }}
                                     </p>
@@ -111,7 +118,7 @@
                             </form>
                             @error('message')
                                 <dir class="error">
-                                    {{-- {{ $messsage }} --}} // TODO ERROR
+                                    {{-- {{ $messsage }} --}}
                                 </dir>
                             @enderror
                         @endif
