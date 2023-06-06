@@ -57,10 +57,10 @@ class MessageController extends Controller
         
         // Vérifications de données de la requête
         $this->validate($request, [
-            'message' => 'required|string|max:2'
+            'message' => 'required|string|min:2'
         ]);
         $Message = strval($request->input('message'));
-        if (Str::length($Message) >= 2) {
+        if ($Message != '') {
             $dbMsg = new Message();
             // Appel de la méthode postMysMessage du modèle
             $NewMessage = $dbMsg->postMyMessage($Message, self::getNewID());
@@ -70,7 +70,7 @@ class MessageController extends Controller
         }else {
             session()->flash('error', "Votre nouveau message n'est pas enregistré, il existe une erreur dans vos données envoyées.\nVeuillez recommencer");
         }
-        dd($Message);
+        // dd($Message);
         return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
     }
 
