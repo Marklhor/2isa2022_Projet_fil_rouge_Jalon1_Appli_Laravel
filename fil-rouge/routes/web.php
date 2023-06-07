@@ -42,7 +42,7 @@ use App\Http\Controllers\MyUserController;
 
 Route::get('/', function () {
     return view('connexion'); // page d'accueil apès connexion
-})->name('home');
+})->middleware('guest')->name('home');
 
 /**
  * Route de gestion des utilisateurs en fonction de leurs roles

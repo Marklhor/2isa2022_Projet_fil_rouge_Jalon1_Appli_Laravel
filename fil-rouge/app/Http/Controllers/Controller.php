@@ -15,7 +15,7 @@ class Controller extends BaseController
      */
     public static function forgetItemsSession() : void
     { 
-        session()->forget('errordb');
+        session()->forget('errordb'); 
         session()->forget('noticket');
         session()->forget('error');
         session()->forget('success');
