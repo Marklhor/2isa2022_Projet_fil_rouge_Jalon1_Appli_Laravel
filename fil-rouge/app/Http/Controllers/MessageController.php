@@ -23,7 +23,6 @@ class MessageController extends Controller
 
         // Création d'une instance du modèle Message
         $dbMsg = new Message();
-
         // Appel de la méthode du modèle
         $data = $dbMsg->getAllMessagesForTicket($IdTicket);
         if (!empty($data)) {
@@ -39,7 +38,22 @@ class MessageController extends Controller
             }
             return view('errordb');
         }
-        return view('ticket', ['data' => $data]);
+        $isTicketOfThisTecHotline = false;
+        $isTicketOfTecHotline = false;
+
+        foreach ($data as $message) { // un seul tour
+            // défini si le techotline authentifié est l'auteur du ticket
+            if ($message->id_user == session()->get('idUser') && session()->get('IsTecHotline')) {
+                $isTicketOfThisTecHotline = true;
+            }
+            // défini si l'auteur du ticket est un techotline
+            if ($message->id_role == 77002) {
+                $isTicketOfTecHotline = true;
+                // dd($isTicketOfTecHotline);
+            }
+            break;
+        }
+        return view('ticket', ['data' => $data , 'isTicketOfThisTecHotline' => $isTicketOfThisTecHotline , 'isTicketOfTecHotline'=> $isTicketOfTecHotline] );
         // session(['errordb' => "Veuillez contacter votre gestionnaire de park informatique"]);
         // return view('errordb');
     }

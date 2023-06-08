@@ -66,7 +66,7 @@ Route::get('home', function(Request $request){
 // utilité, ou autres méthodes, bonnes pratiques ? TODO
 // *******************************************
 $nb = 11111; // 99006, 99304
-$iduser = 82001; // techHotline : 96101
+$iduser = 0; // techHotline : 96101 / usager 82001
 // $iduser = 96101; // techHotline : 96101
 
 // *******************************************

@@ -6,6 +6,8 @@
 
 
 @section('contenu')
+    {{-- {{ dd($isTicketOfThisTecHotline) }} --}}
+    {{-- {{ dd($isTicketOfTecHotline) }} --}}
     @if (!empty($data))
         <article>
             <section>
@@ -82,16 +84,16 @@
                                     } else {
                                         $maclasse = 'message left';
                                     }
-                                    if ($message->id_role == 77002) {
+                                    if ($message->id_role == 77002 && !$isTicketOfThisTecHotline) {
                                         $maclasse .= ' techhotline';
                                     } else {
                                         $maclasse .= ' usager';
                                     }
                                 @endphp
 
-                                <li @if ($message->id_role == 77002) class="{{ $maclasse }}"><img class="logo" src="/img/help-desk-technical-support.svg" alt="technicien">
+                                <li @if (!$isTicketOfThisTecHotline && !$isTicketOfTecHotline && $message->id_role == 77002) class="{{ $maclasse }}"><img class="logo" src="/img/help-desk-technical-support.svg" alt="technicien"> 
                                     @else
-                                        class="{{ $maclasse }}"><img class="logo" src="/img/computer-icons-clip-art-man.svg" alt="usager"> @endif
+                                    class="{{ $maclasse }}"><img class="logo" src="/img/computer-icons-clip-art-man.svg" alt="usager"> @endif
                                     <p>
                                     {{ $message->msg }}
                                     </p>
