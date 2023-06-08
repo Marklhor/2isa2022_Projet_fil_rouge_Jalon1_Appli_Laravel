@@ -48,12 +48,5 @@ class CreateNewUser implements CreatesNewUsers
             $data = UsersRoleContoller::addRoleForUser($myUser->id, 77001);
             // MyUserController::getUserIdToSession($request);
             return $myUser;
-        // return User::create([
-        //     'name' => $input['name'],
-        //     'firstname' => $input['firstname'],
-        //     'email' => $input['email'],
-        //     'password' => Hash::make($input['password']),
-        //     'role_id' => 77001
-        // ]);
     }
 }
