@@ -10,6 +10,7 @@ use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\UsersRoleContoller;
+// use App\Http\Controllers\MyUserController;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -36,16 +37,27 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
         
             $myUser = User::create([
-                'name' => $input['name'],
-                'firstname' => $input['firstname'],
+                'name' => $input['firstname'],
+                'firstname' =>$input['firstname'],
+                'tel'=>$input['tel'],
+                // strtoupper($input['name']), // TODO
+                // 'firstname' => function(){
+                //     $firstname =  strval($input['firstname']);
+                //     $fistLetter = strtoupper($firstname[0]);
+                //     $firstname = $fistLetter.substr($firstname, 1); 
+                //     return  $firstname;  
+                //   return  $input['firstname'];  
+                // }, 
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
                 'role_id' => 77001
             ]);
-            // définition de l'identifien de l'utilisateur dans la session après sa création
-            MyUserController::getUserIdToSession($myUser->id);
+            // dd($myUser->id);
+            // définition de l'identifiant de l'utilisateur dans la session après sa création
+            // MyUserController::getUserIdToSession($myUser->id);
             // défini l'utilisateur comme un usager
             $data = UsersRoleContoller::addRoleForUser($myUser->id, 77001);
+            // dd($data);
             // MyUserController::getUserIdToSession($request);
             return $myUser;
     }

@@ -23,7 +23,7 @@ class UsersRole extends Model
     {
         DB::beginTransaction();
         try {
-            DB::insert("INSERT INTO USERS_ROLE (IdUser, Label) values (?,?)", [$idUser, $UserRole]);
+            DB::insert("INSERT INTO USERS_ROLE (IdUser, IdRole) values (?,?)", [$idUser, $UserRole]);
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();

@@ -28,20 +28,30 @@
                     <fieldset>
                         <legend>Enregistrez-vous</legend>
                         <label for="name" hidden>Nom</label>
-                        <input class="input bt_value" type="text" name="name" value="{{ old('name') }}" required
-                            autofocus placeholder="Entrez votre nom..." />
+                        <input class="input bt_value" type="text" name="name" value="{{ old('name') }}"
+                            autofocus placeholder="Entrez votre nom..." required />
+
                         <label for="firstname" hidden>Prénom</label>
                         <input class="input bt_value" type="text" name="firstname" value="{{ old('firstname') }}"
-                            required autofocus placeholder="Entrez votre prénom..." />
+                            placeholder="Entrez votre prénom..." required />
+
+                        <label for="tel" hidden>Téléphone</label>
+                        <input class="input bt_value" type="text" name="tel"
+                            placeholder="Entrez votre numéro de téléphone..." />
+
                         <label for="email" hidden>Email</label>
                         <input class="input bt_value" type="email" name="email" value="{{ old('email') }}"
-                            placeholder="Entrez votre mot-de-passe..." required />
+                            placeholder="Entrez votre email..." required />
+
                         <label for="password" hidden>Mot de passe</label>
-                        <input class="input bt_value" type="password" name="password" required />
+                        <input class="input bt_value" type="password" name="password"
+                            placeholder="Entrez votre mot de passe..." required />
+
                         <label for="password_confirmation" hidden>Confirmer le mot de passe</label>
                         <input class="input bt_value" type="password" name="password_confirmation"
                             placeholder="Confirmer votre mot-de-passe..." required />
-                        <button class="input bt_ok pointer" name="button" type="submit">Se connecter</button>
+
+                        <button class="input bt_ok pointer" name="button" type="submit">S'enregistrer</button>
                         <a class="input bt_nok pointer" href="{{ route('login') }}">Déjà enregistré ?</a>
                     </fieldset>
                 </form>

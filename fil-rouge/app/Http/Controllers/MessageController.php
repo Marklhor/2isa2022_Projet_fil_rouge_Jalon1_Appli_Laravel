@@ -73,7 +73,8 @@ class MessageController extends Controller
         $this->validate($request, [
             'message' => 'required|string|min:2'
         ]);
-        $Message = htmlspecialchars($request->input('message'));
+        $Message = strval($request->input('message'));
+        // $Message = htmlspecialchars($request->input('message'));
         if ($Message != '') {
             $dbMsg = new Message();
             // Appel de la méthode postMysMessage du modèle
