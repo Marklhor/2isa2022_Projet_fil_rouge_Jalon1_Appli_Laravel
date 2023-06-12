@@ -27,15 +27,15 @@
                                     {{-- {{ $data[0]->status_label }} --}}
                                     @switch($data[0]->id_status)
                                         @case(11111)
-                                            <img class="icon_advance" src="/img/red.svg" alt="">
+                                            Ouvert <img class="icon_advance" src="/img/red.svg" alt="">
                                         @break
 
                                         @case(22222)
-                                            <img class="icon_advance" src="/img/yellow.svg" alt="">
+                                            En-cours <img class="icon_advance" src="/img/yellow.svg" alt="">
                                         @break
 
                                         @case(33333)
-                                            <img class="icon_advance" src="/img/green.svg" alt="">
+                                            Clôturé <img class="icon_advance" src="/img/green.svg" alt="">
                                         @break
                                     @endswitch
                                 </span>
