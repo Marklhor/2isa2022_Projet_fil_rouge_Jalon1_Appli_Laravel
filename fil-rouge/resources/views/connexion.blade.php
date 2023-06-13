@@ -33,6 +33,15 @@
                         <label for="password" class="hidden">Entrer votre mot-de-passe</label>
                         <input class="input  bt_value" type="password" id="password" name="password"
                             placeholder="Entrer votre mot-de-passe" required>
+                        {{-- @if ($errors->ConfirmPassword->any()) // TODO
+                            <div class="mb-3">
+                                <ul>
+                                    @foreach ($errors->ConfirmTwoFactorAuthentication->all() as $error)
+                                        <li class="error">{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif --}}
                         <button type="submit" class="input bt_ok pointer" name="button">Se connecter</button>
                         <a class="input bt_nok pointer" name="" href="/forgot-password">Mot-de-passe oublier
                             ?</a>
