@@ -1,0 +1,295 @@
+.hidden_phone {
+    display: none;
+}
+
+
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 25px;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.7);
+    /* overflow: hidden; */
+    padding: 15px 15px 30px 15px;
+    position: relative;
+    /* width: 320px; */
+    max-width: 100%;
+    min-height: 300px;
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    align-items: flex-start;
+    list-style-type: none;
+    padding: 30px 10px 6em 10px;
+    margin: 0;
+
+    width: 300px;
+    /* width: 600px; */
+
+}
+
+.message {
+    /* background-color: rgba(255, 255, 255, 0.9); */
+    background-color: #232F3F;
+    /* box-shadow: 0px 15px 5px 0px rgba(0,0,0,0.5); */
+    position: relative;
+    margin-bottom: 30px;
+    color: white;
+
+    width: 200px;
+    /* max-width: 400px; */
+}
+
+
+.message.left {
+    padding: 15px 20px 15px 45px;
+    border-radius: 0 10px 0 10px;
+    align-items: flex-start;
+    /* border: 3px solid #4DC3FA; */
+
+}
+
+.message.right {
+    align-self: flex-end;
+    padding: 15px 45px 15px 20px;
+    border-radius: 10px 0 10px 0;
+    align-items: flex-end;
+    /* border: 3px solid #FB667A; */
+}
+
+.techhotline{
+    border: 3px solid #4DC3FA;
+}
+
+.usager{
+    border: 3px solid #FB667A;
+}
+.techhotline .logo{
+    border: 3px solid #4DC3FA;
+}
+.usager .logo{
+    border: 3px solid #FB667A;
+}
+
+.logo {
+    border-radius: 50%;
+    /* box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.7); */
+    object-fit: cover;
+    position: absolute;
+    left: -1em;
+    top: -25px;
+    width: 50px;
+    height: 50px;
+    /* border: 3px solid #4DC3FA; */
+
+
+}
+
+.message.right .logo {
+    left: auto;
+    right: -1em;
+    /* border: 3px solid #FB667A; */
+
+}
+
+.message p {
+    margin: 0;
+}
+
+.chat-form {
+    position: static;
+    bottom: 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.text_input {
+    font-size: 16px;
+    bottom: 15px;
+    padding: 10px;
+
+    border-radius: 10px 10px 0 10px;
+
+
+    width: 300px;
+}
+
+.bt_submit {
+    margin-top: 10px;
+}
+
+.border {
+    /* text-align: left; */
+    /* width: 80%; */
+    height: auto;
+    margin: 10px;
+    /* display: table; */
+    padding: 1em 1.8em 1em 1.8em;
+    background-color: #323C50;
+
+    /* border: 2px solid white;
+    border-radius: 10px 10px 10px 10px;
+    padding: 0.2em; */
+}
+
+/* .detail_ticket{
+min-width: 280px;
+} */
+
+#incident_detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.statut_zone {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 10px;
+    align-items: center;
+    margin-bottom: 0;
+    box-sizing: content-box;
+}
+
+.margin_top_zerosix {
+    margin-top: 0.6em;
+}
+
+.error,
+.fieldset_newticket {
+    width: 300px;
+}
+
+.error {
+    text-align: center;
+}
+
+/* rapports: chat width = media/1.25; message width = chat width / 1.5 */
+
+
+/* Extra small devices (phones, 600px and down) */
+/* @media only screen and (max-width: 600px) {
+
+} */
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 377px) {
+    .chat {
+
+        width: 332px;
+    }
+
+    .message {
+        width: 221px;
+    }
+
+    /* .detail_ticket{
+        min-width: 310;
+    } */
+
+    .text_input,
+    .fieldset_newticket {
+        width: auto;
+        min-width: 332px;
+    }
+}
+
+@media only screen and (min-width: 416px) {
+    .chat {
+
+        width: 432px;
+    }
+
+    .message {
+        width: 288px;
+    }
+
+    .text_input,
+    .fieldset_newticket {
+        width: auto;
+        min-width: 432px;
+    }
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .hidden_phone {
+        display: inline-block;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .chat {
+
+        width: 600px;
+    }
+
+    .message {
+        width: 400px;
+    }
+
+    .text_input,
+    .fieldset_newticket {
+        width: auto;
+        min-width: 600px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    detail {
+        position: fixed;
+        top: auto;
+        left: 5px;
+    }
+
+    .chat-container {
+        justify-content: flex-end;
+    }
+
+    .chat {
+
+        width: 400px;
+    }
+
+    .message {
+        width: 300px;
+    }
+
+    .text_input,
+    .fieldset_newticket {
+        width: auto;
+        min-width: 400px;
+    }
+
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+    .chat {
+
+        width: 600px;
+    }
+
+    .message {
+        width: 400px;
+    }
+
+    .text_input,
+    .fieldset_newticket {
+        width: auto;
+        min-width: 600px;
+    }
+
+}
