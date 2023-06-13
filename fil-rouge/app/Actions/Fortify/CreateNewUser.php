@@ -40,7 +40,7 @@ class CreateNewUser implements CreatesNewUsers
                 'name' => $input['firstname'],
                 'firstname' =>$input['firstname'],
                 'tel'=>$input['tel'],
-                // strtoupper($input['name']), // TODO
+                // strtoupper($input['name']), // TODO Caster le prénom en PascalCase
                 // 'firstname' => function(){
                 //     $firstname =  strval($input['firstname']);
                 //     $fistLetter = strtoupper($firstname[0]);

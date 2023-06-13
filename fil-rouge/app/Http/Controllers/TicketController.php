@@ -67,7 +67,9 @@ class TicketController extends Controller
     {
         Controller::forgetItemsSession();
         $ListePannes = [];
-
+        // TODO perte de l iduser de session
+        // session(['idUser' => $idUser]);
+        // dd(session()->get('idUser'));
         if (!empty(session()->get('idUser'))) {
             $dbPannes = new TypePannes();
             $ListePannes = $dbPannes->getAllFailures();
@@ -75,7 +77,6 @@ class TicketController extends Controller
                 session(['error' => "pas de type de panne, veuillez contacter le service informatique"]);
             }
         }else{
-            dd('ici');
             session(['errordb' => "Vous ne devriez pas être ici"]);
         }
         return view('newticket', ['liste_pannes' => $ListePannes]);

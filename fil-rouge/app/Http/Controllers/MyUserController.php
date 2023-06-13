@@ -20,7 +20,11 @@ class MyUserController extends Controller
      * @return redirect route tickets si techotline, mytickets si usager
      */
     public static function choiseHomePageToRoleAndSetSession(int $idUser){
+        // dd($idUser);
         session(['idUser' => $idUser]);
+        // TODO l'iduser est nul malgré son assignation 
+        // dd('session : ',session()->get('idUser'));
+        
         if(self::UserisTecHoline($idUser)){
             session(['IsTecHotline' => true]);
             return redirect()->route('tickets');

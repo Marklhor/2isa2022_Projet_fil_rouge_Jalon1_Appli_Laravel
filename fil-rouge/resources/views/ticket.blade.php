@@ -113,11 +113,8 @@
                             <form class="chat-form" action="{{ route('postmessage', ['nb' => $data[0]->id_ticket]) }}"
                                 method="POST">
                                 @csrf
-                                <textarea
-                                    class="text_input @error('message')
-                                <div class="error">Veuillez entrer un texte de cinq carractères minimun</div>
-                            @enderror"
-                                    name="message" id="" cols="30" rows="4" type="text" placeholder="Message..."></textarea>
+                                <textarea class="text_input @error('message') is-invalid @enderror" name="message" id="" cols="30"
+                                    rows="4" type="text" placeholder="Message..."></textarea>
                                 @error('message')
                                     <div class="error">Veuillez entrer un texte de deux carractères minimun</div>
                                 @enderror

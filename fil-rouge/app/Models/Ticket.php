@@ -39,7 +39,7 @@ class Ticket extends Model
                 JOIN PANNES_TYPE ON TICKETS.IdTypePanne = PANNES_TYPE.Id
                 JOIN users ON TICKETS.IdAuteur = users.id
                 JOIN STATUS_TYPE ON TICKETS.IdStatus = STATUS_TYPE.Id
-            ORDER BY 'date_de_creation' ASC"
+            ORDER BY 'date_de_maj' ASC"
         );
     }
 
@@ -71,7 +71,7 @@ class Ticket extends Model
             JOIN users ON TICKETS.IdAuteur = users.id
             JOIN STATUS_TYPE ON TICKETS.IdStatus = STATUS_TYPE.Id
         WHERE users.id = ?
-        ORDER BY 'date_de_creation' ASC",
+        ORDER BY 'date_de_maj' ASC",
             [$id_user]
         );
     }

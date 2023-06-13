@@ -13,7 +13,7 @@ trait PasswordValidationRules
      */
     protected function passwordRules(): array
     {
-        // TODO
+        // TODO est-correct ?
         return [
             'required', 
             'string', 
