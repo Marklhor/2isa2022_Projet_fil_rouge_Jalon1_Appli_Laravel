@@ -28,21 +28,15 @@
                     <fieldset>
                         <legend>Connectez-vous</legend>
                         <label for="email" class="hidden"></label>
-                        <input class="input bt_value" type="email" id="email" name="email" value=""
-                            placeholder="Entrer votre email" required>
+                        <input class="input bt_value @error('connexion') is-invalid @enderror" type="email"
+                            id="email" name="email" value="" placeholder="Entrer votre email" required>
                         <label for="password" class="hidden">Entrer votre mot-de-passe</label>
-                        <input class="input  bt_value" type="password" id="password" name="password"
-                            placeholder="Entrer votre mot-de-passe" required>
-                        {{-- @if ($errors->ConfirmPassword->any()) // TODO
-                            <div class="mb-3">
-                                <ul>
-                                    @foreach ($errors->ConfirmTwoFactorAuthentication->all() as $error)
-                                        <li class="error">{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif --}}
+                        <input class="input  bt_value @error('connexion') is-invalid @enderror" type="password"
+                            id="password" name="password" placeholder="Entrer votre mot-de-passe" required>
                         <button type="submit" class="input bt_ok pointer" name="button">Se connecter</button>
+                        @error('connexion')
+                            <div class="error">Erreur de connexionl</div>
+                        @enderror
                         <a class="input bt_nok pointer" name="" href="/forgot-password">Mot-de-passe oublier
                             ?</a>
                         <a class="input bt_nok pointer" href="{{ route('register') }}" name="">S'enregistrer</a>

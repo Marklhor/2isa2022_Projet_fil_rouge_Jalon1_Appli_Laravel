@@ -92,8 +92,8 @@ class TicketController extends Controller
         Controller::forgetItemsSession();
 
         $this->validate($request, [
-            'message' => 'required|min:2',
-            'sujet' => 'required|min:2'
+            'message' => 'required|string|min:2',
+            'sujet' => 'required|string|min:5'
         ]);
 
         $newIdTicket = self::getNewID();
