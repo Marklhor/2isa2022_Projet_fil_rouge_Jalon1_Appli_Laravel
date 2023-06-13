@@ -270,10 +270,10 @@ button:hover {
     opacity: 1;
     transition: 0s;
   } */
-  
-  button:active {
+
+button:active {
     top: 1px;
-  }
+}
 
 
 

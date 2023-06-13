@@ -3,7 +3,7 @@
 </div>
 <address>
     <p>01.65.61.42.42</p>
-    <p>service.it@2isa.fr</p>
+    <p href="mailto:service.it@2isa.fr">service.it@2isa.fr</p>
     <p><a href="https://amio-millau.fr/">amio-millau.fr</a></p>
 </address>
 <div>
