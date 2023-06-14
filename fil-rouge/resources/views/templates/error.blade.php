@@ -1,7 +1,8 @@
-<div class="error">
-    {{-- @if (!isset(session()->get('error')))
+<div class="error txt_inline">
+    {{-- // TODO algo impossible voir le TODO perte de l iduser de session dans TicketController --}}
+    {{-- @if (!empty(session()->get('error')))
         {{ session()->get('error') }}
-    @else
+    @elseif(!empty(session()->get('errordb')))
         {{ session()->get('errordb') }}
     @endif --}}
     {{ session()->get('error') }}
