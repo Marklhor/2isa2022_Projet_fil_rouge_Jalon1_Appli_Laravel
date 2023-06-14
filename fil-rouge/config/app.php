@@ -16,6 +16,7 @@ return [
     |
     */
 
+    // TODO changer de nom de l'appli
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
