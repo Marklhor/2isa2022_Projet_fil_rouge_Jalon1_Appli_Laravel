@@ -240,10 +240,12 @@ footer {
 }
 
 button:hover {
-    background-color: #4DC3FA;
-    box-shadow: 0 0 1px 0 #4DC3FA inset, 0 0 1px 2px #4DC3FA;
+    /* background-color: #4DC3FA;
+    box-shadow: 0 0 1px 0 #4DC3FA inset, 0 0 1px 2px #4DC3FA; */
     /* color: black; */
 }
+
+
 
 
 
@@ -314,6 +316,11 @@ button:active {
 .bt_value {
     border-radius: 0 10px 0 10px;
 
+}
+
+.bt_ok:hover {
+    background-color: #4DC3FA;
+    box-shadow: 0 0 1px 0 #4DC3FA inset, 0 0 1px 2px #4DC3FA;
 }
 
 .pointer {
