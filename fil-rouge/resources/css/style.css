@@ -122,6 +122,13 @@ h3 {
 caption,
 .error {
     color: #FB667A;
+
+}
+
+.error {
+    display: contents;
+    text-align: center;
+
 }
 
 

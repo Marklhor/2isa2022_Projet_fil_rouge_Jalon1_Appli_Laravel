@@ -3,7 +3,9 @@
 
 <head>
     @include('templates.metas')
-    @include('templates.links')
+    {{-- @include('templates.links') --}}
+    {{-- <link rel="icon" href="{{ asset('/img/favicon-16x16.ico') }}?v={{ date('YmdHis') }}"> --}}
+    <link rel="icon" href="{{ URL::asset('/img/favicon-16x16.ico') }}" type="image/x-icon"/>
     @vite('resources/js/app.js')
     <title>@yield('title')</title>
 </head>
