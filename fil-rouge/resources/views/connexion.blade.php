@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.1">
-
+    @include('templates.favicon')
     <link rel="stylesheet" href="{{ Vite::asset('resources/css/style.css') }}">
     <title>Elements du site</title>
 
