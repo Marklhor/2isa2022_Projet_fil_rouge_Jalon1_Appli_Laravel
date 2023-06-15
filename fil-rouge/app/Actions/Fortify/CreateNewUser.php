@@ -37,17 +37,11 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
         
             $myUser = User::create([
-                'name' => $input['firstname'],
-                'firstname' =>$input['firstname'],
+                'name' => strtoupper($input['firstname']),
+                'firstname' =>ucfirst($input['firstname']),
+                // 'firstname' =>$input['firstname'],
                 'tel'=>$input['tel'],
-                // strtoupper($input['name']), // TODO Caster le prénom en PascalCase
-                // 'firstname' => function(){
-                //     $firstname =  strval($input['firstname']);
-                //     $fistLetter = strtoupper($firstname[0]);
-                //     $firstname = $fistLetter.substr($firstname, 1); 
-                //     return  $firstname;  
-                //   return  $input['firstname'];  
-                // }, 
+                strtoupper($input['name']), // TODO Caster le prénom en PascalCase
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
                 'role_id' => 77001
