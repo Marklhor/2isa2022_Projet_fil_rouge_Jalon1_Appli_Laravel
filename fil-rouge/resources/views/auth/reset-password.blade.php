@@ -20,7 +20,7 @@
         <main>
             <hgroup>
                 <h1 class="text_center">SERVICE INFORMATIQUE</h1>
-                <h2 class="text_center">GESTION DES INCIDENTS</h2>
+                <h2 class="text_center">CHANGER VOTRE MOT DE PASSE</h2>
             </hgroup>
             <article>
                 <form method="POST" action="/reset-password">
