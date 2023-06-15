@@ -28,8 +28,11 @@
                     <fieldset>
                         <legend>Mot-de-passe oublié</legend>
                         <label for="email" hidden>Email</label>
-                        <input class="input bt_value" type="email" name="email" value="{{ old('email') }}"
-                            placeholder="Entrez votre mot-de-passe..." required />
+                        <input class="input bt_value @error('email') is-invalid @enderror" type="email" name="email"
+                            value="{{ old('email') }}" placeholder="Entrez votre mot-de-passe..." required />
+                        @error('email')
+                            <div class="error">Il existe un problème vis-à-vis votre mail</div>
+                        @enderror
                         <button class="input bt_ok pointer" name="button" type="submit">Envoyer</button>
                         <a class="input bt_nok pointer" href="{{ route('login') }}">Annuler</a>
                     </fieldset>

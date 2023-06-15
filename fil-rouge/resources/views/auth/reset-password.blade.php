@@ -27,14 +27,24 @@
                     @csrf
                     <fieldset>
                         <label for="email">Email</label>
-                        <input class="input bt_value" type="email" name="email" value="{{ old('email') }}"
-                            required />
+                        <input class="input bt_value @error('email') is-invalid @enderror" type="email" name="email"
+                            value="{{ old('email') }}" required />
+                        @error('email')
+                            <div class="error">Il existe un problème vis-à-vis votre mail</div>
+                        @enderror
                         <label for="password" hidden>Email</label>
-                        <input class="input bt_value" type="password" name="password"
-                            placeholder="Entrez votre nouveau mot-de-passe..." required />
+                        <input class="input bt_value @error('password') is-invalid @enderror" type="password"
+                            name="password" placeholder="Entrez votre nouveau mot-de-passe..." required />
+                        @error('password')
+                            <div class="error">Il existe un problème vis-à-vis votre mot de passe</div>
+                        @enderror
                         <label for="password_confirmation" hidden>Email</label>
-                        <input class="input bt_value" type="password" name="password_confirmation"
+                        <input class="input bt_value @error('password_confirmation') is-invalid @enderror"
+                            type="password" name="password_confirmation"
                             placeholder="Confirmez votre nouveau mot-de-passe..." required />
+                        @error('password_confirmation')
+                            <div class="error">Il existe un problème vis-à-vis de votre confirmation mail</div>
+                        @enderror
                         <input class="" type="" name="token" value="{{ request()->route('token') }}"
                             hidden />
                         <button class="input bt_ok pointer" name="button" type="submit">Valider</button>
