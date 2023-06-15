@@ -394,3 +394,36 @@ time {
     background-color: #FB667A;
     border: 2px solid #464A52;
 }
+
+.hidden_div div {
+    display: none;
+}
+
+.container:hover {
+
+    border: 2px solid #08EFFD;
+    text-align: center;
+    border-radius: 10px 0 10px 0;
+    padding: 15px 32px;
+    margin-bottom: 2em;
+}
+
+.container:hover .hidden_div div {
+    display: block;
+}
+
+.no_margin_top {
+    margin-top: 0;
+}
+
+/* .text-clignote  {
+    animation-duration: .15s;
+    animation-name: clignoter;
+    animation-iteration-count: infinite;
+    transition: none;
+ }
+ @keyframes clignoter {
+   0%   { opacity:1; }
+   40%   {opacity:0; }
+   100% { opacity:1; }
+ } */

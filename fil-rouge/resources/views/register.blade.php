@@ -54,11 +54,19 @@
                         <label for="password" hidden>Mot de passe</label>
                         <input class="input bt_value @error('password') is-invalid @enderror" type="password"
                             name="password" placeholder="Entrez votre mot de passe..." required />
+                        <div class="container text-clignote">Règles des mots de passe
+                            <div class="bt_value hidden_div">
+                                <div>au moins une lettre majuscule</div>
+                                <div>au moins un chiffre</div>
+                                <div>au moins un caractère spécial</div>
+                                <div>longueur minimale de 8 caractères</div>
+                            </div>
+                        </div>
                         @error('password')
                             <div class="error">Il existe un problème vis-à-vis votre mot de passe</div>
                         @enderror
                         <label for="password_confirmation" hidden>Confirmer le mot de passe</label>
-                        <input class="input bt_value @error('password_confirmation') is-invalid @enderror"
+                        <input class="no_margin_top input bt_value @error('password_confirmation') is-invalid @enderror"
                             type="password" name="password_confirmation" placeholder="Confirmer votre mot-de-passe..."
                             required />
                         @error('password_confirmation')
