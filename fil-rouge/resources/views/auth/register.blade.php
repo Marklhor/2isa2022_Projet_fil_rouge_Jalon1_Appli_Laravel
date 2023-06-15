@@ -3,7 +3,9 @@
 @section('content')
     @if ($errors->any())
         <div>
-            <div><p>Quelque chose s'est mal passé</p></div>
+            <div>
+                <p>Quelque chose s'est mal passé</p>
+            </div>
 
             <ul>
                 @foreach ($errors->all() as $error)
@@ -18,15 +20,28 @@
 
         <div>
             <label for="name">Nom</label>
-            <input type="text" name="name" value="{{ old('name') }}" required autofocus />
+
+            <input type="text" name="name" value="{{ old('name') }}"
+                class="input bt_value @error('name') is-invalid @enderror" required autofocus />
+            @error('name')
+                <div class="error">Erreur sur le nom</div>
+            @enderror
         </div>
         <div>
             <label for="firstname">Prénom</label>
-            <input type="text" name="firstname" value="{{ old('firstname') }}" required autofocus />
+            <input type="text" name="firstname" value="{{ old('firstname') }}"
+                class="input bt_value @error('firstname') is-invalid @enderror" required autofocus />
+            @error('firstname')
+                <div class="error">Erreur sur le prénom</div>
+            @enderror
         </div>
         <div>
             <label for="email">Email</label>
-            <input type="email" name="email" value="{{ old('email') }}" required />
+            <input type="email" name="email" value="{{ old('email') }}"
+                class="input bt_value @error('email') is-invalid @enderror" required />
+            @error('email')
+                <div class="error">Erreur sur l'email</div>
+            @enderror
         </div>
 
         <div>
