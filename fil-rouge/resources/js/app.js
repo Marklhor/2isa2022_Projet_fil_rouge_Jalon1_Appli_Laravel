@@ -1,4 +1,4 @@
-import './bootstrap';
+// import './bootstrap';
 import '../css/style.css';
 import '../css/incident_mfirst.css';
 import '../css/nav.css';

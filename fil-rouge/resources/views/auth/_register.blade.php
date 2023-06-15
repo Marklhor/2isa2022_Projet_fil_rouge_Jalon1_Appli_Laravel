@@ -1,20 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @if ($errors->any())
-        <div>
-            <div>
-                <p>Quelque chose s'est mal passé</p>
-            </div>
-
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -59,5 +45,18 @@
         <div>
             <button type="submit">Enregistrer</button>
         </div>
+        {{-- @if ($errors->any()) // TODO error any, voir si utilse
+        <div>
+            <div>
+                <p>Quelque chose s'est mal passé</p>
+            </div>
+
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif --}}
     </form>
 @endsection

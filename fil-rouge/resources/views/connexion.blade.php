@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.1">
     @include('templates.favicon')
     <link rel="stylesheet" href="{{ Vite::asset('resources/css/style.css') }}">
-    <title>Elements du site</title>
+    <title>Gestion des incidents AMIO - Connexion - AMIO</title>
 
 </head>
 

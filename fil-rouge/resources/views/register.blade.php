@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('templates.favicon')
-    <link rel="stylesheet" href="{{ Vite::asset('resources/css/style.css') }}">
-    <title>Elements du site</title>
+    @vite('resources/js/register.js')
+    <title>S'enregistrer - Gestion des incidents - AMIO</title>
 
 </head>
 
@@ -54,7 +54,9 @@
                         <label for="password" hidden>Mot de passe</label>
                         <input class="input bt_value @error('password') is-invalid @enderror" type="password"
                             name="password" placeholder="Entrez votre mot de passe..." required />
-                        <div class="container text-clignote">Règles des mots de passe
+                        <div class="container text-clignote">
+                            <img class="icon_advance no_margin_top" src="/img/fleche.svg" alt="cliquez ici">
+                            Règles des mots de passe
                             <div class="bt_value hidden_div">
                                 <div>au moins une lettre majuscule</div>
                                 <div>au moins un chiffre</div>
