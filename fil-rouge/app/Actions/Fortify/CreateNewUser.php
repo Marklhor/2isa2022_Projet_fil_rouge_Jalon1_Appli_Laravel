@@ -37,22 +37,16 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
         
             $myUser = User::create([
-                'name' => strtoupper($input['firstname']),
-                'firstname' =>ucfirst($input['firstname']),
-                // 'firstname' =>$input['firstname'],
+                'name' => strtoupper($input['firstname']), // Mon en majuscule
+                'firstname' =>ucfirst($input['firstname']), // 1er lettre en majuscule
                 'tel'=>$input['tel'],
-                strtoupper($input['name']), // TODO Caster le prénom en PascalCase
+                strtoupper($input['name']),
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
                 'role_id' => 77001
             ]);
-            // dd($myUser->id);
-            // définition de l'identifiant de l'utilisateur dans la session après sa création
-            // MyUserController::getUserIdToSession($myUser->id);
-            // défini l'utilisateur comme un usager
+
             $data = UsersRoleContoller::addRoleForUser($myUser->id, 77001);
-            // dd($data);
-            // MyUserController::getUserIdToSession($request);
             return $myUser;
     }
 }
