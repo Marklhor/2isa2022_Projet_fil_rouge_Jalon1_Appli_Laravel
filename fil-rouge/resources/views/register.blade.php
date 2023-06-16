@@ -27,6 +27,11 @@
                     @csrf
                     <fieldset>
                         <legend>Enregistrez-vous</legend>
+                        @if (session('status'))
+                            <div class="success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         <label for="name" hidden>Nom</label>
                         <input class="input bt_value @error('name') is-invalid @enderror" type="text" name="name"
                             value="{{ old('name') }}" autofocus placeholder="Entrez votre nom..." required />
@@ -54,14 +59,15 @@
                         <label for="password" hidden>Mot de passe</label>
                         <input class="input bt_value @error('password') is-invalid @enderror" type="password"
                             name="password" placeholder="Entrez votre mot de passe..." required />
-                        <div class="container text-clignote">
+                        <div id="rules_password" class="container text-clignote">
+                            {{-- <div onclick="showDiv()" id="rules_password" class="container text-clignote"> --}}
                             <img class="icon_advance no_margin_top" src="/img/fleche.svg" alt="cliquez ici">
                             Règles des mots de passe
-                            <div class="bt_value hidden_div">
-                                <div>au moins une lettre majuscule</div>
-                                <div>au moins un chiffre</div>
-                                <div>au moins un caractère spécial</div>
-                                <div>longueur minimale de 8 caractères</div>
+                            <div id="The_rules_password" class="bt_value hidden_div ">
+                                <div class="rule_password">au moins une lettre majuscule</div>
+                                <div class="rule_password">au moins un chiffre</div>
+                                <div class="rule_password">au moins un caractère spécial</div>
+                                <div class="rule_password">longueur minimale de 8 caractères</div>
                             </div>
                         </div>
                         @error('password')
@@ -86,5 +92,27 @@
         </footer>
     </div>
 </body>
+<script>
+    // function showDiv() {
+    //     // var divParent = document.getElementById("rules_password");
+    //     // var divToShow = document.getElementById("The_rules_password");
+    //     var divRules = document.getElementsByClassName("rule_password")
+    //     console.log(divRules);
+    //     if (divRules[0].style.display === "none") {
+    //         // divToShow.style.display = "block";
+    //         for (var myDiv in divRules) {
+    //             // console.log(myDiv);
+    //             myDiv.style.display = "block"
+    //         }
+    //     } else {
+    //         // divToShow.style.display = "none";
+    //         for (var myDiv in divRules) {
+    //             // console.log(myDiv);
+
+    //             myDiv.style.display = "none"
+    //         }
+    //     }
+    // }
+</script>
 
 </html>
