@@ -41,7 +41,8 @@ use App\Http\Controllers\MyUserController;
 // *******************************************
 
 Route::get('/', function () {
-    return view('connexion'); // page d'accueil apès connexion
+    return view('login'); // page d'accueil apès connexion
+    // return view('connexion'); // page d'accueil apès connexion
 })->middleware('guest')->name('home');
 
 /**
