@@ -1,5 +1,9 @@
 @extends('template')
 
+@section('title')
+    Service informatique AMIO - Nouvel incident
+@endsection
+
 @section('contenu')
     <article>
         <form action="{{ route('postnewticket') }}" method="POST">
