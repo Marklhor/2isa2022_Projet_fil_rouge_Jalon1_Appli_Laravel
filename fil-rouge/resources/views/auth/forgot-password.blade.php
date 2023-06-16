@@ -20,13 +20,13 @@
         <main>
             <hgroup>
                 <h1 class="text_center">SERVICE INFORMATIQUE</h1>
-                <h2 class="text_center">MOT DE PASSE OUBLIÉ</h2>
+                <h2 class="text_center">LIEN POUR UN NOUVEAU MOT DE PASSE</h2>
             </hgroup>
             <article>
                 <form method="POST" action="/forgot-password">
                     @csrf
                     <fieldset>
-                        <legend>Mot-de-passe oublié</legend>
+                        <legend>ENTREZ VOTRE MAIL</legend>
                         <label for="email" hidden>Email</label>
                         <input class="input bt_value @error('email') is-invalid @enderror" type="email" name="email"
                             value="{{ old('email') }}" placeholder="Entrez votre mot-de-passe..." required />
@@ -35,6 +35,11 @@
                         @enderror
                         <button class="input bt_ok pointer" name="button" type="submit">Envoyer</button>
                         <a class="input bt_nok pointer" href="{{ route('login') }}">Annuler</a>
+                        @if (session('status'))
+                            <div class="success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                     </fieldset>
                 </form>
             </article>
