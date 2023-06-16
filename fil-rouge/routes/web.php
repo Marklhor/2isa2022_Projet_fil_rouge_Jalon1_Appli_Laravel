@@ -29,7 +29,7 @@ use App\Http\Controllers\MyUserController;
 // *******************************************
 // NOM DES VARIABLES :
 // - variables de routes, de session et de méthode de class -> pascalCase
-// - autres variables -> CamelCase
+// - autres variables -> camelCase
 // - variables de l'uri et nom de route -> minuscul sans symboles
 //
 // URI vs CODE :

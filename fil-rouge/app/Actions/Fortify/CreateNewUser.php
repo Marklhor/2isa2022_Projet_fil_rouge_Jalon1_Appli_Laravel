@@ -46,6 +46,7 @@ class CreateNewUser implements CreatesNewUsers
                 'role_id' => 77001
             ]);
 
+            // ajout du rôle "usager" au nouvel utilisateur 
             $data = UsersRoleContoller::addRoleForUser($myUser->id, 77001);
             return $myUser;
     }
