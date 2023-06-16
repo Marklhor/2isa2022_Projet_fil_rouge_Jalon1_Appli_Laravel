@@ -117,6 +117,8 @@ h3 {
 
 .success {
     color: #08EFFD;
+    display: contents;
+    text-align: center;
 }
 
 caption,
@@ -303,7 +305,14 @@ button:active {
     background-color: #232F3F;
     /* Green */
     text-align: center;
-    color: #08EFFD;
+    color: #FB667A;
+}
+
+.bt_blue {
+    background-color: #232F3F;
+    /* Green */
+    text-align: center;
+    color: #4DC3FA;
 }
 
 .bt_close_ticket {
