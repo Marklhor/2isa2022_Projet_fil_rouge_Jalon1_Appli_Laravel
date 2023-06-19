@@ -92,21 +92,19 @@ class Ticket extends Model
         try {
             $ToDay = strval(date("Y-m-d H:i:s"));
             $Message = strval($Message);
-            DB::insert("INSERT INTO TICKETS (Id,Sujet,IdStatus,IdTypePanne,IdAuteur,CreatedAT) values (?,?,?,?,?,?)", [$newIdTicket, $Sujet, 11111, $PanneType, $idUser, $ToDay]);
-
-            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newIdMessage, $idUser, $Message, $ToDay]);
-            // return true if request ok
-
+            DB::insert("INSERT INTO TICKETS (Id,Sujet,IdStatus,IdTypePanne,IdAuteur,CreatedAT) values (?,?,?,?,?,?)", [$newIdTicket, $Sujet, 11111, $PanneType, auth()->user()->id, $ToDay]);
+            
+            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newIdMessage, auth()->user()->id, $Message, $ToDay]);
+            
             DB::insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)", [$newIdMessage, $newIdTicket]);
-            // return true if request ok
+            
             DB::commit();
-            // return true;
+
         } catch (\Throwable $th) {
-            //throw $th;
+            
             DB::rollBack();
             return false;
         }
-        // dd($return);
         return true;
     }
 

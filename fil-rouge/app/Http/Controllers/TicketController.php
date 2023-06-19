@@ -23,7 +23,7 @@ class TicketController extends Controller
         
         $data=[];
 
-        if (!empty(session()->get('idUser') & !empty(session()->get('IsTecHotline')))) {
+        if (auth()->user()->id != NULL & !empty(session()->get('IsTecHotline'))) {
             $db = new Ticket();
             $data = $db->getTickets();
             if (empty($data)) {
@@ -46,9 +46,9 @@ class TicketController extends Controller
 
         $data=[];
 
-        if (!empty(session()->get('idUser'))) {
+        if (auth()->user()->id != NULL) {
             $db = new Ticket();
-            $data = $db->getMyTickets(session()->get('idUser'));
+            $data = $db->getMyTickets(auth()->user()->id);
             if (empty($data)) {
                 session(['noticket' => "Aucun incident"]);
             }
@@ -83,7 +83,7 @@ class TicketController extends Controller
     }
 
     /**
-     * Ajout un nouveau ticket, incident
+     * Ajout un nouveau ticket, incidentD
      * 
      * @param Request requête provenant du formulaire en Post
      * @return redirect vers la vue du des messages du nouveau ticket
@@ -99,7 +99,7 @@ class TicketController extends Controller
 
         $newIdTicket = self::getNewID();
         $newIdMessage = MessageController::getNewID();
-        $idUser = session()->get('idUser');
+        $idUser = auth()->user()->id;
         $Sujet = strval($request->input('sujet'));
         $PanneType = (int)$request->input('panne_type');
         $Message = strval($request->input('message'));

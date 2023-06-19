@@ -63,17 +63,19 @@
     /* border: 3px solid #FB667A; */
 }
 
-.techhotline{
+.techhotline {
     border: 3px solid #4DC3FA;
 }
 
-.usager{
+.usager {
     border: 3px solid #FB667A;
 }
-.techhotline .logo{
+
+.techhotline .logo {
     border: 3px solid #4DC3FA;
 }
-.usager .logo{
+
+.usager .logo {
     border: 3px solid #FB667A;
 }
 
@@ -246,7 +248,7 @@ min-width: 280px;
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    detail {
+    details {
         position: fixed;
         top: auto;
         left: 5px;

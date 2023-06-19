@@ -68,7 +68,7 @@ class Message extends Model
             $ToDay = strval(date("Y-m-d H:i:s"));
             $message = strval($msg);
             // l'Id du message est défini par la variable statique est la méthode getNewId
-            $rq01 = DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newID, session()->get('idUser'), $message, $ToDay]);
+            $rq01 = DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newID, auth()->user()->id, $message, $ToDay]);
             // return true if request ok
 
             $rq02 = DB::insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)", [$newID, session()->get('idTicket')]);
