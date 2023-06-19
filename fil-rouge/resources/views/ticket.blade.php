@@ -4,16 +4,12 @@
     Service informatique AMIO - Incident
 @endsection
 
-
 @section('contenu')
-    {{-- {{ dd($isTicketOfThisTecHotline) }} --}}
-    {{-- {{ dd($isTicketOfTecHotline) }} --}}
     @if (!empty($data))
         <article>
             <section>
-                <detail class="detail_ticket">
+                <details class="detail_ticket">
                     <summary class="border">
-
                         <h3>{{ $data[0]->nom }}</h3>
                         <p class="txt_inline">n° <span class="ticket_values">{{ $data[0]->id_ticket }}</span>
                         </p>
@@ -24,7 +20,6 @@
                             <span>
                                 Statut :
                                 <span class="ticket_values">
-                                    {{-- {{ $data[0]->status_label }} --}}
                                     @switch($data[0]->id_status)
                                         @case(11111)
                                             Ouvert <img class="icon_advance" src="/img/red.svg" alt="">
@@ -67,7 +62,7 @@
                         <p class="txt_inline sujet">Sujet : <span class="ticket_values">{{ $data[0]->sujet }}</span>
                         </p>
                     </div>
-                </detail>
+                </details>
             </section>
             <section>
                 <div>
