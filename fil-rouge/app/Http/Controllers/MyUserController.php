@@ -20,19 +20,19 @@ class MyUserController extends Controller
      * @return redirect route tickets si techotline, mytickets si usager
      */
     public static function choiseHomePageToRoleAndSetSession(int $idUser){
-        session(['idUser' => $idUser]); 
+       session(['idUser' => $idUser]); 
 
         // TODO remplacer l'identifiant de session par le helper de Fortifi  dd(auth()->user()->id);
         // TODO l'iduser est nul malgré son assignation  // NON passer par dd(auth()->user()->id);
         // dd('session : ',session()->get('idUser'));
         
-        if(self::UserisTecHoline(auth()->user()->id)){
+        if(self::UserisTecHoline($idUser)){
             session(['IsTecHotline' => true]);
             return redirect()->route('tickets');
 
         }else{
             session(['IsTecHotline' => false]);
-            return redirect()->route('mytickets',['iduser' => auth()->user()->id]);
+            return redirect()->route('mytickets',['iduser' => $idUser]);
         }
     }
     /**

@@ -65,7 +65,8 @@ class TicketController extends Controller
      */
     public function getNewTicket()
     {
-        Controller::forgetItemsSession();
+        if (auth()->user()->id != NULL) {
+            Controller::forgetItemsSession();
         $ListePannes = [];
         // TODO perte de l iduser de session
         // session(['idUser' => $idUser]);
@@ -80,6 +81,10 @@ class TicketController extends Controller
             session(['errordb' => "Vous ne devriez pas être ici"]);
         }
         return view('newticket', ['liste_pannes' => $ListePannes]);
+        }else{
+            return view('login');
+        }
+        
     }
 
     /**
@@ -90,7 +95,8 @@ class TicketController extends Controller
      */
     public function postNewTicket(Request $request)
     {
-        Controller::forgetItemsSession();
+        if (auth()->user()->id != NULL) {
+            Controller::forgetItemsSession();
 
         $this->validate($request, [
             'message' => 'required|string|min:2',
@@ -117,6 +123,11 @@ class TicketController extends Controller
             session()->flash('error', "Votre nouvel incident n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer");
             return redirect()->route('newticket');
         }
+
+        }else{
+            return view('login');
+        }
+        
     }
 
     /**
@@ -127,16 +138,22 @@ class TicketController extends Controller
      */
     public function updateToCloseThisTicket(int $IdTicket){
 
-        Controller::forgetItemsSession();
+        if (auth()->user()->id != NULL) {
+            Controller::forgetItemsSession();
 
-        $dbTicket = new Ticket();
-        $data  = $dbTicket->updateToCloseThisTicket($IdTicket);
+            $dbTicket = new Ticket();
+            $data  = $dbTicket->updateToCloseThisTicket($IdTicket);
         if ($data) {
             session()->flash('success', "L'incident est clôturé");
         }else{
             session()->flash('error', "L'incident n'est pas clôturé");
         }
         return redirect()->route('ticket', ['nb' => $IdTicket]);
+
+        }else{
+            return view('login');
+        }
+        
     }
 
 

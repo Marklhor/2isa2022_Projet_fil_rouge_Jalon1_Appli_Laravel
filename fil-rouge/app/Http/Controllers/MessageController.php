@@ -25,8 +25,8 @@ class MessageController extends Controller
         $dbMsg = new Message();
         // Appel de la méthode du modèle
         $data = $dbMsg->getAllMessagesForTicket($IdTicket);
-        if (!empty($data)) {
-            if (!session()->get('IsTecHotline') && $data[0]->id_user != session()->get('idUser')) {
+        if (auth()->user()->id != NULL && !empty($data)) {
+            if (!session()->get('IsTecHotline') && $data[0]->id_user != auth()->user()->id) {
                 session(['errordb' => "Vous n'êtes pas autorisé à accéder à cette page"]);
                 $data=[];
             }
@@ -42,20 +42,15 @@ class MessageController extends Controller
         $isTicketOfTecHotline = false;
 
         foreach ($data as $message) { // un seul tour
-            // défini si le techotline authentifié est l'auteur du ticket
-            if ($message->id_user == session()->get('idUser') && session()->get('IsTecHotline')) {
+            if ($message->id_user == auth()->user()->id && session()->get('IsTecHotline')) {
                 $isTicketOfThisTecHotline = true;
             }
-            // défini si l'auteur du ticket est un techotline
             if ($message->id_role == 77002) {
                 $isTicketOfTecHotline = true;
-                // dd($isTicketOfTecHotline);
             }
             break;
         }
         return view('ticket', ['data' => $data , 'isTicketOfThisTecHotline' => $isTicketOfThisTecHotline , 'isTicketOfTecHotline'=> $isTicketOfTecHotline] );
-        // session(['errordb' => "Veuillez contacter votre gestionnaire de park informatique"]);
-        // return view('errordb');
     }
 
     /**
@@ -67,14 +62,16 @@ class MessageController extends Controller
     // 
     public function postMysMessage(Request $request)
     {
-        Controller::forgetItemsSession();
+        $Message ='';
+        if (auth()->user()->id != NULL) {
+            Controller::forgetItemsSession();
         
-        // Vérifications de données de la requête
-        $this->validate($request, [
-            'message' => 'required|string|min:2'
-        ]);
-        $Message = strval($request->input('message'));
-        // $Message = htmlspecialchars($request->input('message'));
+            // Vérifications de données de la requête
+            $this->validate($request, [
+                'message' => 'required|string|min:2'
+            ]);
+            $Message = strval($request->input('message'));
+        }
         if ($Message != '') {
             $dbMsg = new Message();
             // Appel de la méthode postMysMessage du modèle
