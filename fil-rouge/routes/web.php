@@ -64,17 +64,14 @@ Route::get('home', function(Request $request){
 
 // *******************************************
 // variables d'initialisation pour les routes
-// utilité, ou autres méthodes, bonnes pratiques ? TODO
 // *******************************************
-$nb = 11111; // 99006, 99304
-$iduser = 0; // techHotline : 96101 / usager 82001
-// $iduser = 96101; // techHotline : 96101
+$nb = 11111; 
+$iduser = 0; 
 
 // *******************************************
 // Routes les listes des incidents, tickets, soit celle d'un utilisateur, soit celle de l'ensemble
 // *******************************************
 Route::get('/mesincidents', [TicketController::class, 'getMyTickets'])->middleware('auth')->name('mytickets');
-// Route::get('/mesincidents/{iduser}', [TicketController::class, 'getMyTickets', ['idUser' => session()->get('idUser')]])->where('iduser', '^[0-9]{5}')->middleware('auth')->name('mytickets');
 Route::get('/incidents', [TicketController::class, 'getTickets'])->middleware('auth')->name('tickets');
 
 // *******************************************

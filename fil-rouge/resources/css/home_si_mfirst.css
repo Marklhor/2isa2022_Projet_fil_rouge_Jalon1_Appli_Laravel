@@ -102,7 +102,6 @@ tbody tr:hover {
     height: 100vw;
     margin: 0;
     padding-bottom: 30px
-
 }
 
 caption {
@@ -205,11 +204,6 @@ table {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
 
-    /* .container td,
-    .container th {
-        padding-left: 1.5em;
-        padding-right: 1.5em;
-    } */
 
     .container td:nth-child(7),
     .container th:nth-child(7) {

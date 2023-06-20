@@ -32,6 +32,5 @@ trait PasswordValidationRules
                 ->requireSpecialCharacter(), 
             'confirmed',
         ];
-        // return ['required', 'string', new Password, 'confirmed'];
     }
 }

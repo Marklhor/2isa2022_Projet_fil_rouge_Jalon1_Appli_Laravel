@@ -82,7 +82,6 @@ class MessageController extends Controller
         }else {
             session()->flash('error', "Votre nouveau message n'est pas enregistré, il existe une erreur dans vos données envoyées.\nVeuillez recommencer");
         }
-        // dd($Message);
         return redirect()->route('ticket', ['nb' => session()->get('idTicket')]);
     }
 

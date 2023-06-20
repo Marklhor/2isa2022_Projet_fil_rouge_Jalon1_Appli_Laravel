@@ -121,10 +121,8 @@ class Ticket extends Model
         try {
             DB::update("UPDATE TICKETS set IdStatus = 33333 where Id = ?", [$IdTicket]);
             DB::commit();
-            // dd('ok');
         } catch (\Throwable $th) {
             DB::rollback();
-            // dd('nok');
             return false;
         };
         return true;
