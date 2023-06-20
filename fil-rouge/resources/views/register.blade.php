@@ -105,7 +105,7 @@
         const divsRules = document.querySelectorAll('[data-rulespassword]');
 
         if (divsRules[0].className == "display_none") {
-            for (let index = 0; index < divsRules.length - 1; index++) {
+            for (let index = 0; index < divsRules.length; index++) {
                 divsRules[index].classList.remove("display_none");
                 divsRules[index].classList.add("display_block");
                 divsRules[index].classList.add("colorrules");
@@ -114,7 +114,7 @@
             divRules.classList.add("showcontenaire");
             dartrules.classList.add("display_none");
         } else {
-            for (let index = 0; index < divsRules.length - 1; index++) {
+            for (let index = 0; index < divsRules.length; index++) {
 
                 divsRules[index].classList.remove("display_block");
                 divsRules[index].classList.add("display_none");
