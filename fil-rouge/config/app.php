@@ -16,8 +16,8 @@ return [
     |
     */
 
-    // TODO changer de nom de l'appli
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('AMIO_GestionIncidents', 'Laravel'),
+    // 'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
