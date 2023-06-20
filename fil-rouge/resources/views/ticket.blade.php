@@ -8,7 +8,7 @@
     @if (!empty($data))
         <article>
             <section>
-                <details class="detail_ticket">
+                <details class="detail_ticket" open>
                     <summary class="border">
                         <h3>{{ $data[0]->nom }}</h3>
                         <p class="txt_inline">n° <span class="ticket_values">{{ $data[0]->id_ticket }}</span>
@@ -74,7 +74,7 @@
                             @foreach ($data as $message)
                                 @php
                                     $maclasse = '';
-                                    if (session()->get('idUser') == $message->id_user) {
+                                    if (auth()->user()->id == $message->id_user) {
                                         $maclasse = 'message right';
                                     } else {
                                         $maclasse = 'message left';
@@ -94,7 +94,7 @@
                                     </p>
                                     <div class="date">
                                         <p>
-                                            @if ($message->id_user != session()->get('idUser'))
+                                            @if ($message->id_user != auth()->user()->id)
                                                 <span>{{ $message->nom }} </span>
                                             @endif
                                             <time datetime="{{ $message->date_message }}">{{ $message->date_message }}
@@ -122,6 +122,16 @@
 
             </section>
         </article>
+        <script defer>
+            const details = document.getElementsByClassName("detail_ticket")[0];
+            details.addEventListener("toggle", (event) => {
+                if (details.open) {
+                    details.classList.remove("borderBlue");
+                } else {
+                    details.classList.add("borderBlue");
+                }
+            });
+        </script>
     @endif
 
 @endsection
