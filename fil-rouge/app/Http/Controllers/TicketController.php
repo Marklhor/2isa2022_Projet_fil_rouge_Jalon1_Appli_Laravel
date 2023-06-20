@@ -65,13 +65,11 @@ class TicketController extends Controller
      */
     public function getNewTicket()
     {
-        if (auth()->user()->id != NULL) {
+        
             Controller::forgetItemsSession();
         $ListePannes = [];
-        // TODO perte de l iduser de session
-        // session(['idUser' => $idUser]);
-        // dd(session()->get('idUser'));
-        if (!empty(session()->get('idUser'))) {
+
+        if (auth()->user()->id != NULL) {
             $dbPannes = new TypePannes();
             $ListePannes = $dbPannes->getAllFailures();
             if (empty($ListePannes)) {
@@ -81,9 +79,7 @@ class TicketController extends Controller
             session(['errordb' => "Vous ne devriez pas être ici"]);
         }
         return view('newticket', ['liste_pannes' => $ListePannes]);
-        }else{
-            return view('login');
-        }
+        
         
     }
 
@@ -98,31 +94,31 @@ class TicketController extends Controller
         if (auth()->user()->id != NULL) {
             Controller::forgetItemsSession();
 
-        $this->validate($request, [
-            'message' => 'required|string|min:2',
-            'sujet' => 'required|string|min:5'
-        ]);
+            $this->validate($request, [
+                'message' => 'required|string|min:2',
+                'sujet' => 'required|string|min:5'
+            ]);
 
-        $newIdTicket = self::getNewID();
-        $newIdMessage = MessageController::getNewID();
-        $idUser = auth()->user()->id;
-        $Sujet = strval($request->input('sujet'));
-        $PanneType = (int)$request->input('panne_type');
-        $Message = strval($request->input('message'));
+            $newIdTicket = self::getNewID();
+            $newIdMessage = MessageController::getNewID();
+            $idUser = auth()->user()->id;
+            $Sujet = strval($request->input('sujet'));
+            $PanneType = (int)$request->input('panne_type');
+            $Message = strval($request->input('message'));
 
-        if ($Sujet != Null | $PanneType != Null | $Message != Null) {
-            $dbNewTicket = new Ticket();
-            $NewTicket = $dbNewTicket->postMyTicket($newIdTicket, $newIdMessage, $Sujet, $PanneType, $idUser, $Message);
-            if ($NewTicket) {
-                return redirect()->route('ticket', ['nb' => $newIdTicket]);
+            if ($Sujet != Null | $PanneType != Null | $Message != Null) {
+                $dbNewTicket = new Ticket();
+                $NewTicket = $dbNewTicket->postMyTicket($newIdTicket, $newIdMessage, $Sujet, $PanneType, $idUser, $Message);
+                if ($NewTicket) {
+                    return redirect()->route('ticket', ['nb' => $newIdTicket]);
+                } else {
+                    session()->flash('error', "Votre nouvel incident n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer");
+                    return redirect()->route('newticket');
+                }
             } else {
-                session()->flash('error', "Votre nouvel incident n'est pas enregistré suite à une erreur de la base de données.\nVeuillez recommencer");
+                session()->flash('error', "Votre nouvel incident n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer");
                 return redirect()->route('newticket');
             }
-        } else {
-            session()->flash('error', "Votre nouvel incident n'est pas enregistré, il existe une erreur dans vos données envoyées à la base de données.\nVeuillez recommencer");
-            return redirect()->route('newticket');
-        }
 
         }else{
             return view('login');
