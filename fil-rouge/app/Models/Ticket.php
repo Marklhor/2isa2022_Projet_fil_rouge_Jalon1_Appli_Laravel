@@ -90,11 +90,13 @@ class Ticket extends Model
     {
         DB::beginTransaction();
         try {
+            // Définit le fuseau horaire par défaut à utiliser.
+            date_default_timezone_set('Europe/Paris');
             $ToDay = strval(date("Y-m-d H:i:s"));
             $Message = strval($Message);
-            DB::insert("INSERT INTO TICKETS (Id,Sujet,IdStatus,IdTypePanne,IdAuteur,CreatedAT) values (?,?,?,?,?,?)", [$newIdTicket, $Sujet, 11111, $PanneType, auth()->user()->id, $ToDay]);
+            DB::insert("INSERT INTO TICKETS (Id,Sujet,IdStatus,IdTypePanne,IdAuteur,CreatedAT) values (?,?,?,?,?,?)", [$newIdTicket, $Sujet, 11111, $PanneType, $idUser, $ToDay]);
             
-            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newIdMessage, auth()->user()->id, $Message, $ToDay]);
+            DB::insert("INSERT INTO USERS_MESSAGES (Id, IdAuteur, Content, CreateAt) values(?,?,?,?)", [$newIdMessage, $idUser, $Message, $ToDay]);
             
             DB::insert("INSERT INTO MESSAGES_TYCKET (IdMessage, IdTicket) values(?,?)", [$newIdMessage, $newIdTicket]);
             

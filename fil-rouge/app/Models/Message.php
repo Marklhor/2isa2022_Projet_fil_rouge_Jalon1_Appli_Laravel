@@ -64,6 +64,8 @@ class Message extends Model
          */
         DB::beginTransaction();
         try {
+            // Définit le fuseau horaire par défaut à utiliser.
+            date_default_timezone_set('Europe/Paris');
             // définition de la date dans le code et non via la BD pour obtenir les mêmes dans les tables USERS_MESSAGES et TICKETS
             $ToDay = strval(date("Y-m-d H:i:s"));
             $message = strval($msg);
