@@ -3,7 +3,24 @@
     display: none;
 }
 
-.container:hover {
+.showcontenaire {
+    border: 2px solid #08EFFD;
+    text-align: center;
+    border-radius: 10px 0 10px 0;
+    padding: 15px 32px;
+    margin-bottom: 2em;
+    color: #08EFFD;
+}
+
+.hiddeimg {
+    display: none;
+}
+
+.colorrules {
+    color: #c5bdcc;
+}
+
+/* .container:hover {
 
     border: 2px solid #08EFFD;
     text-align: center;
@@ -13,9 +30,6 @@
     color: #08EFFD;
 }
 
-.container img {
-    display: inline-block;
-}
 
 .container:hover img {
     display: none;
@@ -24,6 +38,10 @@
 .container:hover .hidden_div div {
     display: block;
     color: #c5bdcc;
+} */
+
+.display_inlineblock {
+    display: inline-block;
 }
 
 /* .rule_password{
@@ -31,3 +49,11 @@
 } */
 
 /* fin div visible par survole */
+
+.display_none {
+    display: none;
+}
+
+.display_block {
+    display: block;
+}

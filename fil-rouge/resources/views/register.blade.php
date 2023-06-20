@@ -59,15 +59,19 @@
                         <label for="password" hidden>Mot de passe</label>
                         <input class="input bt_value @error('password') is-invalid @enderror" type="password"
                             name="password" placeholder="Entrez votre mot de passe..." required />
-                        <div id="rules_password" class="container text-clignote">
+                        <div onclick="showDiv()" id="rules_password" class="container text-clignote pointer">
                             {{-- <div onclick="showDiv()" id="rules_password" class="container text-clignote"> --}}
-                            <img class="icon_advance no_margin_top" src="/img/fleche.svg" alt="cliquez ici">
+                            <img id="dartrules" class="icon_advance no_margin_top display_inlineblock"
+                                src="/img/fleche.svg" alt="cliquez ici">
                             Règles des mots de passe
-                            <div id="The_rules_password" class="bt_value hidden_div ">
-                                <div class="rule_password">au moins une lettre majuscule</div>
-                                <div class="rule_password">au moins un chiffre</div>
-                                <div class="rule_password">au moins un caractère spécial</div>
-                                <div class="rule_password">longueur minimale de 8 caractères</div>
+                            <div id="The_rules_password" class="bt_value ">
+                                <div class="display_none" data-rulespassword="rule_password">au moins une lettre
+                                    majuscule</div>
+                                <div class="display_none" data-rulespassword="rule_password">au moins un chiffre</div>
+                                <div class="display_none" data-rulespassword="rule_password">au moins un caractère
+                                    spécial</div>
+                                <div class="display_none" data-rulespassword="rule_password">longueur minimale de 8
+                                    caractères</div>
                             </div>
                         </div>
                         @error('password')
@@ -92,27 +96,42 @@
         </footer>
     </div>
 </body>
-<script>
-    // function showDiv() {
-    //     // var divParent = document.getElementById("rules_password");
-    //     // var divToShow = document.getElementById("The_rules_password");
-    //     var divRules = document.getElementsByClassName("rule_password")
-    //     console.log(divRules);
-    //     if (divRules[0].style.display === "none") {
-    //         // divToShow.style.display = "block";
-    //         for (var myDiv in divRules) {
-    //             // console.log(myDiv);
-    //             myDiv.style.display = "block"
-    //         }
-    //     } else {
-    //         // divToShow.style.display = "none";
-    //         for (var myDiv in divRules) {
-    //             // console.log(myDiv);
+<script defer>
+    function showDiv() {
+        // var divParent = document.getElementById("rules_password");
+        // var divToShow = document.getElementById("The_rules_password");
+        // var divRules = document.getElementsByClassName("rule_password") [0]
+        const dartrules = document.getElementById("dartrules");
+        const divRules = document.getElementById("rules_password");
+        const divsRules = document.querySelectorAll('[data-rulespassword]');
+        console.log(dartrules);
 
-    //             myDiv.style.display = "none"
-    //         }
-    //     }
-    // }
+        // console.log(divsRules);
+        if (divsRules[0].className == "display_none") {
+            for (let index = 0; index < divsRules.length - 1; index++) {
+                // console.log(divsRules[index]);
+                divsRules[index].classList.remove("display_none");
+                divsRules[index].classList.add("display_block");
+                divsRules[index].classList.add("colorrules");
+
+            }
+            divRules.classList.add("showcontenaire");
+            dartrules.classList.remove("display_inlineblock");
+            dartrules.classList.add("display_none");
+        } else {
+            for (let index = 0; index < divsRules.length - 1; index++) {
+                // console.log(divsRules[index]);
+
+                divsRules[index].classList.remove("display_block");
+                divsRules[index].classList.add("display_none");
+                divsRules[index].classList.remove("colorrules");
+
+            }
+            divRules.classList.remove("showcontenaire");
+            dartrules.classList.remove("display_none");
+            dartrules.classList.add("display_inlineblock");
+        }
+    }
 </script>
 
 </html>
