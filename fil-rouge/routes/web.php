@@ -73,7 +73,8 @@ $iduser = 0; // techHotline : 96101 / usager 82001
 // *******************************************
 // Routes les listes des incidents, tickets, soit celle d'un utilisateur, soit celle de l'ensemble
 // *******************************************
-Route::get('/mesincidents/{iduser}', [TicketController::class, 'getMyTickets', ['idUser' => session()->get('idUser')]])->where('iduser', '^[0-9]{5}')->middleware('auth')->name('mytickets');
+Route::get('/mesincidents', [TicketController::class, 'getMyTickets'])->middleware('auth')->name('mytickets');
+// Route::get('/mesincidents/{iduser}', [TicketController::class, 'getMyTickets', ['idUser' => session()->get('idUser')]])->where('iduser', '^[0-9]{5}')->middleware('auth')->name('mytickets');
 Route::get('/incidents', [TicketController::class, 'getTickets'])->middleware('auth')->name('tickets');
 
 // *******************************************
