@@ -97,30 +97,24 @@
     </div>
 </body>
 <script defer>
+    // affichage des règles du mot de passe
     function showDiv() {
-        // var divParent = document.getElementById("rules_password");
-        // var divToShow = document.getElementById("The_rules_password");
-        // var divRules = document.getElementsByClassName("rule_password") [0]
+
         const dartrules = document.getElementById("dartrules");
         const divRules = document.getElementById("rules_password");
         const divsRules = document.querySelectorAll('[data-rulespassword]');
-        console.log(dartrules);
 
-        // console.log(divsRules);
         if (divsRules[0].className == "display_none") {
             for (let index = 0; index < divsRules.length - 1; index++) {
-                // console.log(divsRules[index]);
                 divsRules[index].classList.remove("display_none");
                 divsRules[index].classList.add("display_block");
                 divsRules[index].classList.add("colorrules");
 
             }
             divRules.classList.add("showcontenaire");
-            dartrules.classList.remove("display_inlineblock");
             dartrules.classList.add("display_none");
         } else {
             for (let index = 0; index < divsRules.length - 1; index++) {
-                // console.log(divsRules[index]);
 
                 divsRules[index].classList.remove("display_block");
                 divsRules[index].classList.add("display_none");
@@ -129,7 +123,6 @@
             }
             divRules.classList.remove("showcontenaire");
             dartrules.classList.remove("display_none");
-            dartrules.classList.add("display_inlineblock");
         }
     }
 </script>
