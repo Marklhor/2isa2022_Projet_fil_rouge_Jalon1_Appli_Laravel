@@ -28,16 +28,21 @@
                     <fieldset>
                         <legend>Connectez-vous</legend>
                         <label for="email" class="hidden"></label>
-                        <input class="input bt_value @error('connexion') is-invalid @enderror" type="email"
-                            id="email" name="email" value="" placeholder="Entrer votre email" required>
-                        <label for="password" class="hidden">Entrer votre mot-de-passe</label>
-                        <input class="input  bt_value @error('connexion') is-invalid @enderror" type="password"
-                            id="password" name="password" placeholder="Entrer votre mot-de-passe" required>
-                        <button type="submit" class="input bt_ok pointer" name="button">Se connecter</button>
-                        @error('connexion')
-                            <div class="error">Erreur de connexionl</div>
+                        <input class="input bt_value @error('email') is-invalid @enderror" type="email" id="email"
+                            name="email" value="{{ old('email') }}" placeholder="Entrer votre email" required>
+                        @error('email')
+                            <div class="error">Erreur de connexion</div>
                         @enderror
-                        <a class="input bt_blue pointer" name="" href="/forgot-password">Mot-de-passe oublier
+                        <label for="password" class="hidden">Entrer votre mot-de-passe</label>
+                        <input class="input  bt_value @error('password') is-invalid @enderror" type="password"
+                            id="password" name="password" value="{{ old('password') }}"
+                            placeholder="Entrer votre mot-de-passe" required>
+                        @error('password')
+                            <div class="error">Erreur de mot de passe</div>
+                        @enderror
+                        <button type="submit" class="input bt_ok pointer" name="button">Se connecter</button>
+
+                        <a class="input bt_blue pointer" name="" href="/forgot-password">Mot-de-passe oublié
                             ?</a>
                         <a class="input bt_blue pointer" href="{{ route('register') }}" name="">S'enregistrer</a>
                     </fieldset>
