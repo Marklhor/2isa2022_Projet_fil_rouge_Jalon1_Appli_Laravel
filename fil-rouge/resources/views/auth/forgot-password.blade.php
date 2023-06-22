@@ -28,11 +28,18 @@
                     <fieldset>
                         <legend>ENTREZ VOTRE MAIL</legend>
                         <label for="email" hidden>Email</label>
-                        <input class="input bt_value @error('email') is-invalid @enderror" type="email" name="email"
-                            value="{{ old('email') }}" placeholder="Entrez votre mot-de-passe..." required />
-                        @error('email')
-                            <div class="error">Il existe un problème vis-à-vis votre mail</div>
-                        @enderror
+                        <input class="input bt_value " type="email" name="email" value="{{ old('email') }}"
+                            placeholder="Entrez votre mot-de-passe..." required />
+
+                        @if ($errors->any())
+                            <div class="error">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <button class="input bt_ok pointer" name="button" type="submit">Envoyer</button>
                         <a class="input bt_nok pointer" href="{{ route('login') }}">Annuler</a>
                         @if (session('status'))

@@ -45,6 +45,15 @@
                         @error('password_confirmation')
                             <div class="error">Il existe un problème vis-à-vis de votre confirmation mail</div>
                         @enderror
+                        @if ($errors->any())
+                            <div class="error">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <input class="" type="" name="token" value="{{ request()->route('token') }}"
                             hidden />
                         <button class="input bt_ok pointer" name="button" type="submit">Valider</button>
