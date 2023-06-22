@@ -30,7 +30,15 @@
                         <label for="email" hidden>Email</label>
                         <input class="input bt_value " type="email" name="email" value="{{ old('email') }}"
                             placeholder="Entrez votre mot-de-passe..." required />
-
+                        @if ($errors->any())
+                            <div class="error">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         @if ($errors->any())
                             <div class="error">
                                 <ul>
