@@ -26,4 +26,4 @@ Après validation de la maquette par le Product Owner, j'ai développé la logiq
 
 ![Détail incident](./Img4ReadeMe/detailIncident.jpg)
 
-![Clôturer incident](../Img4ReadeMe/cloturerIncident.jpg)
+![Clôturer incident](./Img4ReadeMe/cloturerIncident.jpg)
